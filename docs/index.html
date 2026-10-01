@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Radar Fiscal · NFe / CTe / MDFe</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>📡 Radar Fiscal — NFe · CTe · MDFe</h1>
+      <p class="subtitle">Monitoramento automático de Notas Técnicas e Informes nas fontes oficiais do governo</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="cards" id="cards">
+      <!-- preenchido via JS -->
+    </section>
+
+    <section class="controls">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-doc="all">Todos</button>
+        <button class="tab" data-doc="NFe">NF-e</button>
+        <button class="tab" data-doc="CTe">CT-e</button>
+        <button class="tab" data-doc="BP-e">BP-e</button>
+        <button class="tab" data-doc="MDFe">MDF-e</button>
+      </div>
+      <input type="search" id="search" placeholder="Buscar por título, código ou resumo..." />
+    </section>
+
+    <section class="table-wrapper">
+      <table id="items-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Documento</th>
+            <th>Publicação</th>
+            <th>O que está sendo alterado</th>
+            <th>Fonte</th>
+          </tr>
+        </thead>
+        <tbody id="items-body">
+          <!-- preenchido via JS -->
+        </tbody>
+      </table>
+      <p id="empty-state" class="empty-state" hidden>Nenhum item encontrado para este filtro.</p>
+    </section>
+
+    <footer class="footer">
+      <span id="last-updated">Carregando...</span>
+      ·
+      <a href="https://github.com" target="_blank" rel="noopener">Repositório no GitHub</a>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
