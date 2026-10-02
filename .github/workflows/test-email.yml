@@ -1,0 +1,32 @@
+name: Testar envio de e-mail
+
+# Workflow dedicado só para validar o SMTP/e-mail de alerta.
+# Só roda quando acionado manualmente (não tem agendamento), e não altera
+# nenhum arquivo do repositório (não faz commit de nada).
+on:
+  workflow_dispatch: {}
+
+jobs:
+  test_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Enviar e-mail de teste
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ALERT_FROM: ${{ secrets.ALERT_FROM }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+        run: python -m scraper.send_test_email
