@@ -4872,6 +4872,20 @@
       "type": "Nota Técnica",
       "version": "1.10"
     },
+    "e45b14521944dae9": {
+      "category": "Informes",
+      "code": null,
+      "date": "2026-10-02",
+      "document": "NFe",
+      "first_seen": "2026-10-02",
+      "id": "e45b14521944dae9",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "source_key": "nfe_informes",
+      "summary": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "type": "Ato Conjunto",
+      "version": null
+    },
     "e61c91b402ddb07c": {
       "category": "Notas Técnicas",
       "code": null,
@@ -5573,5 +5587,5 @@
       "version": "1.20"
     }
   },
-  "last_run": "2026-10-02T13:27:32+00:00"
+  "last_run": "2026-10-02T18:04:50+00:00"
 }

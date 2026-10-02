@@ -1,15 +1,30 @@
 {
-  "generated_at": "2026-10-02T13:27:32+00:00",
-  "total_items": 398,
+  "generated_at": "2026-10-02T18:04:50+00:00",
+  "total_items": 399,
   "counts_by_document": {
-    "NFe": 326,
+    "NFe": 327,
     "CTe": 41,
     "BP-e": 13,
     "BP-e TA": 3,
     "MDFe": 15
   },
-  "new_last_run": 0,
+  "new_last_run": 1,
   "items": [
+    {
+      "document": "NFe",
+      "category": "Informes",
+      "type": "Ato Conjunto",
+      "code": null,
+      "version": null,
+      "date": "2026-10-02",
+      "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "summary": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "source_key": "nfe_informes",
+      "id": "e45b14521944dae9",
+      "first_seen": "2026-10-02",
+      "is_new": true
+    },
     {
       "document": "NFe",
       "category": "Notas Técnicas",
