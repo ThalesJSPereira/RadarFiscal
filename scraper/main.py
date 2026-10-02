@@ -45,6 +45,18 @@ def collect_all_items():
     return all_items, errors
 
 
+def _version_key(version):
+    """Normaliza a versão para comparação segura.
+
+    Alguns itens extraídos dos portais não possuem uma versão explícita
+    (campo None) - por exemplo, quando a Nota Técnica não traz "v.X.XX" no
+    título. Sem essa normalização, comparar None > "1.00" quebra o Python
+    com TypeError. Tratamos None (e valores vazios) como string vazia, que
+    sempre perde na comparação contra uma versão real.
+    """
+    return version or ""
+
+
 def diff_against_state(all_items, state):
     """Retorna (new_items, updated_items, merged_state)."""
     existing = state.get("items", {})
@@ -60,7 +72,9 @@ def diff_against_state(all_items, state):
         if key[1] is None:
             continue
         current_best = latest_by_code.get(key)
-        if current_best is None or existing_item.get("version", "") > current_best.get("version", ""):
+        if current_best is None or _version_key(existing_item.get("version")) > _version_key(
+            current_best.get("version")
+        ):
             latest_by_code[key] = existing_item
 
     for item in all_items:
