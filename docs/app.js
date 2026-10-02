@@ -42,6 +42,19 @@ function docBadgeClass(doc) {
   return "doc-" + doc.replace(/\s|-/g, "");
 }
 
+/**
+ * Converte uma data no formato ISO (yyyy-mm-dd), vinda de data.json, para o
+ * formato brasileiro dd/mm/aaaa. Mantida em uma única linha (sem quebra) via
+ * CSS (white-space: nowrap) na célula da tabela.
+ */
+function formatDateBR(isoDate) {
+  if (!isoDate) return "-";
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(isoDate);
+  if (!m) return isoDate;
+  const [, year, month, day] = m;
+  return `${day}/${month}/${year}`;
+}
+
 function renderTable() {
   const tbody = document.getElementById("items-body");
   const emptyState = document.getElementById("empty-state");
@@ -81,7 +94,7 @@ function renderTable() {
         : "";
       return `
       <tr>
-        <td>${it.date || "-"}</td>
+        <td class="col-date">${formatDateBR(it.date)}</td>
         <td><span class="doc-badge ${docBadgeClass(it.document)}">${it.document}</span></td>
         <td>${escapeHtml(it.title)} ${badge}</td>
         <td>${escapeHtml(it.summary || "")}${prevInfo}</td>
