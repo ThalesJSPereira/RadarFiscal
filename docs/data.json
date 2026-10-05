@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T18:09:30+00:00",
+  "generated_at": "2026-10-05T12:05:26+00:00",
   "total_items": 399,
   "counts_by_document": {
     "NFe": 327,
@@ -38,7 +38,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "11743b55d3bd9917",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -53,7 +53,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "4ac771a82e87121b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -68,7 +68,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8b74b458d5c18dbb",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -83,7 +83,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "97bf63c390717f83",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -98,7 +98,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ee0e5d23ea521059",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -113,7 +113,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f0ae53569a7a9ef1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -128,7 +128,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f523026b275244b3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Notas Técnicas",
@@ -173,7 +173,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "55ded0b944cde086",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -203,7 +203,7 @@
       "source_key": "nfe_informes",
       "id": "5f55cf76e1118f40",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Informes",
@@ -248,7 +248,7 @@
       "source_key": "nfe_informes",
       "id": "b6d4ac1027d8a16c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e TA",
@@ -263,7 +263,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "3126d8c14b972a09",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -308,7 +308,7 @@
       "source_key": "nfe_informes",
       "id": "fe9b83527452d221",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -338,7 +338,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7177a7b5858dcce8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -428,7 +428,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0311d64f3101bf5e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -443,7 +443,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b55e9e6e60fc4cda",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -458,7 +458,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "01365e405e069ed3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -473,7 +473,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c1f7fb06bd1c9279",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -488,7 +488,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "736ad18b912aafe0",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -503,7 +503,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c3010ec156268863",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -518,7 +518,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "737722758c310183",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -533,7 +533,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "8ee402f0e84c4d6f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Documentos",
@@ -563,7 +563,7 @@
       "source_key": "mdfe_documentos",
       "id": "93340dabb45f6845",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -578,7 +578,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "47d2c1fbf1654d3f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -593,7 +593,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "782cfa44f474887b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -608,7 +608,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b1936cf1b30129ee",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -623,7 +623,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "56f62a5f692f2c0a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -638,7 +638,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b3e84a04440e16f8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -653,7 +653,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "daea167ca360b7db",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -668,7 +668,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e235d338328c3fa1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -698,7 +698,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "220acb917a04ed8e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -713,7 +713,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f61dce9f6f712e4b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -728,7 +728,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "2e2c41dbd4891e13",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -743,7 +743,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "3e66e0587b0804ae",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e TA",
@@ -758,7 +758,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "614baae6d28cf76b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -773,7 +773,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "97062247759deb9d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e TA",
@@ -788,7 +788,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "b6d14c779f314bed",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -803,7 +803,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "dd59c6d9c06f2986",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -818,7 +818,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a6137f2cfa4e7c33",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -833,7 +833,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d33cf2d749f790f4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -848,7 +848,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d3d767b529ad5d72",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -863,7 +863,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "14aaef60809364df",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -878,7 +878,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "4a975a6d4da3054f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -893,7 +893,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "ac6fb50b291c8dab",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Notas Técnicas",
@@ -923,7 +923,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "cc05e88b0105376b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -938,7 +938,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "52e4f943484eeaad",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -953,7 +953,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "81a4621835999f7c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -968,7 +968,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "8bd5d2216494ae46",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -983,7 +983,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "21fa0092be9b5c41",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -998,7 +998,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "edf4316f578d14eb",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -1013,7 +1013,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "9697951cc4d3364d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1028,7 +1028,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6915869766703db1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1043,7 +1043,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ba71ae3b9ad1df81",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1058,7 +1058,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e74ba17dc20bd089",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1073,7 +1073,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "67e9bf73078e37da",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1088,7 +1088,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "14ade8e58bd98ef7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1103,7 +1103,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b867a6c384900ee4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1118,7 +1118,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9eeb060dbcbb0c58",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1133,7 +1133,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "2d8547ec610186e6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1148,7 +1148,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "423447d3b5b56a0a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1163,7 +1163,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "dca1174e4ebb033f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1178,7 +1178,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "27c370b404637413",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -1193,7 +1193,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "a70bfee99af6a20e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1208,7 +1208,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "994b918e253821dc",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1223,7 +1223,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "eabeaa38e7dc1c1b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -1238,7 +1238,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "340627a5bbb06137",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "BP-e",
@@ -1253,7 +1253,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "e61c91b402ddb07c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1268,7 +1268,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "ee29e811d7c61d12",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1283,7 +1283,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "649fea41b8517e0f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -1313,7 +1313,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "4808be418a528515",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1328,7 +1328,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "ddaebbca241b9047",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1343,7 +1343,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "f6b676761f4a3158",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1358,7 +1358,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "85999262a3adf957",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1373,7 +1373,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "2f8cbdd3ba82b74d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1388,7 +1388,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "3cd7577fc418bc46",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1403,7 +1403,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9918332239f2656b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1418,7 +1418,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8125505b18af55b0",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1433,7 +1433,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "02784342b5086de1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1448,7 +1448,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "cefadcec38f17916",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1463,7 +1463,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "be70d327c316849b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1478,7 +1478,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e2e52028c7851b25",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1493,7 +1493,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "020860b3b9e44283",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1508,7 +1508,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "830dc2aea2c82e17",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1523,7 +1523,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "82d4eb1af1323532",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1538,7 +1538,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "63b0777b8002ef18",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1553,7 +1553,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "2a363cc87c451f79",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1568,7 +1568,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "d9972e9527287005",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1583,7 +1583,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "c7b8039054b66a20",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1598,7 +1598,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "125c3f37767c4cb7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1613,7 +1613,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8fda8f8923a3f3aa",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -1628,7 +1628,7 @@
       "source_key": "mdfe_documentos",
       "id": "d6d2e1d6564d06b4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1643,7 +1643,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a5b257986703b554",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1658,7 +1658,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "22823f44de24038a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1673,7 +1673,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d7fbbeb688215f42",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1688,7 +1688,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "f8f62a8b2470de5c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1703,7 +1703,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ec1b0c1810bf3081",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1718,7 +1718,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7bfaecacdb1aa29b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1733,7 +1733,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b103f96e074d5b39",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1748,7 +1748,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a0e85986d1500a55",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1763,7 +1763,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "bf9543706dfc04f5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1778,7 +1778,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "517510354aa525da",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1793,7 +1793,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "03cf9d4506da58af",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1808,7 +1808,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6b4bd5401d60b89d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1823,7 +1823,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7ef919e76fa85423",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1838,7 +1838,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "376470487df8b603",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1853,7 +1853,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "5ae492d02a7950a9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1868,7 +1868,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b4a2d5240d11d7d6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1883,7 +1883,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "016cfd23a22b2a66",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1898,7 +1898,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "771c31bdaad2ffd8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1913,7 +1913,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "420d855c2c25a09e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1928,7 +1928,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c4fc20ac17c0cc6a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1943,7 +1943,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ed78301ed983e654",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1958,7 +1958,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "dbfffe40dca39344",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -1973,7 +1973,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "4391646677898026",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -1988,7 +1988,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "ee05fbe4277762a5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2003,7 +2003,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "5bb31a90b2c7b40f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2018,7 +2018,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c0d9a80ffc765996",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -2033,7 +2033,7 @@
       "source_key": "mdfe_documentos",
       "id": "8b458b086a0160e9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2048,7 +2048,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "1428517bb4521c3c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2063,7 +2063,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "235327ac9a61726f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2078,7 +2078,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "fc9705bb16b0a121",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2093,7 +2093,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a22994f211c48413",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2108,7 +2108,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "1dd1862dd241fb37",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2123,7 +2123,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c0e6bb7f3196d674",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2138,7 +2138,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a957c0400ff5a3c0",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2153,7 +2153,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "2976d86969ddfcde",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2168,7 +2168,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "3977dace37f13fb3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2183,7 +2183,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e2c8c034f8660861",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2198,7 +2198,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b0a4c7aa9e64e029",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2213,7 +2213,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "3a2b5071bfee3810",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2228,7 +2228,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "61072cf0bb40aae0",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2243,7 +2243,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "46d613eeeb287d84",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2258,7 +2258,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "508c023658cc4784",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2273,7 +2273,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b1a68ad75dabc8e5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2288,7 +2288,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "551a311bf37bff73",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -2303,7 +2303,7 @@
       "source_key": "mdfe_documentos",
       "id": "e35db74286510e8f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2318,7 +2318,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b4758ac609dded43",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2333,7 +2333,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9d5bd126e299edce",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2348,7 +2348,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "24f13f5ac92532cd",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2363,7 +2363,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "b3bc73e2eb1a80d9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2378,7 +2378,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "2de1f508d9efa8f1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2393,7 +2393,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0e245aaea8ad3ae0",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2408,7 +2408,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "4c8a87401f28d918",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2423,7 +2423,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a0ecc029071d22c8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2438,7 +2438,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b7ecdfef67c24703",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2453,7 +2453,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c2c085756b98879b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2468,7 +2468,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b8b06749199cb6c9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2483,7 +2483,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ee46a9ebd253edaf",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2498,7 +2498,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "2ae63dc989bd58aa",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2513,7 +2513,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9c2d0c60a4d1022e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2528,7 +2528,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "21e882d760e7d9f9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2543,7 +2543,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "94e6de260d31fd8e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2558,7 +2558,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0de755693cf4d998",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2573,7 +2573,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5389ab95aac1f194",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -2588,7 +2588,7 @@
       "source_key": "mdfe_documentos",
       "id": "74c1d29bca6609e3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2603,7 +2603,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "aa878d98b65c0a1a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2618,7 +2618,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "8f09072e174f7adc",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2633,7 +2633,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "362793ecd6d68311",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2648,7 +2648,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f99972e10b04b2c2",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2663,7 +2663,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7530710adb05f1d6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2678,7 +2678,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "73a467c3762a0aa3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "CTe",
@@ -2693,7 +2693,7 @@
       "source_key": "cte_notas_tecnicas",
       "id": "b1959c2ec9b8e021",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2708,7 +2708,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c3ff50057c929a43",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2723,7 +2723,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c2fdd76466680620",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -2738,7 +2738,7 @@
       "source_key": "mdfe_documentos",
       "id": "44f9edb39e90b752",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2753,7 +2753,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f9ba5ef3920b0818",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2768,7 +2768,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "69519327d2dff807",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2783,7 +2783,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "161e58094b8040dc",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2798,7 +2798,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f010f83239cc2a63",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2813,7 +2813,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "1eb7bbc084cd24e6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2828,7 +2828,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "be137453127350d6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2843,7 +2843,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6552b87c9a6c2cd3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2858,7 +2858,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f7a9ec5978a0b81d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2873,7 +2873,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e36ac02540c3faa6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2888,7 +2888,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "270d278f15761cbc",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2903,7 +2903,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7d417830ce07542b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2918,7 +2918,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8d7988dd0e5ed468",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2933,7 +2933,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "99eb1e578399b37a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2948,7 +2948,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "3b4ea5d35c917efc",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2963,7 +2963,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6cdf1107f19233c0",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2978,7 +2978,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7603f37401efd5b5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -2993,7 +2993,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "826a9b1f583b6920",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3008,7 +3008,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "515a8d7fcaa2e8eb",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3023,7 +3023,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0ec4a1bc16cdb93c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3038,7 +3038,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6f9a36f892f524ee",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3053,7 +3053,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "489f76df51904236",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3068,7 +3068,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7c1d03f591674896",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3083,7 +3083,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "1204e7c991ce21f8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3098,7 +3098,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6a5b197f9f467811",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3113,7 +3113,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7eaa2bf8c08c00b2",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3128,7 +3128,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6ae61a0d1b0a37e7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3143,7 +3143,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7d71885f3e0096e1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3158,7 +3158,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d6593d07a4fe5206",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3173,7 +3173,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "275371d4eae93af8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3188,7 +3188,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d1eedc40d0aca045",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3203,7 +3203,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f7f1d65617cd69f7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3218,7 +3218,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5aa38d6803a63e8a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3233,7 +3233,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "4ccfcc4a951af915",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3248,7 +3248,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ea2344e0f3cf855a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3263,7 +3263,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7f29d2e9c232ba1f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3278,7 +3278,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5c08320fda6efd39",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3293,7 +3293,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d7ddcddbc0421159",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3308,7 +3308,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c9e17b1c9a6d2c8e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -3323,7 +3323,7 @@
       "source_key": "mdfe_documentos",
       "id": "7f1d56c328f15f3b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3338,7 +3338,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8ce9e9e925dae76a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3353,7 +3353,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d126f2699d6e9de5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3368,7 +3368,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ab2a0b8f2b7d2ea5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3383,7 +3383,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8d2061e8cb788240",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -3398,7 +3398,7 @@
       "source_key": "mdfe_documentos",
       "id": "74af5ad4b7985b37",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3413,7 +3413,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "26c99850c3076ba6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3428,7 +3428,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "31fca67785e55c28",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3443,7 +3443,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e9a40db4a6146baf",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3458,7 +3458,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ca2f7ae710ac8507",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3473,7 +3473,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "4c20ae2eb3963421",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3488,7 +3488,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "647016670af6f491",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3503,7 +3503,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "45c68240cf271635",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3518,7 +3518,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8f858584885bf897",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3533,7 +3533,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d09934fb137def83",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3548,7 +3548,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e94d8606d25d4710",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3563,7 +3563,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f6543694af6aab85",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3578,7 +3578,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "07b771a7f7bc1dc7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3593,7 +3593,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "68b753703602c4b3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -3608,7 +3608,7 @@
       "source_key": "mdfe_documentos",
       "id": "c2a9a98d62f84f9e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3623,7 +3623,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "eacac0e334f61ef6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3638,7 +3638,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ff8f1774821167f9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3653,7 +3653,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5e03b6408596db25",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -3668,7 +3668,7 @@
       "source_key": "mdfe_documentos",
       "id": "27f986fe7c713694",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -3683,7 +3683,7 @@
       "source_key": "mdfe_documentos",
       "id": "9728292cdf72c43f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3698,7 +3698,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a4573b45764200fa",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3713,7 +3713,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "bf8155c81a3bdd2e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3728,7 +3728,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0b2d1b01aa7ba661",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3743,7 +3743,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "03881f9dc1383fed",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3758,7 +3758,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8b9215b4ee0b112e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3773,7 +3773,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "90d5dc199acde983",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3788,7 +3788,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ecd6861e8a732b65",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3803,7 +3803,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "89cc2f03ebe0ffa6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3818,7 +3818,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d50d1dd26dfcb4a7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3833,7 +3833,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "88011f96e0a77ea9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3848,7 +3848,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6823d0e84da6a657",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3863,7 +3863,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "41ea7f43bc94ba13",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3878,7 +3878,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "882152fc280af4ae",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3893,7 +3893,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b158470427e21895",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3908,7 +3908,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "070b6d3a5fa1003b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3923,7 +3923,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b52d21f8c3f3bff8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3938,7 +3938,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "024ff4c082844f9c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3953,7 +3953,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d004c9ca3fe9a26c",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3968,7 +3968,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8d959255308aaf02",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3983,7 +3983,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d61330c5cd13bd0b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -3998,7 +3998,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6f0758a1441917af",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "MDFe",
@@ -4013,7 +4013,7 @@
       "source_key": "mdfe_documentos",
       "id": "161fccb495621a41",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4028,7 +4028,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9b32d36566b89854",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4043,7 +4043,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "04aca67acd405e5b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4058,7 +4058,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "98279844596b622d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4073,7 +4073,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "55317721f7b8f097",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4088,7 +4088,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "da505a0f19cd5ba6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4103,7 +4103,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "da6c515da4b12e4e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4118,7 +4118,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "513efa2be29de649",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4133,7 +4133,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6f37e84e1fc32f13",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4148,7 +4148,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8449f6cd939f38c4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4163,7 +4163,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "52d558264d43fbac",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4178,7 +4178,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "47a97ff371415f1d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4193,7 +4193,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "fa42f41229149c31",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4208,7 +4208,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "577665e7ffde3c43",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4223,7 +4223,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "92c325cd20cf9334",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4238,7 +4238,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c2943adfe45362a6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4253,7 +4253,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "99362bc331328673",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4268,7 +4268,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "87d9781792195ea8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4283,7 +4283,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "45fbda5aa480c164",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4298,7 +4298,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "067e0c27df01aba4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4313,7 +4313,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "73168710a90183c3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4328,7 +4328,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "830344b7c771364d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4343,7 +4343,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9bbfc53f2997ac1d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4358,7 +4358,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c66db81b1c6c277a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4373,7 +4373,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "67837f868cb28734",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4388,7 +4388,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "84967df5a9ce52b7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4403,7 +4403,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "e9dec1b788133891",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4418,7 +4418,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0f99b52e72c2bc78",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4433,7 +4433,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9f17dbfdfd92a072",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4448,7 +4448,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "46982ac240af930b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4463,7 +4463,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9ac54e00fa7d9838",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4478,7 +4478,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "04beb5d0599b30ff",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4493,7 +4493,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "eba78c9971fa67a1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4508,7 +4508,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9ff645e3c987c6ed",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4523,7 +4523,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "769435ca9fc96f16",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4538,7 +4538,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "345fbc59edfcccd4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4553,7 +4553,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8f3bf05be8067509",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4568,7 +4568,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7540d28a28c6f216",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4583,7 +4583,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "546157b9782451b1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4598,7 +4598,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "45d1bacbc3e27cf0",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4613,7 +4613,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "3f45eb4049ceead6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4628,7 +4628,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "31783c8fe348ff4d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4643,7 +4643,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "4b17124def4cb4f7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4658,7 +4658,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "31cba046f1082e47",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4673,7 +4673,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "eed0f9823e2a4747",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4688,7 +4688,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a757b41dc0da2fff",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4703,7 +4703,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "fe548ac566ffd45e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4718,7 +4718,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "33b4e393cb354df5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4733,7 +4733,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8998ab272c1a3f26",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4748,7 +4748,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "cb7356dd569fda86",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4763,7 +4763,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5cda90bed90288bb",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4778,7 +4778,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "80aedbdf094dfad1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4793,7 +4793,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ce6e80949cea7730",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4808,7 +4808,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "eb2159d4bd8af4c1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4823,7 +4823,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "58889473127c278a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4838,7 +4838,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a6affe36920e9b00",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4853,7 +4853,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a24c9baa10bf94b7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4868,7 +4868,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b3cbb54b6a26f18b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4883,7 +4883,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "17a8eb1e0e381479",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4898,7 +4898,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "3f3a6de0ff1b22c4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4913,7 +4913,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "da30aff269f3d430",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4928,7 +4928,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5ff954a0881e6a73",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4943,7 +4943,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b3c001b71ca707cd",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4958,7 +4958,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "863852c3bbc0fd3f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4973,7 +4973,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "552b5c912d9406c8",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -4988,7 +4988,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "fd86df3547dcb911",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5003,7 +5003,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8dcd6156a2b4ba2f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5018,7 +5018,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5fa93f3da1838d0b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5033,7 +5033,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "72c11e1ef64799ce",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5048,7 +5048,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a89e2d52a2058f55",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5063,7 +5063,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6fae522de68c8bc6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5078,7 +5078,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "32107644e0995ee1",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5093,7 +5093,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0c22011fe17d4ae2",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5108,7 +5108,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "82532c211dbadf21",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5123,7 +5123,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "18b46a4c2bf487cc",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5138,7 +5138,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7c52a25eae933b02",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5153,7 +5153,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "89fb58b07d8602b7",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5168,7 +5168,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7379b852421b770f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5183,7 +5183,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f9468734a4ae518a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5198,7 +5198,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "24e82c9898e12652",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5213,7 +5213,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "417c08a9e18195c6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5228,7 +5228,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "56b50b81f23a319f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5243,7 +5243,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "35e1ae0a0d2561db",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5258,7 +5258,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "758187ed28d0579b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5273,7 +5273,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "773905a8a7c77a5d",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5288,7 +5288,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f9f74c8e84d8cea3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5303,7 +5303,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f63d5466d9624385",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5318,7 +5318,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "36221566c186e367",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5333,7 +5333,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "a0ebc522beb89fac",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5348,7 +5348,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d04d18aa07e4a271",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5363,7 +5363,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "39d83ee54cffde5a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5378,7 +5378,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c1e4a1e4f3926123",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5393,7 +5393,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "6b26e42cf7c6832b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5408,7 +5408,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "fbd8486a4db04a8b",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5423,7 +5423,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f152751b4b9e62df",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5438,7 +5438,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8187e4264c4cd1bd",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5453,7 +5453,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "789c32072ea9ec50",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5468,7 +5468,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7c1ea56f9754e4fc",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5483,7 +5483,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f7f72d5f541d6a05",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5498,7 +5498,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "819e76db860170f6",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5513,7 +5513,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "cf4a80cc9e5c71bf",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5528,7 +5528,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d8ae836caf40a5d5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5543,7 +5543,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ef751db8622715d3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5558,7 +5558,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b8733b164d2a1f1a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5573,7 +5573,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "1ecfb83caa30acbb",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5588,7 +5588,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "383f1c595f0bef39",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5603,7 +5603,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ca508f8e4d0fd2eb",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5618,7 +5618,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "8fd95847e6b6221e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5633,7 +5633,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7db40b701f3d6187",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5648,7 +5648,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9c4a182b3f9e13e3",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5663,7 +5663,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "19cbecfdeee109a5",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5678,7 +5678,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "43748a8832544d79",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5693,7 +5693,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "4bf140f7ccbc254a",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5708,7 +5708,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "5ff1a747caa12076",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5723,7 +5723,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "7dac3a777f7c68c9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5738,7 +5738,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "84a17baf784dcbce",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5753,7 +5753,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "9ca81829d1b77b2f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5768,7 +5768,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ab4b3627922a6f82",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5783,7 +5783,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "b123ab0074e06b3e",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5798,7 +5798,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "c0866581b34768c9",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5813,7 +5813,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ca699a47f7f2eaed",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5828,7 +5828,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "d9d20356cfa75932",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5843,7 +5843,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "efa08cd5a4a2cbb4",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5858,7 +5858,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f45ca4bb22bfcc70",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5873,7 +5873,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0c74f654ab6d1733",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5888,7 +5888,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "17bfc8e4902be033",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5903,7 +5903,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "89a2e597363ea611",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5918,7 +5918,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "89d701d1ce004c44",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5933,7 +5933,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "ac469e3650cf4838",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5948,7 +5948,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "cce9118db073cf8f",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5963,7 +5963,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "f77000b818c83228",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5978,7 +5978,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "89e776d6a13a9c33",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -5993,7 +5993,7 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "df20f3a0e82ebb82",
       "first_seen": "2026-10-01",
-      "is_new": true
+      "is_new": false
     }
   ]
 }
