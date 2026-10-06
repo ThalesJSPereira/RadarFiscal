@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-05T18:06:10+00:00",
-  "total_items": 399,
+  "generated_at": "2026-10-06T12:05:16+00:00",
+  "total_items": 400,
   "counts_by_document": {
-    "NFe": 327,
+    "NFe": 328,
     "CTe": 41,
     "BP-e": 13,
     "BP-e TA": 3,
     "MDFe": 15
   },
-  "new_last_run": 0,
+  "new_last_run": 1,
   "items": [
     {
       "document": "NFe",
@@ -23,7 +23,7 @@
       "source_key": "nfe_informes",
       "id": "e45b14521944dae9",
       "first_seen": "2026-10-02",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -296,19 +296,34 @@
       "is_new": false
     },
     {
+      "category": "Informes",
+      "code": null,
+      "date": "2026-08-25",
+      "document": "NFe",
+      "first_seen": "2026-10-01",
+      "id": "fe9b83527452d221",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "source_key": "nfe_informes",
+      "summary": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...",
+      "title": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...",
+      "type": "Ato Conjunto",
+      "version": null,
+      "is_new": false
+    },
+    {
       "document": "NFe",
       "category": "Informes",
       "type": "Ato Conjunto",
       "code": null,
       "version": null,
       "date": "2026-08-25",
-      "title": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...",
-      "summary": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...",
+      "title": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+      "summary": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
       "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
       "source_key": "nfe_informes",
-      "id": "fe9b83527452d221",
-      "first_seen": "2026-10-01",
-      "is_new": false
+      "id": "d69b50865f10da6c",
+      "first_seen": "2026-10-06",
+      "is_new": true
     },
     {
       "document": "CTe",

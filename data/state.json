@@ -4592,6 +4592,20 @@
       "type": "Nota Técnica",
       "version": "1.10"
     },
+    "d69b50865f10da6c": {
+      "category": "Informes",
+      "code": null,
+      "date": "2026-08-25",
+      "document": "NFe",
+      "first_seen": "2026-10-06",
+      "id": "d69b50865f10da6c",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "source_key": "nfe_informes",
+      "summary": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+      "title": "Publicado Ato Conjunto RFB/CGIBS nº 2, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+      "type": "Ato Conjunto",
+      "version": null
+    },
     "d6d2e1d6564d06b4": {
       "category": "Documentos",
       "code": null,
@@ -5587,5 +5601,5 @@
       "version": "1.20"
     }
   },
-  "last_run": "2026-10-05T18:06:10+00:00"
+  "last_run": "2026-10-06T12:05:16+00:00"
 }
