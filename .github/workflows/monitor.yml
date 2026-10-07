@@ -14,9 +14,17 @@ on:
 permissions:
   contents: write   # necessário para o job poder commitar data/state.json e docs/data.json
 
+# Fila: nunca roda duas execuções do monitor ao mesmo tempo (evita o erro
+# "rejected ... (fetch first)" no push e alertas duplicados). A execução nova
+# espera a anterior terminar, sem cancelá-la.
+concurrency:
+  group: monitor-nfe-cte-mdfe
+  cancel-in-progress: false
+
 jobs:
   scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -42,13 +50,34 @@ jobs:
 
       - name: Commitar dados atualizados
         if: always()
+        env:
+          NEW_COUNT: ${{ steps.run_monitor.outputs.new_count }}
+          UPDATED_COUNT: ${{ steps.run_monitor.outputs.updated_count }}
         run: |
           git config user.name "radar-fiscal-bot"
           git config user.email "radar-fiscal-bot@users.noreply.github.com"
           git add data/state.json docs/data.json
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para commitar."
-          else
-            git commit -m "chore(monitor): atualiza dados - novos=${{ steps.run_monitor.outputs.new_count }} novas_versoes=${{ steps.run_monitor.outputs.updated_count }}"
-            git push
+            exit 0
           fi
+          git commit -m "chore(monitor): atualiza dados - novos=${NEW_COUNT:-0} novas_versoes=${UPDATED_COUNT:-0}"
+
+          # Se o remoto recebeu outro commit durante a execução, sincroniza e tenta de novo.
+          # "-X theirs" no rebase mantém os dados que ESTA execução acabou de gerar.
+          BRANCH="${GITHUB_REF_NAME}"
+          for tentativa in 1 2 3 4 5; do
+            if git push origin "HEAD:${BRANCH}"; then
+              echo "Push concluído (tentativa ${tentativa})."
+              exit 0
+            fi
+            echo "Push rejeitado (tentativa ${tentativa}/5). Sincronizando com o remoto..."
+            if ! git pull --rebase -X theirs origin "${BRANCH}"; then
+              git rebase --abort || true
+              echo "Falha ao sincronizar com o remoto."
+              exit 1
+            fi
+            sleep $((tentativa * 3))
+          done
+          echo "Não foi possível publicar os dados após 5 tentativas."
+          exit 1
