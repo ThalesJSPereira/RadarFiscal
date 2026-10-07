@@ -23,6 +23,15 @@ qualificador ("até") para ser exibido junto da data.
 Quando o documento não tem essa tabela, as datas são buscadas nas frases
 ("ambiente de homologação ... 15/10/2026").
 
+Links
+-----
+O link do documento que vai para o e-mail e para o painel passa por
+clean_document_url(): o portal (ASP.NET) acrescenta sozinho, nos redirecionamentos,
+o marcador "AspxAutoDetectCookieSupport=1" (e, em alguns casos, um ID de sessão no
+caminho). Esses trechos não identificam o documento e, abertos direto no navegador,
+causam "ERR_TOO_MANY_REDIRECTS". O link guardado é o mesmo que o portal usa na
+própria listagem.
+
 O resultado fica em item["change_summary"] e é usado pelo painel e pelo e-mail:
   homologation / production            -> "dd/mm/aaaa" ou None
   homologation_note / production_note  -> "até" | "a partir de" | None
@@ -35,7 +44,7 @@ de triagem: sempre confira o PDF original antes de implementar.
 import io
 import re
 from datetime import datetime, timedelta, timezone
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 import requests
 from bs4 import BeautifulSoup
@@ -57,6 +66,28 @@ _SKIP_HREF = re.compile(r"^(#|javascript:|mailto:)", re.IGNORECASE)
 
 def _norm(text):
     return re.sub(r"\s+", " ", text or "").strip().lower()
+
+
+# ---------------------------------------------------------------------------
+# Limpeza de links
+# ---------------------------------------------------------------------------
+# Parâmetros que o servidor ASP.NET do portal acrescenta SOZINHO durante o teste de cookies.
+_VOLATILE_PARAMS = {"aspxautodetectcookiesupport"}
+# Sessão "sem cookie" do ASP.NET embutida no caminho: /(S(abc123))/pagina.aspx
+_RE_COOKIELESS_SESSION = re.compile(r"/\((?:[SAF]\([^)]*\))+\)(?=/)", re.IGNORECASE)
+
+
+def clean_document_url(url):
+    """Remove da URL os trechos temporários que o portal acrescenta nos redirecionamentos
+    (AspxAutoDetectCookieSupport e ID de sessão no caminho), preservando o restante
+    exatamente como está (inclusive o "=" no fim do valor de "conteudo")."""
+    if not url:
+        return url
+    parts = urlsplit(url)
+    path = _RE_COOKIELESS_SESSION.sub("", parts.path)
+    kept = [p for p in parts.query.split("&")
+            if p and p.split("=", 1)[0].lower() not in _VOLATILE_PARAMS]
+    return urlunsplit((parts.scheme, parts.netloc, path, "&".join(kept), parts.fragment))
 
 
 # ---------------------------------------------------------------------------
@@ -92,10 +123,10 @@ def find_document_url(page_html, page_url, item):
     for _, _, node in candidates:
         anchor = node.find_parent("a", href=True)
         if anchor is not None and not _SKIP_HREF.match(anchor["href"]):
-            return urljoin(page_url, anchor["href"])
+            return clean_document_url(urljoin(page_url, anchor["href"]))
         for nxt in node.find_all_next("a", href=True, limit=3):
             if not _SKIP_HREF.match(nxt["href"]):
-                return urljoin(page_url, nxt["href"])
+                return clean_document_url(urljoin(page_url, nxt["href"]))
     return None
 
 
@@ -116,20 +147,24 @@ def _pdf_to_text(data):
 
 
 def get_document_text(url, depth=0):
-    """Baixa `url` e devolve (texto, url_final).
+    """Baixa `url` e devolve (texto, url_final_limpa).
 
     - Se for PDF: extrai o texto.
     - Se for uma página HTML com link para PDF (ex.: exibirArquivo.aspx): segue
       o link uma vez.
     - Se for uma página HTML sem PDF (caso dos Informes): usa o texto da página.
+
+    A URL devolvida é a final (depois dos redirecionamentos), SEM os marcadores
+    temporários do portal (ver clean_document_url).
     """
     resp = requests.get(url, headers=config.HTTP_HEADERS, timeout=DOWNLOAD_TIMEOUT)
     resp.raise_for_status()
     content = resp.content[:MAX_BYTES]
     ctype = resp.headers.get("Content-Type", "").lower()
+    final_url = clean_document_url(resp.url)
 
     if content[:5] == b"%PDF-" or "application/pdf" in ctype:
-        return _pdf_to_text(content), resp.url
+        return _pdf_to_text(content), final_url
 
     if "charset" not in ctype:  # sem charset declarado: requests assumiria ISO-8859-1
         resp.encoding = resp.apparent_encoding or "utf-8"
@@ -164,7 +199,7 @@ def get_document_text(url, depth=0):
     text = "\n".join(blocks)
     if len(text) < 200:  # página sem tags de bloco: usa o texto inteiro
         text = soup.get_text("\n", strip=True)
-    return text, resp.url
+    return text, final_url
 
 
 # ---------------------------------------------------------------------------
@@ -743,7 +778,7 @@ def _unavailable(reason, item, doc_url=None):
         "production_note": None,
         "schedule_version": None,
         "deadlines": [],
-        "doc_url": doc_url,
+        "doc_url": clean_document_url(doc_url),
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
 
@@ -759,7 +794,7 @@ def build_summary(item, page_html, page_url):
     if len(re.sub(r"\s+", "", text)) < 200:
         return _unavailable("não foi possível extrair texto (documento escaneado ou vazio)", item, final_url)
     result = summarize_text(text, item)
-    result["doc_url"] = final_url
+    result["doc_url"] = clean_document_url(final_url)
     result["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     return result
 

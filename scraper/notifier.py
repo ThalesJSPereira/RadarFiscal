@@ -23,7 +23,7 @@ from email.mime.text import MIMEText
 from html import escape
 
 from . import config
-from .nt_summary import summary_to_text, rollout_info
+from .nt_summary import summary_to_text, rollout_info, clean_document_url
 
 TEST_BANNER = (
     "E-mail de TESTE: foi gerado com a Nota Técnica mais recente publicada nos portais oficiais. "
@@ -194,8 +194,16 @@ def _summary_html(cs):
     return "".join(parts)
 
 
+def _item_link(it):
+    """Link do documento (ou da página do portal) SEM os marcadores temporários do portal
+    (AspxAutoDetectCookieSupport etc.), que causam ERR_TOO_MANY_REDIRECTS no navegador.
+    Também corrige itens antigos já gravados com o link "sujo"."""
+    raw = it.get("doc_url") or it.get("link")
+    return clean_document_url(raw) if raw else "#"
+
+
 def _render_item_html(it, badge_text, badge_color):
-    link = it.get("doc_url") or it.get("link") or "#"
+    link = _item_link(it)
     link_label = "Abrir Nota Técnica" if it.get("doc_url") else "Abrir fonte"
     previous = ""
     if it.get("previous_version"):
@@ -274,7 +282,7 @@ def _build_text(new_items, updated_items, test_mode=False):
             if text_summary:
                 lines.append("  --- Resumo das alterações ---")
                 lines.extend("  " + ln for ln in text_summary.splitlines())
-            lines.append(f"  Fonte: {it.get('doc_url') or it.get('link')}")
+            lines.append(f"  Fonte: {_item_link(it)}")
             lines.append("")
     return "\n".join(lines)
 
