@@ -42,17 +42,59 @@ function docBadgeClass(doc) {
   return "doc-" + doc.replace(/\s|-/g, "");
 }
 
-/**
- * Converte uma data no formato ISO (yyyy-mm-dd), vinda de data.json, para o
- * formato brasileiro dd/mm/aaaa. Mantida em uma única linha (sem quebra) via
- * CSS (white-space: nowrap) na célula da tabela.
- */
+/** yyyy-mm-dd -> dd/mm/aaaa (a célula usa white-space: nowrap, sem quebra de linha) */
 function formatDateBR(isoDate) {
   if (!isoDate) return "-";
   const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(isoDate);
   if (!m) return isoDate;
   const [, year, month, day] = m;
   return `${day}/${month}/${year}`;
+}
+
+function escapeHtml(str) {
+  return (str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+/** Bloco "Resumo das alterações" gerado a partir do documento da NT */
+function renderChangeSummary(it) {
+  const cs = it.change_summary;
+  if (!cs) return "";
+
+  if (cs.status !== "ok") {
+    return it.is_new
+      ? `<span class="prev-version">Resumo detalhado indisponível: ${escapeHtml(cs.reason || "")}. Consulte o documento original.</span>`
+      : "";
+  }
+
+  let body = "";
+  if (cs.purpose) {
+    body += `<p class="nt-purpose"><strong>Objetivo:</strong> ${escapeHtml(cs.purpose)}</p>`;
+  }
+  for (const sec of cs.sections || []) {
+    body += `<div class="nt-sec nt-${sec.key}"><strong>${escapeHtml(sec.title)}</strong><ul>${(sec.items || [])
+      .map((t) => `<li>${escapeHtml(t)}</li>`)
+      .join("")}</ul></div>`;
+  }
+  if ((cs.elements || []).length) {
+    body += `<p class="nt-line"><strong>Campos/grupos citados:</strong> ${cs.elements
+      .map((e) => `<code>${escapeHtml(e)}</code>`)
+      .join(" ")}</p>`;
+  }
+  if ((cs.rules || []).length) {
+    body += `<p class="nt-line"><strong>Regras/rejeições citadas:</strong> ${cs.rules
+      .map((r) => `<code>${escapeHtml(r)}</code>`)
+      .join(" ")}</p>`;
+  }
+  if ((cs.deadlines || []).length) {
+    body += `<p class="nt-line"><strong>Prazos:</strong> ${cs.deadlines.map(escapeHtml).join(" · ")}</p>`;
+  }
+  body += `<p class="nt-disclaimer">Resumo gerado automaticamente a partir do texto do documento. Confira o PDF original antes de implementar.</p>`;
+
+  return `<details class="nt-summary" ${it.is_new ? "open" : ""}>
+    <summary>📝 Resumo das alterações propostas</summary>${body}</details>`;
 }
 
 function renderTable() {
@@ -88,17 +130,19 @@ function renderTable() {
           }</span>`
         : "";
       const prevInfo = it.previous_version
-        ? `<span class="prev-version">Versão anterior: v${it.previous_version} — ${escapeHtml(
+        ? `<span class="prev-version">Versão anterior: v${escapeHtml(String(it.previous_version))} — ${escapeHtml(
             it.previous_summary || ""
           )}</span>`
         : "";
+      const href = it.doc_url || it.link;
+      const linkLabel = it.doc_url ? "Abrir NT ↗" : "Abrir fonte ↗";
       return `
       <tr>
         <td class="col-date">${formatDateBR(it.date)}</td>
-        <td><span class="doc-badge ${docBadgeClass(it.document)}">${it.document}</span></td>
+        <td><span class="doc-badge ${docBadgeClass(it.document)}">${escapeHtml(it.document)}</span></td>
         <td>${escapeHtml(it.title)} ${badge}</td>
-        <td>${escapeHtml(it.summary || "")}${prevInfo}</td>
-        <td><a href="${it.link}" target="_blank" rel="noopener">Abrir fonte ↗</a></td>
+        <td>${escapeHtml(it.summary || "")}${prevInfo}${renderChangeSummary(it)}</td>
+        <td class="col-link"><a href="${escapeHtml(href)}" target="_blank" rel="noopener">${linkLabel}</a></td>
       </tr>`;
     })
     .join("");
@@ -112,13 +156,6 @@ function renderFooter(data) {
   }
   const d = new Date(data.generated_at);
   el.textContent = "Última atualização: " + d.toLocaleString("pt-BR");
-}
-
-function escapeHtml(str) {
-  return (str || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
 }
 
 document.getElementById("tabs").addEventListener("click", (e) => {
