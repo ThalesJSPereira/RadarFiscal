@@ -51,11 +51,34 @@ function formatDateBR(isoDate) {
   return `${day}/${month}/${year}`;
 }
 
+/**
+ * Remove da URL os trechos temporários que o portal (ASP.NET) acrescenta nos
+ * redirecionamentos: o marcador "AspxAutoDetectCookieSupport=1" e o ID de sessão
+ * no caminho "/(S(abc))/". Abertos direto no navegador, eles causam
+ * ERR_TOO_MANY_REDIRECTS. O resto da URL é preservado exatamente como está
+ * (inclusive o "=" no fim do valor de "conteudo").
+ */
+function cleanDocUrl(url) {
+  if (!url) return url;
+  const hashIdx = url.indexOf("#");
+  const hash = hashIdx === -1 ? "" : url.slice(hashIdx);
+  const rest = hashIdx === -1 ? url : url.slice(0, hashIdx);
+  const qIdx = rest.indexOf("?");
+  let base = qIdx === -1 ? rest : rest.slice(0, qIdx);
+  const query = qIdx === -1 ? "" : rest.slice(qIdx + 1);
+  base = base.replace(/\/\((?:[SAF]\([^)]*\))+\)(?=\/)/gi, "");
+  const kept = query
+    .split("&")
+    .filter((p) => p && !/^aspxautodetectcookiesupport(=|$)/i.test(p));
+  return base + (kept.length ? "?" + kept.join("&") : "") + hash;
+}
+
 function escapeHtml(str) {
   return (str || "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 /** Bloco "Resumo das alterações" gerado a partir do documento da NT */
@@ -134,7 +157,7 @@ function renderTable() {
             it.previous_summary || ""
           )}</span>`
         : "";
-      const href = it.doc_url || it.link;
+      const href = cleanDocUrl(it.doc_url || it.link);
       const linkLabel = it.doc_url ? "Abrir NT ↗" : "Abrir fonte ↗";
       return `
       <tr>
