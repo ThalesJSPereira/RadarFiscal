@@ -1,14 +1,16 @@
 """Envio de e-mails de alerta quando novas Notas Técnicas / atualizações são detectadas.
 
 Estrutura do e-mail:
-  1. DATAS DE IMPLANTAÇÃO em destaque, logo no início: para cada NT, a data em que
-     ela entra em HOMOLOGAÇÃO e em PRODUÇÃO (extraídas do documento da NT);
+  1. DATAS DE IMPLANTAÇÃO em destaque, logo no início: para cada NT, a data do
+     ambiente de HOMOLOGAÇÃO (coluna "Implantação Teste" do cronograma da NT) e a
+     do ambiente de PRODUÇÃO (coluna "Implantação Produção"), extraídas do documento;
   2. (somente no modo teste) aviso de que é um e-mail de teste;
   3. para cada publicação: resumo do portal, "Resumo das alterações" (ver
      scraper/nt_summary.py) e link para o documento.
 
 As mesmas datas vão no texto de pré-visualização (aparece ao lado do assunto na
-caixa de entrada) e no início da versão em texto puro.
+caixa de entrada) e no início da versão em texto puro. Quando o documento diz
+"Até 05/10/2026", o "até" aparece junto da data.
 
 Com test_mode=True (usado por scraper/send_test_email.py) o e-mail sai marcado
 como [TESTE], com um aviso no corpo e sem o selo "NOVO".
@@ -21,7 +23,7 @@ from email.mime.text import MIMEText
 from html import escape
 
 from . import config
-from .nt_summary import summary_to_text, rollout_dates
+from .nt_summary import summary_to_text, rollout_info
 
 TEST_BANNER = (
     "E-mail de TESTE: foi gerado com a Nota Técnica mais recente publicada nos portais oficiais. "
@@ -54,13 +56,19 @@ def _unknown_reason(cs):
     return "indisponível - confira o PDF"
 
 
+def _with_note(note, date):
+    return f"{note} {date}" if note else date
+
+
 # ---------------------------------------------------------------------------
 # Bloco de destaque: datas de homologação e produção
 # ---------------------------------------------------------------------------
-def _date_cell_html(label, date, colors, unknown_reason):
+def _date_cell_html(label, date, note, colors, unknown_reason):
     bg, fg, border = colors if date else _UNKNOWN_COLORS
     if date:
-        value = f'<div style="font-size:22px;line-height:26px;font-weight:700;color:{fg};white-space:nowrap;">{escape(date)}</div>'
+        prefix = f'<span style="font-size:12px;font-weight:600;">{escape(note)} </span>' if note else ""
+        value = (f'<div style="font-size:22px;line-height:26px;font-weight:700;color:{fg};white-space:nowrap;">'
+                 f"{prefix}{escape(date)}</div>")
     else:
         value = f'<div style="font-size:12px;line-height:18px;padding:4px 0;color:{fg};">{escape(unknown_reason)}</div>'
     return (
@@ -76,15 +84,19 @@ def _rollout_panel_html(new_items, updated_items):
     rows = []
     for it in items:
         cs = it.get("change_summary")
-        homologation, production = rollout_dates(cs)
+        info = rollout_info(cs)
         reason = _unknown_reason(cs)
+        source_line = (
+            f'<div style="font-size:11px;color:#57606a;margin-top:2px;">cronograma da v{escape(str(info["schedule_version"]))} do documento</div>'
+            if info["schedule_version"] else ""
+        )
         rows.append(
             "<tr>"
             f'<td valign="middle" style="padding:6px 8px 6px 0;font-size:14px;">'
-            f'<strong>[{escape(it["document"])}]</strong> {escape(it["title"])}</td>'
-            + _date_cell_html("HOMOLOGAÇÃO", homologation, _HOMOLOG_COLORS, reason)
+            f'<strong>[{escape(it["document"])}]</strong> {escape(it["title"])}{source_line}</td>'
+            + _date_cell_html("HOMOLOGAÇÃO", info["homologation"], info["homologation_note"], _HOMOLOG_COLORS, reason)
             + '<td width="8"></td>'
-            + _date_cell_html("PRODUÇÃO", production, _PROD_COLORS, reason)
+            + _date_cell_html("PRODUÇÃO", info["production"], info["production_note"], _PROD_COLORS, reason)
             + "</tr>"
         )
     return (
@@ -96,8 +108,8 @@ def _rollout_panel_html(new_items, updated_items):
         '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 6px;">'
         + "".join(rows)
         + "</table>"
-        '<div style="font-size:11px;color:#57606a;margin-top:2px;">Datas extraídas automaticamente do documento da NT. '
-        "Confira no PDF antes de planejar a implantação.</div>"
+        '<div style="font-size:11px;color:#57606a;margin-top:2px;">Homologação = "Implantação Teste" e Produção = "Implantação Produção" '
+        "do cronograma da NT. Datas extraídas automaticamente do documento: confira no PDF antes de planejar a implantação.</div>"
         "</td></tr></table>"
     )
 
@@ -109,12 +121,15 @@ def _rollout_text(new_items, updated_items):
     lines = ["=== DATAS DE IMPLANTAÇÃO DA NOTA TÉCNICA ==="]
     for it in items:
         cs = it.get("change_summary")
-        homologation, production = rollout_dates(cs)
+        info = rollout_info(cs)
         reason = _unknown_reason(cs)
-        lines.append(f"[{it['document']}] {it['title']}")
-        lines.append(f"  HOMOLOGAÇÃO: {homologation or reason}")
-        lines.append(f"  PRODUÇÃO:    {production or reason}")
-    lines.append("(Datas extraídas automaticamente do documento da NT. Confira no PDF.)")
+        version = f" (cronograma da v{info['schedule_version']})" if info["schedule_version"] else ""
+        lines.append(f"[{it['document']}] {it['title']}{version}")
+        h = _with_note(info["homologation_note"], info["homologation"]) if info["homologation"] else reason
+        p = _with_note(info["production_note"], info["production"]) if info["production"] else reason
+        lines.append(f"  HOMOLOGAÇÃO: {h}")
+        lines.append(f"  PRODUÇÃO:    {p}")
+    lines.append('(Homologação = "Implantação Teste"; Produção = "Implantação Produção". Datas extraídas automaticamente do documento da NT. Confira no PDF.)')
     lines.append("")
     return lines
 
@@ -125,13 +140,10 @@ def _preheader_text(new_items, updated_items):
     if not items:
         return ""
     first = items[0]
-    homologation, production = rollout_dates(first.get("change_summary"))
-    parts = [
-        f"Homologação: {homologation or 'não informada'}",
-        f"Produção: {production or 'não informada'}",
-        f"{first['document']} {first['title']}",
-    ]
-    text = " · ".join(parts)
+    info = rollout_info(first.get("change_summary"))
+    h = _with_note(info["homologation_note"], info["homologation"]) if info["homologation"] else "não informada"
+    p = _with_note(info["production_note"], info["production"]) if info["production"] else "não informada"
+    text = " · ".join([f"Homologação: {h}", f"Produção: {p}", f"{first['document']} {first['title']}"])
     if len(items) > 1:
         text += f" (+{len(items) - 1} NT)"
     return text
@@ -145,8 +157,7 @@ def _other_deadlines(cs):
     out = []
     for line in cs.get("deadlines") or []:
         low = line.lower()
-        if low.startswith("homologação:") or low.startswith("homologacao:") \
-                or low.startswith("produção:") or low.startswith("producao:"):
+        if low.startswith(("homologação:", "homologacao:", "produção:", "producao:")):
             continue
         out.append(line)
     return out

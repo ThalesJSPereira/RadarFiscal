@@ -7,9 +7,26 @@ identifica, por regras de texto (sem IA externa): objetivo, inclusões,
 alterações, exclusões, campos/grupos citados, regras/rejeições, e as DATAS DE
 HOMOLOGAÇÃO E PRODUÇÃO.
 
-O resultado fica em item["change_summary"] e é usado pelo painel e pelo e-mail.
-As datas ficam em change_summary["homologation"] e change_summary["production"]
-(formato dd/mm/aaaa, ou None quando o documento não traz a data).
+Datas de implantação
+--------------------
+As NTs da SEFAZ trazem o cronograma em uma tabela "Histórico de Alterações /
+Cronograma" com uma linha por versão e as colunas:
+
+    Versão | Histórico de atualizações | Implantação Teste | Implantação Produção
+
+  - "Implantação Teste"    = ambiente de HOMOLOGAÇÃO
+  - "Implantação Produção" = ambiente de PRODUÇÃO
+
+Vale a linha da versão da própria NT (a versão do título no portal; se não for
+informada, a versão mais alta da tabela). Textos como "Até 05/10/2026" guardam o
+qualificador ("até") para ser exibido junto da data.
+Quando o documento não tem essa tabela, as datas são buscadas nas frases
+("ambiente de homologação ... 15/10/2026").
+
+O resultado fica em item["change_summary"] e é usado pelo painel e pelo e-mail:
+  homologation / production            -> "dd/mm/aaaa" ou None
+  homologation_note / production_note  -> "até" | "a partir de" | None
+  schedule_version                     -> versão da linha do cronograma usada
 
 O texto do documento NÃO é enviado a nenhum serviço externo. O resumo é um apoio
 de triagem: sempre confira o PDF original antes de implementar.
@@ -170,7 +187,7 @@ _RE_CHANGE = re.compile(
     r"tornad\w*|torna-se|obrigatori\w*|facultativ\w*|redu[çc]\w*|ampli\w*|corre[çc]\w*|corrig\w*)",
     re.IGNORECASE,
 )
-_RE_RULE_CODE = re.compile(r"\b[A-Z]{1,3}\d{2,3}[a-z]?-\d{1,3}\b")
+_RE_RULE_CODE = re.compile(r"\b\d?[A-Z]{1,3}\d{2,3}[a-z]?-\d{1,3}\b")
 _RE_REJEICAO = re.compile(r"Rejei[çc][ãa]o\s*[:\-]?\s*(?:n[ºo°.]*\s*)?(\d{3})\b", re.IGNORECASE)
 _RE_FIELD_ID = re.compile(r"\b[A-Z]{1,3}\d{2,3}[a-z]?\b(?!-\d)")
 _RE_ELEMENT_WORD = re.compile(r"\b(campo|grupo|tag|elemento|evento|leiaute|schema)\b", re.IGNORECASE)
@@ -241,7 +258,10 @@ def _score(sentence):
 
 
 def _extract_purpose(flat, fallback):
-    for m in re.finditer(r"\b(?:Objetivo|Resumo|Introdu[çc][ãa]o|Apresenta[çc][ãa]o)\b[:.\s]+", flat):
+    # (?=[A-Z...]) cobre PDFs que "colam" o título na frase seguinte: "ObjetivoEsta Nota Técnica..."
+    for m in re.finditer(
+        r"\b(?:Objetivo|Resumo|Introdu[çc][ãa]o|Apresenta[çc][ãa]o)(?:\b|(?=[A-ZÁÉÍÓÚÂÊÔÃÕÇ]))[:.\s]*", flat
+    ):
         snippet = flat[m.end(): m.end() + 900]
         cut = _RE_NEXT_HEADING.search(snippet)  # o objetivo termina onde começa a próxima seção
         if cut:
@@ -268,19 +288,25 @@ _MONTHS_PT = {
     "janeiro": 1, "fevereiro": 2, "marco": 3, "abril": 4, "maio": 5, "junho": 6,
     "julho": 7, "agosto": 8, "setembro": 9, "outubro": 10, "novembro": 11, "dezembro": 12,
 }
-# 15/10/2026   ou   15 de outubro de 2026
+# 15/10/2026   |   15 / 10 / 2026 (o PDF às vezes separa "01" de "/09/2026")   |   15 de outubro de 2026
 _RE_ANY_DATE = re.compile(
-    r"(?<!\d)(\d{1,2})/(\d{1,2})/(\d{4})(?!\d)"
+    r"(?<!\d)(\d{1,2})\s?/\s?(\d{1,2})\s?/\s?(\d{4})(?!\d)"
     r"|(?<!\d)(\d{1,2})\s+de\s+(janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|"
     r"outubro|novembro|dezembro)\s+de\s+(\d{4})",
     re.IGNORECASE,
 )
-_RE_ROLLOUT_KW = re.compile(r"(?P<h>homolog\w*|homol\.)|(?P<p>produ[çc][ãa]o|\bprod\.)", re.IGNORECASE)
+# "Implantação Teste" e "ambiente de teste" são o ambiente de HOMOLOGAÇÃO
+_RE_ROLLOUT_KW = re.compile(
+    r"(?P<h>homolog\w*|homol\.|ambientes?\s+de\s+teste\b|implanta[çc][ãa]o\s+(?:em\s+|no\s+)?teste\b)"
+    r"|(?P<p>produ[çc][ãa]o|\bprod\.)",
+    re.IGNORECASE,
+)
 _RE_BOUNDARY = re.compile(r"[.;|]\s")
 _RE_PUBLISHED_CTX = re.compile(r"publica\w*\s*(?:em|de|:)?\s*$", re.IGNORECASE)
 _RE_OTHER_DEADLINE = re.compile(
     r"(vig[êe]ncia|entra(?:r[áa])?\s+em\s+vigor|implanta[çc][ãa]o|a partir de|prazo|obrigatoriedade)", re.IGNORECASE
 )
+_RE_QUALIFIER = re.compile(r"(?P<q>at[ée]|a\s+partir\s+(?:de|do)|desde)\s*[:\-]?\s*$", re.IGNORECASE)
 _CLAUSE_WINDOW = 120   # quantos caracteres antes da data são lidos em busca do "homologação"/"produção"
 _AFTER_WINDOW = 60     # idem, depois da data (formato "15/10/2026 em homologação")
 _PAIR_GAP = 50         # "homologação e produção: 01/12" -> a data vale para os dois
@@ -300,6 +326,18 @@ def _match_to_date(m):
         return None
 
 
+def _qualifier_before(text, start):
+    """'até' | 'a partir de' | None, conforme a palavra que vem logo antes da data."""
+    m = _RE_QUALIFIER.search(text[max(0, start - 20):start])
+    if not m:
+        return None
+    return "até" if m.group("q").lower().startswith("at") else "a partir de"
+
+
+def _with_note(note, date):
+    return f"{note} {date}" if note else date
+
+
 def _rollout_keywords(flat, start, end, consumed):
     found = []
     for m in _RE_ROLLOUT_KW.finditer(flat[start:end]):
@@ -310,23 +348,160 @@ def _rollout_keywords(flat, start, end, consumed):
     return found
 
 
-def extract_rollout_dates(flat):
-    """Acha as datas em que a NT entra em HOMOLOGAÇÃO e em PRODUÇÃO.
+# ---- (a) Tabela "Histórico de Alterações / Cronograma" --------------------
+_KIND = r"(?:Teste|Homologa[çc][ãa]o|Produ[çc][ãa]o)"
+# Cobre "Implantação Teste Implantação Produção" e a leitura intercalada do PDF
+# "Implantação Implantação Teste Produção".
+_RE_SCHEDULE_HEADER = re.compile(
+    r"Implanta[çc][ãa]o\s+(?:Implanta[çc][ãa]o\s+)?(?:(?:em|no|nos)\s+)?(?P<a>" + _KIND + r")"
+    r"\s+(?:Implanta[çc][ãa]o\s+)?(?:(?:em|no|nos)\s+)?(?P<b>" + _KIND + r")\b",
+    re.IGNORECASE,
+)
+# palavras do cabeçalho que o PDF pode colocar DEPOIS das colunas de implantação
+_RE_HEADER_TAIL = re.compile(
+    r"(?:\s|Vers[ãa]o|Hist[óo]rico\s+de\s+atualiza[çc][õo]es|Descri[çc][ãa]o)*", re.IGNORECASE
+)
+_RE_VERSION_TOKEN = re.compile(r"(?<![\w./,\-])(\d{1,2}\.\d{1,2}[a-z]?)(?=\s)", re.IGNORECASE)
+# o que pode existir ENTRE duas datas da mesma linha da tabela: "03/11/2026 - Até 05/10/2026"
+_GAP_BETWEEN_DATES = re.compile(
+    r"[\s\-–—:|()]*(?:(?:at[ée]|a\s+partir\s+(?:de|do)|desde|em)\s*)?[\s\-–—:|()]*", re.IGNORECASE
+)
+_RE_ROW_BOUNDARY = re.compile(r"(?:\d{4}|[-–—]|n/?a)\s*$", re.IGNORECASE)
+_ROW_LOOKAHEAD = 600   # tamanho máximo lido para a última linha da tabela
+_TABLE_SCAN = 5000     # quanto texto depois do cabeçalho é examinado
 
-    Para cada data do texto, procura a palavra "homologação"/"produção" na
+
+def _kind_of(word):
+    return "production" if word.lower().startswith("produ") else "homologation"
+
+
+def _version_key(version):
+    m = re.match(r"\s*v?\.?\s*(\d+)\.(\d+)([a-z]?)", version or "", re.IGNORECASE)
+    return (int(m.group(1)), int(m.group(2)), m.group(3).lower()) if m else (-1, -1, "")
+
+
+def _same_version(a, b):
+    ka, kb = _version_key(a), _version_key(b)
+    return ka[:2] == kb[:2] and ka[0] >= 0
+
+
+def _date_clusters(text):
+    """Agrupa datas consecutivas (colunas da mesma linha da tabela)."""
+    clusters, current = [], []
+    for m in _RE_ANY_DATE.finditer(text):
+        if current and _GAP_BETWEEN_DATES.fullmatch(text[current[-1].end():m.start()]):
+            current.append(m)
+        else:
+            if current:
+                clusters.append(current)
+            current = [m]
+    if current:
+        clusters.append(current)
+    return clusters
+
+
+def _pick_cluster(clusters):
+    """Primeiro grupo com 2 datas (teste + produção). Sem ele, nada é inferido."""
+    for cluster in clusters:
+        if len(cluster) >= 2:
+            return cluster[:2]
+    return None
+
+
+def _schedule_rows(flat, body_start, body_end):
+    """Divide o corpo da tabela em linhas, uma por versão."""
+    body = flat[body_start:body_end]
+    starts = []
+    for m in _RE_VERSION_TOKEN.finditer(body):
+        before = body[(starts[-1][0] if starts else 0):m.start()].rstrip()
+        if not starts:
+            # 1ª linha: o número da versão vem logo depois do cabeçalho
+            ok = m.start() <= 60 and not _RE_ANY_DATE.search(body[:m.start()])
+        else:
+            # demais: a linha anterior terminou em data / traço / "n/a"
+            ok = bool(_RE_ROW_BOUNDARY.search(before))
+        if ok:
+            starts.append((m.start(), m.group(1)))
+    rows = []
+    for i, (pos, version) in enumerate(starts):
+        end = starts[i + 1][0] if i + 1 < len(starts) else len(body)
+        text = body[pos:end]
+        if i + 1 == len(starts):  # última linha: não ler texto que já é de outra seção
+            text = text[:_ROW_LOOKAHEAD]
+            cut = _RE_NEXT_HEADING.search(text, 8)
+            if cut:
+                text = text[:cut.start()]
+        rows.append({"version": version, "offset": body_start + pos, "text": text})
+    return rows
+
+
+def _extract_schedule_table(flat, version=None):
+    """Lê a tabela de cronograma da NT. Devolve None se o documento não a tem.
+
+    Retorno: {"homologation", "production", "homologation_note", "production_note",
+              "version", "start", "end"} - start/end delimitam a tabela no texto.
+    """
+    header = None
+    for m in _RE_SCHEDULE_HEADER.finditer(flat):
+        if _kind_of(m.group("a")) != _kind_of(m.group("b")):
+            header = m
+            break
+    if header is None:
+        return None
+    order = (_kind_of(header.group("a")), _kind_of(header.group("b")))
+
+    body_start = header.end() + _RE_HEADER_TAIL.match(flat, header.end()).end() - header.end()
+    body_end = min(len(flat), body_start + _TABLE_SCAN)
+    rows = _schedule_rows(flat, body_start, body_end)
+
+    result = {"homologation": None, "production": None, "homologation_note": None,
+              "production_note": None, "version": None, "start": header.start(), "end": body_start}
+    chosen, cluster, row_text_offset = None, None, 0
+
+    if rows:
+        if version:
+            chosen = next((r for r in rows if _same_version(r["version"], version)), None)
+        if chosen is None:  # sem versão informada (ou não encontrada): vale a mais alta da tabela
+            chosen = max(enumerate(rows), key=lambda ir: (_version_key(ir[1]["version"]), ir[0]))[1]
+        cluster = _pick_cluster(_date_clusters(chosen["text"]))
+        row_text_offset = chosen["offset"]
+        result["version"] = chosen["version"]
+        result["end"] = max(result["end"], chosen["offset"] + len(chosen["text"]))
+        text_of_cluster = chosen["text"]
+    else:
+        # Não deu para separar as linhas: usa o último par de datas logo após o cabeçalho
+        region = flat[body_start:body_start + 700]
+        cut = _RE_NEXT_HEADING.search(region)
+        if cut:
+            region = region[:cut.start()]
+        pairs = [c[:2] for c in _date_clusters(region) if len(c) >= 2]
+        cluster = pairs[-1] if pairs else None
+        row_text_offset, text_of_cluster = body_start, region
+        result["end"] = body_start + len(region)
+
+    if cluster:
+        for kind, m in zip(order, cluster):
+            label = _match_to_date(m)
+            if label:
+                result[kind] = label
+                result[kind + "_note"] = _qualifier_before(text_of_cluster, m.start())
+    return result
+
+
+# ---- (b) Frases do texto --------------------------------------------------
+def _extract_rollout_generic(flat):
+    """Procura, em cada data do texto, a palavra "homologação"/"produção" na
     mesma oração (antes da data; se não houver, logo depois). Cobre formatos como:
       - "Homologação: 15/10/2026 | Produção: 01/12/2026"
       - "disponível em homologação a partir de 15/10/2026 e em produção em 01/12/2026"
       - "a partir de 15/10/2026 em homologação e 01/12/2026 em produção"
-      - "ambientes de homologação e produção a partir de 01/12/2026" (data vale para os dois)
-    Retorna {"homologation": "dd/mm/aaaa"|None, "production": "dd/mm/aaaa"|None}.
-    Nunca inventa data: se o documento não traz, devolve None.
+      - "ambientes de homologação e produção a partir de 01/12/2026" (vale para os dois)
     """
     # Datas inválidas (ex.: 31/02/2026) entram com label None: não valem como prazo,
     # mas continuam delimitando a oração e "consumindo" a palavra que as acompanha.
     dates = [(m.start(), m.end(), _match_to_date(m)) for m in _RE_ANY_DATE.finditer(flat)]
 
-    result = {"homologation": None, "production": None}
+    result = {"homologation": None, "production": None, "homologation_note": None, "production_note": None}
     consumed = set()
     prev_end = 0
     for i, (start, end, label) in enumerate(dates):
@@ -359,7 +534,77 @@ def extract_rollout_dates(flat):
             consumed.add(pos)
             if label and result[kind] is None:
                 result[kind] = label
+                result[kind + "_note"] = _qualifier_before(flat, start)
     return result
+
+
+def extract_rollout_dates(flat, version=None):
+    """Datas em que a NT entra em HOMOLOGAÇÃO (Implantação Teste) e em PRODUÇÃO.
+
+    Primeiro lê a tabela "Histórico de Alterações / Cronograma" (linha da versão
+    `version`, ou a mais alta); o que faltar é buscado nas frases do texto.
+    Nunca inventa data: se o documento não traz, devolve None.
+    """
+    result = {"homologation": None, "production": None, "homologation_note": None,
+              "production_note": None, "schedule_version": None}
+    text = flat
+    table = _extract_schedule_table(flat, version)
+    if table:
+        for key in ("homologation", "production", "homologation_note", "production_note"):
+            result[key] = table[key]
+        result["schedule_version"] = table["version"]
+        if result["homologation"] and result["production"]:
+            return result
+        # tabela incompleta: complementa com as frases, ignorando o texto da própria tabela
+        text = flat[:table["start"]] + " | " + flat[table["end"]:]
+
+    generic = _extract_rollout_generic(text)
+    for kind in ("homologation", "production"):
+        if result[kind] is None and generic[kind]:
+            result[kind] = generic[kind]
+            result[kind + "_note"] = generic[kind + "_note"]
+    return result
+
+
+def _schedule_excerpt(flat):
+    """Trecho bruto do cronograma, como o PDF foi lido (usado só para diagnóstico)."""
+    for m in _RE_SCHEDULE_HEADER.finditer(flat):
+        return flat[max(0, m.start() - 40): m.start() + 420].strip()
+    return None
+
+
+_RE_VERSION_CONTROL = re.compile(r"Controle\s+de\s+Vers[õo]es", re.IGNORECASE)
+_RE_SCHEDULE_HEADING = re.compile(r"Hist[óo]rico\s+de\s+Altera[çc][õo]es(?:\s*/\s*Cronograma)?", re.IGNORECASE)
+
+
+def _strip_version_tables(flat, table):
+    """Remove do texto as tabelas "Controle de Versões" e "Histórico de Alterações /
+    Cronograma". Elas descrevem o histórico do documento, não as mudanças que a NT
+    propõe, e não podem entrar no "Resumo das alterações"."""
+    cuts = []
+    if table:
+        start = table["start"]
+        back = flat[max(0, start - 200):start]
+        headings = list(_RE_SCHEDULE_HEADING.finditer(back))
+        if headings:
+            start = max(0, start - 200) + headings[-1].start()
+        cuts.append((start, table["end"]))
+    for m in _RE_VERSION_CONTROL.finditer(flat):
+        end = min(len(flat), m.end() + 600)
+        nxt = _RE_NEXT_HEADING.search(flat, m.end())
+        if nxt:
+            end = min(end, nxt.start())
+        if table:  # termina onde começa a tabela de cronograma, quando ela vem logo depois
+            sched = max(0, table["start"] - 200)
+            heading = _RE_SCHEDULE_HEADING.search(flat, m.end())
+            if heading and heading.start() < end:
+                end = heading.start()
+            elif sched > m.end():
+                end = min(end, sched)
+        cuts.append((m.start(), end))
+    for start, end in sorted(cuts, reverse=True):
+        flat = flat[:start] + " . " + flat[end:]
+    return flat
 
 
 def _extract_deadlines(rollout, sentences):
@@ -367,9 +612,9 @@ def _extract_deadlines(rollout, sentences):
     duas) até 2 frases sobre vigência/implantação para o leitor conferir."""
     deadlines = []
     if rollout["homologation"]:
-        deadlines.append(f"Homologação: {rollout['homologation']}")
+        deadlines.append(f"Homologação: {_with_note(rollout['homologation_note'], rollout['homologation'])}")
     if rollout["production"]:
-        deadlines.append(f"Produção: {rollout['production']}")
+        deadlines.append(f"Produção: {_with_note(rollout['production_note'], rollout['production'])}")
     if not (rollout["homologation"] and rollout["production"]):
         extra = 0
         for sentence in sentences:
@@ -381,32 +626,45 @@ def _extract_deadlines(rollout, sentences):
     return deadlines
 
 
-def rollout_dates(cs):
-    """(homologação, produção) de um change_summary, em 'dd/mm/aaaa' ou None.
+def rollout_info(cs):
+    """Datas de implantação de um change_summary:
+    {"homologation", "production", "homologation_note", "production_note", "schedule_version"}.
 
     Aceita também resumos antigos (gravados antes desta versão), que só tinham a
-    lista de texto 'deadlines' ("Homologação: 15/10/2026").
+    lista de texto 'deadlines' ("Homologação: até 15/10/2026").
     """
+    info = {"homologation": None, "production": None, "homologation_note": None,
+            "production_note": None, "schedule_version": None}
     if not cs or cs.get("status") != "ok":
-        return None, None
-    homologation, production = cs.get("homologation"), cs.get("production")
-    if homologation is None and production is None:
+        return info
+    for key in info:
+        info[key] = cs.get(key)
+    if info["homologation"] is None and info["production"] is None:
+        qual = r"\s*(?:(até|a partir de)\s+)?"
         for line in cs.get("deadlines") or []:
-            m = re.match(r"\s*Homologa[çc][ãa]o:\s*" + _DATE, line, re.IGNORECASE)
-            if m and homologation is None:
-                homologation = m.group(1)
-            m = re.match(r"\s*Produ[çc][ãa]o:\s*" + _DATE, line, re.IGNORECASE)
-            if m and production is None:
-                production = m.group(1)
-    return homologation, production
+            m = re.match(r"\s*Homologa[çc][ãa]o:" + qual + _DATE, line, re.IGNORECASE)
+            if m and info["homologation"] is None:
+                info["homologation_note"], info["homologation"] = (m.group(1) or None), m.group(2)
+            m = re.match(r"\s*Produ[çc][ãa]o:" + qual + _DATE, line, re.IGNORECASE)
+            if m and info["production"] is None:
+                info["production_note"], info["production"] = (m.group(1) or None), m.group(2)
+    return info
+
+
+def rollout_dates(cs):
+    """(homologação, produção) em 'dd/mm/aaaa' ou None."""
+    info = rollout_info(cs)
+    return info["homologation"], info["production"]
 
 
 def summarize_text(text, item=None):
     """Gera o resumo estruturado a partir do texto bruto do documento."""
     item = item or {}
     flat = _prepare_flat(text)
-    sentences = _split_sentences(flat)
-    purpose = _extract_purpose(flat, item.get("summary"))
+    # frases e objetivo vêm do texto SEM as tabelas de versões/cronograma; as datas, do texto completo
+    body = _strip_version_tables(flat, _extract_schedule_table(flat, item.get("version")))
+    sentences = _split_sentences(body)
+    purpose = _extract_purpose(body, item.get("summary"))
     purpose_norm = _norm(purpose)
 
     # Classifica cada frase na primeira categoria que casar (exclusão > inclusão > alteração)
@@ -416,7 +674,7 @@ def summarize_text(text, item=None):
         if _is_noise(sentence):
             continue
         norm = _norm(sentence)
-        if norm in seen or (purpose_norm and norm[:80] in purpose_norm):
+        if norm in seen or (purpose_norm and (norm[:80] in purpose_norm or purpose_norm[:60] in norm)):
             continue
         for key, _, regex in _SECTIONS:
             if regex.search(sentence):
@@ -448,8 +706,8 @@ def summarize_text(text, item=None):
     rejections = ordered_unique(_RE_REJEICAO.findall(flat))[:10]
     rules = [f"Regra {c}" for c in rule_codes] + [f"Rejeição {r}" for r in rejections]
 
-    rollout = extract_rollout_dates(flat)
-    return {
+    rollout = extract_rollout_dates(flat, item.get("version"))
+    summary = {
         "status": "ok",
         "purpose": purpose,
         "sections": sections,
@@ -457,8 +715,15 @@ def summarize_text(text, item=None):
         "rules": rules,
         "homologation": rollout["homologation"],
         "production": rollout["production"],
+        "homologation_note": rollout["homologation_note"],
+        "production_note": rollout["production_note"],
+        "schedule_version": rollout["schedule_version"],
         "deadlines": _extract_deadlines(rollout, sentences),
     }
+    excerpt = _schedule_excerpt(flat)
+    if excerpt:
+        summary["schedule_excerpt"] = excerpt
+    return summary
 
 
 # ---------------------------------------------------------------------------
@@ -474,6 +739,9 @@ def _unavailable(reason, item, doc_url=None):
         "rules": [],
         "homologation": None,
         "production": None,
+        "homologation_note": None,
+        "production_note": None,
+        "schedule_version": None,
         "deadlines": [],
         "doc_url": doc_url,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
