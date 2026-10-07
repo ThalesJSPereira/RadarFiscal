@@ -6,26 +6,33 @@ Fluxo:
   2. Compara com o estado salvo em data/state.json para descobrir:
        - itens novos (id nunca visto antes)
        - itens cuja Nota Técnica ganhou uma NOVA VERSÃO (mesmo código,
-         versão diferente) -> é aqui que fica claro "o que mudou na estrutura"
-  3. Atualiza data/state.json (fonte de verdade, com histórico completo).
-  4. Gera docs/data.json, consumido pelo painel web (GitHub Pages).
-  5. Dispara e-mail de alerta quando há novidade.
+         versão diferente)
+  3. Para cada item novo/nova versão, baixa o documento da NT e gera o
+     "Resumo das alterações" (scraper/nt_summary.py).
+  4. Atualiza data/state.json (fonte de verdade, com histórico completo).
+  5. Gera docs/data.json, consumido pelo painel web (GitHub Pages).
+  6. Dispara e-mail de alerta (já com o resumo) quando há novidade.
 
 Uso:
     python -m scraper.main
 """
 
+import json
+import os
 import sys
 from datetime import datetime, timedelta, timezone
 
-from . import config, store, notifier
+from . import config, store, notifier, nt_summary
 from .fetcher import fetch, FetchError
 from .parsers import PARSERS
 
 
 def collect_all_items():
+    """Retorna (itens, erros, páginas). `páginas` guarda o HTML baixado de cada
+    fonte para que o resumo da NT consiga localizar o link do documento."""
     all_items = []
     errors = []
+    pages = {}
     for source in config.SOURCES:
         parser = PARSERS[source["parser"]]
         try:
@@ -34,6 +41,7 @@ def collect_all_items():
             print(f"[main] AVISO: {exc}")
             errors.append(str(exc))
             continue
+        pages[source["key"]] = (html, source["url"])
         try:
             items = parser(html, source, source["base_url"])
         except Exception as exc:  # noqa: BLE001 - queremos seguir mesmo se um parser falhar
@@ -42,18 +50,11 @@ def collect_all_items():
             continue
         print(f"[main] {source['label']}: {len(items)} item(ns) extraído(s).")
         all_items.extend(items)
-    return all_items, errors
+    return all_items, errors, pages
 
 
 def _version_key(version):
-    """Normaliza a versão para comparação segura.
-
-    Alguns itens extraídos dos portais não possuem uma versão explícita
-    (campo None) - por exemplo, quando a Nota Técnica não traz "v.X.XX" no
-    título. Sem essa normalização, comparar None > "1.00" quebra o Python
-    com TypeError. Tratamos None (e valores vazios) como string vazia, que
-    sempre perde na comparação contra uma versão real.
-    """
+    """Normaliza a versão para comparação segura (None vira string vazia)."""
     return version or ""
 
 
@@ -64,8 +65,6 @@ def diff_against_state(all_items, state):
     updated_items = []
     today = datetime.now(timezone.utc).date().isoformat()
 
-    # Índice por (document, code) para detectar mudança de versão dentro do
-    # mesmo ato normativo (ex.: NT 2025.002 v1.50 -> v1.51).
     latest_by_code = {}
     for existing_id, existing_item in existing.items():
         key = (existing_item.get("document"), existing_item.get("code"))
@@ -80,12 +79,15 @@ def diff_against_state(all_items, state):
     for item in all_items:
         item_id = item["id"]
         if item_id in existing:
-            # já conhecido, apenas garante que o registro mais recente é mantido
-            item["first_seen"] = existing[item_id].get("first_seen", today)
+            # já conhecido: mantém first_seen e o resumo já gerado anteriormente
+            previous = existing[item_id]
+            item["first_seen"] = previous.get("first_seen", today)
+            for keep in ("change_summary", "doc_url", "previous_version", "previous_summary"):
+                if keep in previous and keep not in item:
+                    item[keep] = previous[keep]
             existing[item_id] = item
             continue
 
-        # item novo (id nunca visto)
         item["first_seen"] = today
         key = (item.get("document"), item.get("code"))
         prior = latest_by_code.get(key) if key[1] else None
@@ -110,7 +112,8 @@ def build_dashboard_payload(state):
     items = list(state.get("items", {}).values())
     items.sort(key=lambda x: x.get("date", ""), reverse=True)
 
-    cutoff = (datetime.now(timezone.utc).date() - timedelta(days=config.NEW_BADGE_DAYS)).isoformat()
+    today = datetime.now(timezone.utc).date()
+    cutoff = (today - timedelta(days=config.NEW_BADGE_DAYS)).isoformat()
     for it in items:
         it["is_new"] = it.get("first_seen", "") >= cutoff
 
@@ -118,30 +121,35 @@ def build_dashboard_payload(state):
     for it in items:
         counts[it["document"]] = counts.get(it["document"], 0) + 1
 
-    payload = {
+    return {
         "generated_at": store.now_iso(),
         "total_items": len(items),
         "counts_by_document": counts,
-        "new_last_run": sum(1 for it in items if it.get("first_seen") == datetime.now(timezone.utc).date().isoformat()),
+        "new_last_run": sum(1 for it in items if it.get("first_seen") == today.isoformat()),
         "items": items,
     }
-    return payload
 
 
 def main():
     state = store.load_state()
-    all_items, errors = collect_all_items()
+    all_items, errors, pages = collect_all_items()
 
     if not all_items and not state.get("items"):
         print("[main] Nenhum item coletado e nenhum estado anterior. Abortando sem gravar.")
         sys.exit(1 if errors else 0)
 
     new_items, updated_items, merged_state = diff_against_state(all_items, state)
+
+    # Resumo das alterações da(s) NT(s) nova(s). Qualquer falha aqui NÃO pode
+    # impedir o alerta: no pior caso o e-mail sai apenas com o resumo do portal.
+    try:
+        nt_summary.enrich_items(new_items + updated_items, pages)
+    except Exception as exc:  # noqa: BLE001
+        print(f"[main] AVISO: não foi possível gerar o resumo das alterações: {exc}")
+
     store.save_state(merged_state)
 
     dashboard_payload = build_dashboard_payload(merged_state)
-    import json
-    import os
     os.makedirs(os.path.dirname(config.DASHBOARD_DATA_FILE), exist_ok=True)
     with open(config.DASHBOARD_DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(dashboard_payload, f, ensure_ascii=False, indent=2)
@@ -149,8 +157,6 @@ def main():
     print(f"[main] Itens novos: {len(new_items)} | Novas versões: {len(updated_items)}")
     notifier.send_alert(new_items, updated_items)
 
-    # Sinaliza para o workflow do GitHub Actions se algo mudou (usado para
-    # decidir a mensagem do commit automático).
     github_output = os.environ.get("GITHUB_OUTPUT")
     changed = bool(new_items or updated_items)
     if github_output:
