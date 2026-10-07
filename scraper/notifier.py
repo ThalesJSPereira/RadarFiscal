@@ -1,8 +1,14 @@
 """Envio de e-mails de alerta quando novas Notas Técnicas / atualizações são detectadas.
 
-O e-mail traz, para cada publicação nova, o resumo oficial do portal e (quando
-disponível) o "Resumo das alterações" extraído do documento da NT
-(ver scraper/nt_summary.py).
+Estrutura do e-mail:
+  1. DATAS DE IMPLANTAÇÃO em destaque, logo no início: para cada NT, a data em que
+     ela entra em HOMOLOGAÇÃO e em PRODUÇÃO (extraídas do documento da NT);
+  2. (somente no modo teste) aviso de que é um e-mail de teste;
+  3. para cada publicação: resumo do portal, "Resumo das alterações" (ver
+     scraper/nt_summary.py) e link para o documento.
+
+As mesmas datas vão no texto de pré-visualização (aparece ao lado do assunto na
+caixa de entrada) e no início da versão em texto puro.
 
 Com test_mode=True (usado por scraper/send_test_email.py) o e-mail sai marcado
 como [TESTE], com um aviso no corpo e sem o selo "NOVO".
@@ -15,12 +21,17 @@ from email.mime.text import MIMEText
 from html import escape
 
 from . import config
-from .nt_summary import summary_to_text
+from .nt_summary import summary_to_text, rollout_dates
 
 TEST_BANNER = (
     "E-mail de TESTE: foi gerado com a Nota Técnica mais recente publicada nos portais oficiais. "
     "Nenhuma publicação nova foi detectada e nenhum dado do painel foi alterado."
 )
+
+# cores do bloco de destaque (fundo, texto, borda)
+_HOMOLOG_COLORS = ("#fff8c5", "#7d4e00", "#d4a72c")
+_PROD_COLORS = ("#ffebe9", "#a40e26", "#ff8182")
+_UNKNOWN_COLORS = ("#f6f8fa", "#57606a", "#d0d7de")
 
 
 def _fmt_date(iso):
@@ -30,6 +41,115 @@ def _fmt_date(iso):
         return f"{d}/{m}/{y}"
     except (ValueError, AttributeError):
         return iso or "-"
+
+
+def _all_items(new_items, updated_items):
+    return list(new_items) + list(updated_items)
+
+
+def _unknown_reason(cs):
+    """Texto mostrado no lugar de uma data que não foi encontrada."""
+    if cs and cs.get("status") == "ok":
+        return "não informada no documento"
+    return "indisponível - confira o PDF"
+
+
+# ---------------------------------------------------------------------------
+# Bloco de destaque: datas de homologação e produção
+# ---------------------------------------------------------------------------
+def _date_cell_html(label, date, colors, unknown_reason):
+    bg, fg, border = colors if date else _UNKNOWN_COLORS
+    if date:
+        value = f'<div style="font-size:22px;line-height:26px;font-weight:700;color:{fg};white-space:nowrap;">{escape(date)}</div>'
+    else:
+        value = f'<div style="font-size:12px;line-height:18px;padding:4px 0;color:{fg};">{escape(unknown_reason)}</div>'
+    return (
+        f'<td width="30%" valign="top" style="background:{bg};border:1px solid {border};border-radius:6px;padding:8px 12px;">'
+        f'<div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:{fg};">{label}</div>{value}</td>'
+    )
+
+
+def _rollout_panel_html(new_items, updated_items):
+    items = _all_items(new_items, updated_items)
+    if not items:
+        return ""
+    rows = []
+    for it in items:
+        cs = it.get("change_summary")
+        homologation, production = rollout_dates(cs)
+        reason = _unknown_reason(cs)
+        rows.append(
+            "<tr>"
+            f'<td valign="middle" style="padding:6px 8px 6px 0;font-size:14px;">'
+            f'<strong>[{escape(it["document"])}]</strong> {escape(it["title"])}</td>'
+            + _date_cell_html("HOMOLOGAÇÃO", homologation, _HOMOLOG_COLORS, reason)
+            + '<td width="8"></td>'
+            + _date_cell_html("PRODUÇÃO", production, _PROD_COLORS, reason)
+            + "</tr>"
+        )
+    return (
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+        'style="border:2px solid #0969da;border-radius:8px;border-collapse:separate;margin:0 0 16px;">'
+        '<tr><td style="background:#0969da;color:#ffffff;padding:8px 14px;font-weight:700;font-size:14px;letter-spacing:.04em;">'
+        "📅 DATAS DE IMPLANTAÇÃO DA NOTA TÉCNICA</td></tr>"
+        '<tr><td style="padding:10px 14px;">'
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 6px;">'
+        + "".join(rows)
+        + "</table>"
+        '<div style="font-size:11px;color:#57606a;margin-top:2px;">Datas extraídas automaticamente do documento da NT. '
+        "Confira no PDF antes de planejar a implantação.</div>"
+        "</td></tr></table>"
+    )
+
+
+def _rollout_text(new_items, updated_items):
+    items = _all_items(new_items, updated_items)
+    if not items:
+        return []
+    lines = ["=== DATAS DE IMPLANTAÇÃO DA NOTA TÉCNICA ==="]
+    for it in items:
+        cs = it.get("change_summary")
+        homologation, production = rollout_dates(cs)
+        reason = _unknown_reason(cs)
+        lines.append(f"[{it['document']}] {it['title']}")
+        lines.append(f"  HOMOLOGAÇÃO: {homologation or reason}")
+        lines.append(f"  PRODUÇÃO:    {production or reason}")
+    lines.append("(Datas extraídas automaticamente do documento da NT. Confira no PDF.)")
+    lines.append("")
+    return lines
+
+
+def _preheader_text(new_items, updated_items):
+    """Texto curto que a caixa de entrada mostra ao lado do assunto."""
+    items = _all_items(new_items, updated_items)
+    if not items:
+        return ""
+    first = items[0]
+    homologation, production = rollout_dates(first.get("change_summary"))
+    parts = [
+        f"Homologação: {homologation or 'não informada'}",
+        f"Produção: {production or 'não informada'}",
+        f"{first['document']} {first['title']}",
+    ]
+    text = " · ".join(parts)
+    if len(items) > 1:
+        text += f" (+{len(items) - 1} NT)"
+    return text
+
+
+# ---------------------------------------------------------------------------
+# Resumo das alterações e cartões de cada publicação
+# ---------------------------------------------------------------------------
+def _other_deadlines(cs):
+    """Prazos que NÃO são homologação/produção (esses já estão no destaque do topo)."""
+    out = []
+    for line in cs.get("deadlines") or []:
+        low = line.lower()
+        if low.startswith("homologação:") or low.startswith("homologacao:") \
+                or low.startswith("produção:") or low.startswith("producao:"):
+            continue
+        out.append(line)
+    return out
 
 
 def _summary_html(cs):
@@ -53,8 +173,9 @@ def _summary_html(cs):
         parts.append(f'<p style="margin:6px 0;"><strong>Campos/grupos citados:</strong> {escape(", ".join(cs["elements"]))}</p>')
     if cs.get("rules"):
         parts.append(f'<p style="margin:6px 0;"><strong>Regras/rejeições citadas:</strong> {escape(", ".join(cs["rules"]))}</p>')
-    if cs.get("deadlines"):
-        parts.append(f'<p style="margin:6px 0;"><strong>Prazos:</strong> {escape(" | ".join(cs["deadlines"]))}</p>')
+    others = _other_deadlines(cs)
+    if others:
+        parts.append(f'<p style="margin:6px 0;"><strong>Outras datas citadas:</strong> {escape(" | ".join(others))}</p>')
     parts.append(
         '<p style="margin:8px 0 0;font-size:11px;color:#57606a;">Resumo gerado automaticamente a partir do texto do '
         "documento. Confira o PDF original antes de implementar.</p></div>"
@@ -86,11 +207,15 @@ def _render_item_html(it, badge_text, badge_color):
     """
 
 
+# ---------------------------------------------------------------------------
+# Montagem do e-mail
+# ---------------------------------------------------------------------------
 def _build_html(new_items, updated_items, test_mode=False):
     new_badge = ("ÚLTIMA NT · TESTE", "#57606a") if test_mode else ("NOVO", "#1a7f37")
-    body = "".join(_render_item_html(it, *new_badge) for it in new_items)
-    body += "".join(_render_item_html(it, "NOVA VERSÃO", "#9a6700") for it in updated_items)
+    cards = "".join(_render_item_html(it, *new_badge) for it in new_items)
+    cards += "".join(_render_item_html(it, "NOVA VERSÃO", "#9a6700") for it in updated_items)
     total = len(new_items) + len(updated_items)
+
     banner = (
         f'<div style="background:#fff8c5;border:1px solid #d4a72c;border-radius:6px;padding:10px 12px;margin:0 0 12px;">🧪 {escape(TEST_BANNER)}</div>'
         if test_mode else ""
@@ -100,13 +225,21 @@ def _build_html(new_items, updated_items, test_mode=False):
         if test_mode else
         f"<p>Foram detectadas <strong>{total}</strong> publicação(ões) nova(s) ou atualizada(s) nas fontes oficiais monitoradas.</p>"
     )
+    preheader = _preheader_text(new_items, updated_items)
+    hidden_preheader = (
+        f'<div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">'
+        f"{escape(preheader)}</div>"
+        if preheader else ""
+    )
     return f"""
     <html>
     <body style="font-family:Segoe UI,Arial,sans-serif;color:#1f2328;font-size:14px;">
+      {hidden_preheader}
+      <h2 style="margin:0 0 12px;">🚨 Radar Fiscal - NF-e / CT-e / MDF-e</h2>
+      {_rollout_panel_html(new_items, updated_items)}
       {banner}
-      <h2>🚨 Radar Fiscal - NF-e / CT-e / MDF-e</h2>
       {intro}
-      {body}
+      {cards}
       <p style="margin-top:16px;font-size:12px;color:#666;">
         E-mail gerado automaticamente pelo Radar Fiscal. O painel completo está no GitHub Pages do projeto.
       </p>
@@ -117,6 +250,7 @@ def _build_html(new_items, updated_items, test_mode=False):
 
 def _build_text(new_items, updated_items, test_mode=False):
     lines = []
+    lines += _rollout_text(new_items, updated_items)
     if test_mode:
         lines += [f"*** {TEST_BANNER} ***", ""]
     lines += ["Radar Fiscal - NF-e / CT-e / MDF-e", ""]
