@@ -14,9 +14,22 @@ caixa de entrada) e no início da versão em texto puro. Quando o documento diz
 
 Com test_mode=True (usado por scraper/send_test_email.py) o e-mail sai marcado
 como [TESTE], com um aviso no corpo e sem o selo "NOVO".
+
+Conexão SMTP
+------------
+  - tempo máximo de 30 s para conectar/responder (antes dependia do timeout do
+    sistema, ~2 minutos);
+  - porta 465 usa SSL direto; as demais usam STARTTLS;
+  - qualquer falha vira EmailDeliveryError, com mensagem em português e, nos erros
+    de conexão, um diagnóstico de quais portas do servidor respondem.
+Nenhuma mensagem de erro ou diagnóstico imprime senha, usuário completo ou os
+valores dos Secrets (o GitHub também mascara esses valores nos logs).
 """
 
+import ipaddress
+import re
 import smtplib
+import socket
 import ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -30,10 +43,18 @@ TEST_BANNER = (
     "Nenhuma publicação nova foi detectada e nenhum dado do painel foi alterado."
 )
 
+SMTP_TIMEOUT = 30          # segundos para conectar e para cada resposta do servidor
+_DIAG_TIMEOUT = 5          # segundos por porta no diagnóstico
+_DIAG_PORTS = ((587, "STARTTLS (587)"), (465, "SSL (465)"), (25, "sem criptografia (25)"), (2525, "alternativa (2525)"))
+
 # cores do bloco de destaque (fundo, texto, borda)
 _HOMOLOG_COLORS = ("#fff8c5", "#7d4e00", "#d4a72c")
 _PROD_COLORS = ("#ffebe9", "#a40e26", "#ff8182")
 _UNKNOWN_COLORS = ("#f6f8fa", "#57606a", "#d0d7de")
+
+
+class EmailDeliveryError(Exception):
+    """Falha ao enviar o e-mail. A mensagem já vem pronta para ser mostrada no log."""
 
 
 def _fmt_date(iso):
@@ -297,15 +318,136 @@ def _build_subject(new_items, updated_items, test_mode=False):
     return f"[TESTE] {subject}" if test_mode else subject
 
 
+# ---------------------------------------------------------------------------
+# Configuração e diagnóstico de conexão SMTP
+# ---------------------------------------------------------------------------
+def _smtp_settings():
+    """(host, porta, usuário, senha) já sem espaços/quebras de linha nas pontas
+    (comum ao colar o valor de um Secret)."""
+    host = (config.SMTP_HOST or "").strip()
+    user = (config.SMTP_USER or "").strip()
+    password = (config.SMTP_PASS or "").strip()
+    return host, int(config.SMTP_PORT), user, password
+
+
+def _port_name(port):
+    if port == 587:
+        return "STARTTLS, padrão recomendado"
+    if port == 465:
+        return "SSL direto"
+    if port == 25:
+        return "sem criptografia - o GitHub bloqueia esta porta"
+    return "porta não padrão"
+
+
+def _host_kind(host):
+    low = host.lower()
+    if low.endswith(("gmail.com", "google.com")):
+        return "Gmail/Google"
+    if low.endswith(("office365.com", "outlook.com")):
+        return "Microsoft 365/Outlook"
+    return "outro servidor"
+
+
+def _mask_user(user):
+    if "@" not in user:
+        return "preenchido" if user else "VAZIO"
+    local, domain = user.rsplit("@", 1)
+    return f"{local[:2]}***@{domain}"
+
+
+def _config_hints(host, port):
+    """Problemas de configuração que dá para detectar só olhando os valores."""
+    hints = []
+    if not host:
+        return ["SMTP_HOST está vazio."]
+    if re.search(r"[:/\s]", host):
+        hints.append("SMTP_HOST deve ter só o nome do servidor (ex.: smtp.gmail.com), sem https://, sem porta e sem espaços.")
+    else:
+        internal = False
+        try:
+            internal = ipaddress.ip_address(host).is_private
+        except ValueError:
+            internal = "." not in host or bool(re.search(r"\.(local|lan|corp|internal|intra|home)$", host, re.I))
+        if internal:
+            hints.append("SMTP_HOST parece ser um servidor da rede interna da empresa: o GitHub (nuvem) não consegue acessá-lo. "
+                         "Use um servidor público, como smtp.gmail.com.")
+    if port == 25:
+        hints.append("A porta 25 é bloqueada nos servidores do GitHub. Use SMTP_PORT = 587.")
+    return hints
+
+
+def describe_settings():
+    """Resumo da configuração de e-mail para o log. Não mostra senha nem valores dos Secrets."""
+    host, port, user, password = _smtp_settings()
+    lines = ["Configuração de e-mail em uso (valores sensíveis não são exibidos):",
+             f"  - SMTP_HOST: {'preenchido (' + _host_kind(host) + ')' if host else 'VAZIO'}",
+             f"  - SMTP_PORT: {_port_name(port)}",
+             f"  - SMTP_USER: {_mask_user(user)}",
+             f"  - SMTP_PASS: {'preenchido' if password else 'VAZIO'}",
+             f"  - ALERT_FROM: {'preenchido' if (config.ALERT_FROM or '').strip() else 'VAZIO'}",
+             f"  - ALERT_TO: {len(config.ALERT_TO)} destinatário(s)"]
+    lines += [f"  ! {h}" for h in _config_hints(host, port)]
+    return lines
+
+
+def _tcp_check(host, port, timeout=_DIAG_TIMEOUT):
+    """Tenta abrir uma conexão TCP e descreve o resultado em português."""
+    try:
+        with socket.create_connection((host, port), timeout=timeout):
+            return "acessível"
+    except socket.gaierror:
+        return "nome do servidor não encontrado (DNS)"
+    except ConnectionRefusedError:
+        return "recusada pelo servidor"
+    except (socket.timeout, TimeoutError):
+        return "sem resposta (tempo esgotado)"
+    except OSError as exc:
+        return f"falha ({exc.strerror or type(exc).__name__})"
+
+
+def diagnose_connection(host, port):
+    """Linhas de log com o resultado da conexão com o servidor nas portas de e-mail."""
+    lines = ["Diagnóstico da conexão com o servidor de e-mail:"]
+    try:
+        socket.getaddrinfo(host, None)
+    except (socket.gaierror, UnicodeError):
+        lines.append("  - Nome do servidor (DNS): NÃO encontrado. Confira o valor de SMTP_HOST "
+                     "(sem espaços, sem https://, sem porta) ou use um servidor público, como smtp.gmail.com.")
+        return lines
+    lines.append("  - Nome do servidor (DNS): encontrado")
+
+    results = {p: _tcp_check(host, p) for p in dict.fromkeys([port] + [p for p, _ in _DIAG_PORTS])}
+    lines.append(f"  - Porta configurada em SMTP_PORT ({_port_name(port)}): {results[port]}")
+    lines += [f"  - {label}: {results[p]}" for p, label in _DIAG_PORTS if p != port]
+
+    if results[port] != "acessível":
+        if results.get(587) == "acessível":
+            lines.append("  => Ajuste SMTP_PORT para 587 (STARTTLS): essa porta responde neste servidor.")
+        elif results.get(465) == "acessível":
+            lines.append("  => A porta 465 responde neste servidor: use SMTP_PORT = 465 (SSL).")
+        else:
+            lines.append("  => Nenhuma porta de envio (587/465) respondeu: SMTP_HOST provavelmente está errado "
+                         "ou é um servidor interno que o GitHub não alcança. Para Gmail use smtp.gmail.com.")
+    return lines
+
+
+def _delivery_error(*blocks):
+    return EmailDeliveryError("\n".join(b for b in blocks if b))
+
+
 def send_alert(new_items, updated_items, test_mode=False):
-    """Envia e-mail de alerta. Não faz nada (apenas avisa no log) se as
-    credenciais SMTP não estiverem configuradas, para não quebrar o pipeline
-    em ambientes de teste/desenvolvimento. Retorna True se o e-mail foi enviado."""
+    """Envia e-mail de alerta. Retorna True se o e-mail foi enviado e False se não havia nada
+    a enviar ou se as credenciais SMTP não estão configuradas (apenas avisa no log, para não
+    quebrar o pipeline em ambientes de teste/desenvolvimento).
+
+    Levanta EmailDeliveryError (com mensagem em português) se o envio falhar."""
     if not new_items and not updated_items:
         print("[notifier] Nenhuma novidade, e-mail não será enviado.")
         return False
 
-    if not (config.SMTP_HOST and config.SMTP_USER and config.SMTP_PASS and config.ALERT_TO):
+    host, port, user, password = _smtp_settings()
+    if not (host and user and password and config.ALERT_TO):
         print(
             "[notifier] Variáveis de SMTP/ALERT_TO não configuradas - pulando "
             "envio de e-mail (configure os Secrets no GitHub para habilitar)."
@@ -320,10 +462,43 @@ def send_alert(new_items, updated_items, test_mode=False):
     msg.attach(MIMEText(_build_html(new_items, updated_items, test_mode), "html", "utf-8"))
 
     context = ssl.create_default_context()
-    with smtplib.SMTP(config.SMTP_HOST, config.SMTP_PORT) as server:
-        server.starttls(context=context)
-        server.login(config.SMTP_USER, config.SMTP_PASS)
-        server.sendmail(config.ALERT_FROM, config.ALERT_TO, msg.as_string())
+    try:
+        if port == 465:  # SSL direto
+            server = smtplib.SMTP_SSL(host, port, timeout=SMTP_TIMEOUT, context=context)
+        else:            # STARTTLS
+            server = smtplib.SMTP(host, port, timeout=SMTP_TIMEOUT)
+        with server:
+            if port != 465:
+                server.starttls(context=context)
+            server.login(user, password)
+            server.sendmail(config.ALERT_FROM, config.ALERT_TO, msg.as_string())
+    except smtplib.SMTPAuthenticationError as exc:
+        raise _delivery_error(
+            f"Autenticação recusada pelo servidor (código {exc.smtp_code}). A conexão funciona, "
+            "mas usuário/senha não foram aceitos.",
+            "  - Gmail: use uma SENHA DE APP de 16 letras (não a senha normal) e SMTP_USER com o e-mail completo.",
+            "  - Microsoft 365: o SMTP AUTH pode estar desabilitado para a conta/organização.",
+        ) from exc
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPSenderRefused) as exc:
+        raise _delivery_error(
+            "O servidor recusou o remetente ou os destinatários. Confira ALERT_FROM (precisa ser o mesmo e-mail "
+            "de SMTP_USER) e ALERT_TO.",
+            f"Detalhe do servidor: {type(exc).__name__}",
+        ) from exc
+    except smtplib.SMTPServerDisconnected as exc:
+        raise _delivery_error(
+            "O servidor encerrou a conexão antes de concluir o envio. Em geral é combinação errada de servidor/porta.",
+            "  - Gmail: SMTP_HOST = smtp.gmail.com e SMTP_PORT = 587 (ou 465).",
+        ) from exc
+    except smtplib.SMTPException as exc:
+        raise _delivery_error(f"O servidor de e-mail retornou um erro: {type(exc).__name__}: {exc}") from exc
+    except OSError as exc:  # timeout, conexão recusada, DNS, falha de TLS
+        reason = "tempo esgotado" if isinstance(exc, (socket.timeout, TimeoutError)) else (exc.strerror or type(exc).__name__)
+        raise _delivery_error(
+            f"Não foi possível conectar ao servidor de e-mail ({reason}). A senha nem chegou a ser testada.",
+            *describe_settings(),
+            *diagnose_connection(host, port),
+        ) from exc
 
     print(f"[notifier] E-mail enviado para {config.ALERT_TO} ({len(new_items) + len(updated_items)} itens).")
     return True

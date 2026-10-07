@@ -13,6 +13,10 @@ O que faz:
   3. imprime no log uma prévia do e-mail;
   4. envia o e-mail marcado como [TESTE] para os destinatários de ALERT_TO.
 
+Se o envio falhar, o log explica o motivo, mostra a configuração de e-mail em uso (sem
+senha nem valores dos Secrets) e quais portas do servidor respondem, e o workflow termina
+com erro.
+
 Não altera data/state.json nem docs/data.json e não depende de haver NT nova.
 Se os Secrets de SMTP não estiverem configurados, só mostra a prévia no log.
 """
@@ -24,6 +28,9 @@ from .latest_nt import build_latest_item, requested_document
 
 
 def main():
+    # descarrega o log linha a linha (sem isso, os prints podem aparecer DEPOIS do erro no GitHub Actions)
+    sys.stdout.reconfigure(line_buffering=True)
+
     document = requested_document()
     print(f"[send_test_email] Buscando a Nota Técnica mais recente"
           + (f" (documento: {document})" if document else " (todos os documentos)") + "...")
@@ -37,10 +44,18 @@ def main():
     print(notifier._build_text([item], [], test_mode=True))
     print("=" * 70 + "\n")
 
-    if notifier.send_alert([item], [], test_mode=True):
+    try:
+        sent = notifier.send_alert([item], [], test_mode=True)
+    except notifier.EmailDeliveryError as exc:
+        print("[send_test_email] ERRO: o e-mail NÃO foi enviado.\n" + str(exc))
+        sys.exit(1)
+
+    if sent:
         print("[send_test_email] Concluído. Verifique a caixa de entrada (e o Spam) dos destinatários em ALERT_TO.")
     else:
-        print("[send_test_email] E-mail NÃO enviado: configure os Secrets de SMTP/ALERT_TO. A prévia acima mostra o conteúdo que seria enviado.")
+        print("[send_test_email] E-mail NÃO enviado: configure os Secrets de SMTP/ALERT_TO. "
+              "A prévia acima mostra o conteúdo que seria enviado.\n")
+        print("\n".join(notifier.describe_settings()))
 
 
 if __name__ == "__main__":
