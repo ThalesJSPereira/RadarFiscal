@@ -3,6 +3,9 @@
 O e-mail traz, para cada publicação nova, o resumo oficial do portal e (quando
 disponível) o "Resumo das alterações" extraído do documento da NT
 (ver scraper/nt_summary.py).
+
+Com test_mode=True (usado por scraper/send_test_email.py) o e-mail sai marcado
+como [TESTE], com um aviso no corpo e sem o selo "NOVO".
 """
 
 import smtplib
@@ -13,6 +16,11 @@ from html import escape
 
 from . import config
 from .nt_summary import summary_to_text
+
+TEST_BANNER = (
+    "E-mail de TESTE: foi gerado com a Nota Técnica mais recente publicada nos portais oficiais. "
+    "Nenhuma publicação nova foi detectada e nenhum dado do painel foi alterado."
+)
 
 
 def _fmt_date(iso):
@@ -78,15 +86,26 @@ def _render_item_html(it, badge_text, badge_color):
     """
 
 
-def _build_html(new_items, updated_items):
-    body = "".join(_render_item_html(it, "NOVO", "#1a7f37") for it in new_items)
+def _build_html(new_items, updated_items, test_mode=False):
+    new_badge = ("ÚLTIMA NT · TESTE", "#57606a") if test_mode else ("NOVO", "#1a7f37")
+    body = "".join(_render_item_html(it, *new_badge) for it in new_items)
     body += "".join(_render_item_html(it, "NOVA VERSÃO", "#9a6700") for it in updated_items)
     total = len(new_items) + len(updated_items)
+    banner = (
+        f'<div style="background:#fff8c5;border:1px solid #d4a72c;border-radius:6px;padding:10px 12px;margin:0 0 12px;">🧪 {escape(TEST_BANNER)}</div>'
+        if test_mode else ""
+    )
+    intro = (
+        "<p>Prévia do alerta com a Nota Técnica mais recente publicada.</p>"
+        if test_mode else
+        f"<p>Foram detectadas <strong>{total}</strong> publicação(ões) nova(s) ou atualizada(s) nas fontes oficiais monitoradas.</p>"
+    )
     return f"""
     <html>
     <body style="font-family:Segoe UI,Arial,sans-serif;color:#1f2328;font-size:14px;">
+      {banner}
       <h2>🚨 Radar Fiscal - NF-e / CT-e / MDF-e</h2>
-      <p>Foram detectadas <strong>{total}</strong> publicação(ões) nova(s) ou atualizada(s) nas fontes oficiais monitoradas.</p>
+      {intro}
       {body}
       <p style="margin-top:16px;font-size:12px;color:#666;">
         E-mail gerado automaticamente pelo Radar Fiscal. O painel completo está no GitHub Pages do projeto.
@@ -96,9 +115,13 @@ def _build_html(new_items, updated_items):
     """
 
 
-def _build_text(new_items, updated_items):
-    lines = ["Radar Fiscal - NF-e / CT-e / MDF-e", ""]
-    for label, items in (("NOVO", new_items), ("NOVA VERSAO", updated_items)):
+def _build_text(new_items, updated_items, test_mode=False):
+    lines = []
+    if test_mode:
+        lines += [f"*** {TEST_BANNER} ***", ""]
+    lines += ["Radar Fiscal - NF-e / CT-e / MDF-e", ""]
+    new_label = "ÚLTIMA NT - TESTE" if test_mode else "NOVO"
+    for label, items in ((new_label, new_items), ("NOVA VERSAO", updated_items)):
         for it in items:
             lines.append(f"[{label}] {_fmt_date(it.get('date'))} - [{it['document']}] {it['title']}")
             lines.append(f"  Portal: {it.get('summary') or ''}")
@@ -111,35 +134,37 @@ def _build_text(new_items, updated_items):
     return "\n".join(lines)
 
 
-def _build_subject(new_items, updated_items):
+def _build_subject(new_items, updated_items, test_mode=False):
     total = len(new_items) + len(updated_items)
     if total == 1:
         it = (new_items or updated_items)[0]
-        return f"[Radar Fiscal] {it['document']}: {it['title']}"
-    return f"[Radar Fiscal] {total} nova(s) publicação(ões) NFe/CTe/MDFe"
+        subject = f"[Radar Fiscal] {it['document']}: {it['title']}"
+    else:
+        subject = f"[Radar Fiscal] {total} nova(s) publicação(ões) NFe/CTe/MDFe"
+    return f"[TESTE] {subject}" if test_mode else subject
 
 
-def send_alert(new_items, updated_items):
+def send_alert(new_items, updated_items, test_mode=False):
     """Envia e-mail de alerta. Não faz nada (apenas avisa no log) se as
     credenciais SMTP não estiverem configuradas, para não quebrar o pipeline
-    em ambientes de teste/desenvolvimento."""
+    em ambientes de teste/desenvolvimento. Retorna True se o e-mail foi enviado."""
     if not new_items and not updated_items:
         print("[notifier] Nenhuma novidade, e-mail não será enviado.")
-        return
+        return False
 
     if not (config.SMTP_HOST and config.SMTP_USER and config.SMTP_PASS and config.ALERT_TO):
         print(
             "[notifier] Variáveis de SMTP/ALERT_TO não configuradas - pulando "
             "envio de e-mail (configure os Secrets no GitHub para habilitar)."
         )
-        return
+        return False
 
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = _build_subject(new_items, updated_items)
+    msg["Subject"] = _build_subject(new_items, updated_items, test_mode)
     msg["From"] = config.ALERT_FROM
     msg["To"] = ", ".join(config.ALERT_TO)
-    msg.attach(MIMEText(_build_text(new_items, updated_items), "plain", "utf-8"))
-    msg.attach(MIMEText(_build_html(new_items, updated_items), "html", "utf-8"))
+    msg.attach(MIMEText(_build_text(new_items, updated_items, test_mode), "plain", "utf-8"))
+    msg.attach(MIMEText(_build_html(new_items, updated_items, test_mode), "html", "utf-8"))
 
     context = ssl.create_default_context()
     with smtplib.SMTP(config.SMTP_HOST, config.SMTP_PORT) as server:
@@ -148,3 +173,4 @@ def send_alert(new_items, updated_items):
         server.sendmail(config.ALERT_FROM, config.ALERT_TO, msg.as_string())
 
     print(f"[notifier] E-mail enviado para {config.ALERT_TO} ({len(new_items) + len(updated_items)} itens).")
+    return True

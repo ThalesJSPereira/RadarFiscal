@@ -1,61 +1,46 @@
 """
-Script de TESTE para validar o envio de e-mail de alerta, isoladamente do
-restante do pipeline (não mexe em data/state.json nem em docs/data.json).
+TESTE de envio de e-mail, SEMPRE com a Nota Técnica mais recente publicada
+pelos portais oficiais (NF-e, CT-e/BP-e e MDF-e), já com o "Resumo das alterações".
 
 Uso:
     python -m scraper.send_test_email
 
-Monta 2 itens fictícios (um "novo" e um de "nova versão"), já COM o bloco
-"Resumo das alterações", e chama a mesma função de envio usada em produção.
-Assim você valida credenciais SMTP e o layout final do e-mail.
+Opcional: TEST_DOCUMENT=NFe | CTe | MDFe | BP-e  (restringe a escolha a um documento)
+
+O que faz:
+  1. consulta os portais e escolhe a NT mais recente (ver scraper/latest_nt.py);
+  2. baixa o documento dela e gera o resumo das alterações;
+  3. imprime no log uma prévia do e-mail;
+  4. envia o e-mail marcado como [TESTE] para os destinatários de ALERT_TO.
+
+Não altera data/state.json nem docs/data.json e não depende de haver NT nova.
+Se os Secrets de SMTP não estiverem configurados, só mostra a prévia no log.
 """
 
+import sys
+
 from . import notifier
-
-_FAKE_NEW_ITEM = {
-    "document": "NFe",
-    "date": "2026-10-02",
-    "title": "[TESTE] Nota Técnica 9999.001 v.1.00",
-    "summary": "Item de TESTE para validar o envio de e-mail. Nenhuma publicação real foi detectada.",
-    "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
-    "doc_url": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
-    "change_summary": {
-        "status": "ok",
-        "purpose": "Esta nota técnica (fictícia) divulga a inclusão de novos campos no leiaute da NF-e e ajusta regras de validação.",
-        "sections": [
-            {"key": "removed", "title": "Exclusões / remoções",
-             "items": ["Exclusão do campo XX01 do grupo de informações adicionais."]},
-            {"key": "new", "title": "Inclusões",
-             "items": ["Inclusão do grupo YY10 (Informações de teste) com os campos YY11 e YY12.",
-                       "Nova regra de validação Z10-20 com rejeição 999 para o grupo YY10."]},
-            {"key": "changed", "title": "Alterações",
-             "items": ["Alteração da obrigatoriedade do campo YY11 para NFC-e."]},
-        ],
-        "elements": ["XX01", "YY10", "YY11", "YY12"],
-        "rules": ["Regra Z10-20", "Rejeição 999"],
-        "deadlines": ["Homologação: 15/10/2026", "Produção: 01/11/2026"],
-    },
-}
-
-_FAKE_UPDATED_ITEM = {
-    "document": "CTe",
-    "date": "2026-10-02",
-    "title": "[TESTE] Nota Técnica CT-e 9999.002 v.2.00",
-    "summary": "Item de TESTE simulando uma nova versão de uma Nota Técnica já existente.",
-    "link": "https://www.cte.fazenda.gov.br/portal/listaConteudo.aspx",
-    "previous_version": "1.00",
-    "previous_summary": "Resumo fictício da versão anterior, apenas para teste.",
-    "change_summary": {
-        "status": "unavailable",
-        "reason": "link do documento não localizado na página do portal",
-    },
-}
+from .latest_nt import build_latest_item, requested_document
 
 
 def main():
-    print("[send_test_email] Disparando e-mail de teste (dados fictícios, marcados como [TESTE])...")
-    notifier.send_alert([_FAKE_NEW_ITEM], [_FAKE_UPDATED_ITEM])
-    print("[send_test_email] Concluído. Verifique a caixa de entrada (e o Spam) dos destinatários em ALERT_TO.")
+    document = requested_document()
+    print(f"[send_test_email] Buscando a Nota Técnica mais recente"
+          + (f" (documento: {document})" if document else " (todos os documentos)") + "...")
+    try:
+        item = build_latest_item(document)
+    except LookupError as exc:
+        print(f"[send_test_email] ERRO: {exc}")
+        sys.exit(1)
+
+    print("\n" + "=" * 70 + "\nPRÉVIA DO E-MAIL (texto)\n" + "=" * 70)
+    print(notifier._build_text([item], [], test_mode=True))
+    print("=" * 70 + "\n")
+
+    if notifier.send_alert([item], [], test_mode=True):
+        print("[send_test_email] Concluído. Verifique a caixa de entrada (e o Spam) dos destinatários em ALERT_TO.")
+    else:
+        print("[send_test_email] E-mail NÃO enviado: configure os Secrets de SMTP/ALERT_TO. A prévia acima mostra o conteúdo que seria enviado.")
 
 
 if __name__ == "__main__":

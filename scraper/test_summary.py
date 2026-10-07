@@ -2,19 +2,20 @@
 Testa o "Resumo das alterações" SEM enviar e-mail e SEM alterar nenhum dado.
 
 Uso:
-    python -m scraper.test_summary                 # pega a NT mais recente do portal da NF-e
+    python -m scraper.test_summary                 # NT MAIS RECENTE publicada nos portais (padrão)
     python -m scraper.test_summary <URL do PDF>    # resume um PDF/URL específico
     python -m scraper.test_summary arquivo.pdf     # resume um PDF local
 
-O resultado é impresso no log.
+Sem argumento, usa sempre a última Nota Técnica publicada (NF-e, CT-e/BP-e ou
+MDF-e - a de data mais recente). Para restringir a um documento, defina
+TEST_DOCUMENT=NFe | CTe | MDFe | BP-e.
 """
 
 import os
 import sys
 
-from . import config, nt_summary
-from .fetcher import fetch
-from .parsers import PARSERS
+from . import nt_summary
+from .latest_nt import build_latest_item, requested_document
 
 
 def _summarize_local_or_url(target):
@@ -24,25 +25,23 @@ def _summarize_local_or_url(target):
     else:
         text, _ = nt_summary.get_document_text(target)
     print(f"[test_summary] {len(text)} caracteres extraídos do documento.")
-    return nt_summary.summarize_text(text, {})
-
-
-def _summarize_latest_nfe():
-    source = next(s for s in config.SOURCES if s["key"] == "nfe_notas_tecnicas")
-    html = fetch(source["url"])
-    items = PARSERS[source["parser"]](html, source, source["base_url"])
-    items.sort(key=lambda i: i.get("date", ""), reverse=True)
-    item = items[0]
-    print(f"[test_summary] NT mais recente do portal: {item['title']} ({item['date']})")
-    return nt_summary.build_summary(item, html, source["url"])
+    return {"title": target}, nt_summary.summarize_text(text, {})
 
 
 def main():
-    if len(sys.argv) > 1:
-        summary = _summarize_local_or_url(sys.argv[1])
+    if len(sys.argv) > 1 and sys.argv[1].strip():
+        item, summary = _summarize_local_or_url(sys.argv[1].strip())
     else:
-        summary = _summarize_latest_nfe()
+        try:
+            item = build_latest_item(requested_document())
+        except LookupError as exc:
+            print(f"[test_summary] ERRO: {exc}")
+            sys.exit(1)
+        summary = item["change_summary"]
+
     print("\n" + "=" * 70)
+    print(f"NT: {item.get('title')}")
+    print("=" * 70)
     print(nt_summary.summary_to_text(summary))
     print("=" * 70)
     if summary.get("doc_url"):

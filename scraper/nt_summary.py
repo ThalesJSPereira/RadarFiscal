@@ -1,24 +1,14 @@
 """
 Resumo automático das alterações propostas por uma Nota Técnica (NT).
 
-Para cada publicação NOVA (ou nova versão) detectada, este módulo:
-  1. localiza no HTML do portal o link do documento da NT (normalmente um PDF);
-  2. baixa o documento e extrai o texto;
-  3. identifica, por regras de texto (sem IA externa), o que a NT está propondo:
-       - objetivo da NT;
-       - inclusões (novos campos, grupos, regras, eventos);
-       - alterações (mudança de regra, obrigatoriedade, tamanho, etc.);
-       - exclusões / remoções;
-       - campos/grupos do leiaute citados (ex.: B01, UB12);
-       - regras de validação e rejeições citadas (ex.: N12-82, Rejeição 906);
-       - prazos de homologação e produção.
+Para cada publicação NOVA (ou nova versão) detectada, este módulo localiza o
+documento da NT no portal (normalmente um PDF), baixa, extrai o texto e
+identifica, por regras de texto (sem IA externa): objetivo, inclusões,
+alterações, exclusões, campos/grupos citados, regras/rejeições e prazos.
+O resultado fica em item["change_summary"] e é usado pelo painel e pelo e-mail.
 
-O resultado é gravado em item["change_summary"] e usado pelo painel e pelo
-e-mail de alerta.
-
-Observação: o texto do documento NÃO é enviado a nenhum serviço externo; toda
-a análise roda dentro do próprio GitHub Actions. O resumo é um apoio de
-triagem - sempre confira o PDF original antes de implementar.
+O texto do documento NÃO é enviado a nenhum serviço externo. O resumo é um apoio
+de triagem: sempre confira o PDF original antes de implementar.
 """
 
 import io
@@ -31,38 +21,26 @@ from bs4 import BeautifulSoup
 
 from . import config
 
-# Limites de segurança (evitam baixar dezenas de PDFs caso o estado seja zerado)
 MAX_SUMMARIES_PER_RUN = 10
 MAX_AGE_DAYS = 60
 MAX_BYTES = 30 * 1024 * 1024
 MAX_PDF_PAGES = 120
 DOWNLOAD_TIMEOUT = 40
-
 ITEMS_PER_SECTION = 5
 BULLET_MAX_CHARS = 260
 
 _SKIP_HREF = re.compile(r"^(#|javascript:|mailto:)", re.IGNORECASE)
 
 
-# ---------------------------------------------------------------------------
-# 1) Localizar o link do documento no HTML do portal
-# ---------------------------------------------------------------------------
 def _norm(text):
     return re.sub(r"\s+", " ", text or "").strip().lower()
 
 
 def find_document_url(page_html, page_url, item):
-    """Procura, no HTML da página de listagem, o link da NT descrita em `item`.
-
-    Estratégia: acha o texto que contém o código (ex.: 2026.009), prefere o que
-    também contém a versão, e usa o link que envolve o texto (ou o primeiro
-    link logo depois dele, caso do padrão "... (Leia mais)").
-    """
     code = item.get("code")
     version = (item.get("version") or "").lower()
     if not code or not page_html:
         return None
-
     soup = BeautifulSoup(page_html, "lxml")
     candidates = []
     for idx, node in enumerate(soup.find_all(string=re.compile(re.escape(code)))):
@@ -77,7 +55,6 @@ def find_document_url(page_html, page_url, item):
                 score += 1
         candidates.append((-score, idx, node))
     candidates.sort(key=lambda c: (c[0], c[1]))
-
     for _, _, node in candidates:
         anchor = node.find_parent("a", href=True)
         if anchor is not None and not _SKIP_HREF.match(anchor["href"]):
@@ -88,45 +65,29 @@ def find_document_url(page_html, page_url, item):
     return None
 
 
-# ---------------------------------------------------------------------------
-# 2) Baixar e extrair o texto
-# ---------------------------------------------------------------------------
 def _pdf_to_text(data):
-    from pypdf import PdfReader  # import tardio: só é necessário aqui
-
+    from pypdf import PdfReader
     reader = PdfReader(io.BytesIO(data))
     parts = []
     for page in reader.pages[:MAX_PDF_PAGES]:
         try:
             parts.append(page.extract_text() or "")
-        except Exception:  # noqa: BLE001 - uma página ruim não deve derrubar o resumo
+        except Exception:  # noqa: BLE001
             continue
     return "\n".join(parts)
 
 
 def get_document_text(url, depth=0):
-    """Baixa `url` e devolve (texto, url_final).
-
-    - Se for PDF: extrai o texto.
-    - Se for uma página HTML com link para PDF (ex.: exibirArquivo.aspx): segue
-      o link uma vez.
-    - Se for uma página HTML sem PDF (caso dos Informes): usa o texto da página.
-    """
     resp = requests.get(url, headers=config.HTTP_HEADERS, timeout=DOWNLOAD_TIMEOUT)
     resp.raise_for_status()
     content = resp.content[:MAX_BYTES]
     ctype = resp.headers.get("Content-Type", "").lower()
-
     if content[:5] == b"%PDF-" or "application/pdf" in ctype:
         return _pdf_to_text(content), resp.url
-
-    if "charset" not in ctype:  # sem charset declarado: requests assumiria ISO-8859-1
+    if "charset" not in ctype:
         resp.encoding = resp.apparent_encoding or "utf-8"
     soup = BeautifulSoup(resp.text, "lxml")
-
     if depth == 0:
-        # 1ª passada: links que apontam claramente para PDF
-        # 2ª passada: links cujo texto fala em PDF/baixar/download (exceto zip)
         for strict in (True, False):
             for a in soup.find_all("a", href=True):
                 href = a["href"]
@@ -142,7 +103,6 @@ def get_document_text(url, depth=0):
                         return get_document_text(urljoin(resp.url, href), depth=1)
                     except Exception:  # noqa: BLE001
                         continue
-
     for tag in soup(["script", "style", "nav", "header", "footer"]):
         tag.decompose()
     blocks = []
@@ -151,31 +111,23 @@ def get_document_text(url, depth=0):
         if block:
             blocks.append(block if block[-1] in ".;:!?" else block + ".")
     text = "\n".join(blocks)
-    if len(text) < 200:  # página sem tags de bloco: usa o texto inteiro
+    if len(text) < 200:
         text = soup.get_text("\n", strip=True)
     return text, resp.url
 
 
-# ---------------------------------------------------------------------------
-# 3) Analisar o texto e montar o resumo
-# ---------------------------------------------------------------------------
 _RE_REMOVE = re.compile(
     r"\b(exclu[ií]d\w*|exclus[ãa]o|exclu[ií]r|remo[çc]\w*|remov\w*|elimin\w*|"
-    r"descontinu\w*|suprim\w*|retirad\w*)",
-    re.IGNORECASE,
-)
+    r"descontinu\w*|suprim\w*|retirad\w*)", re.IGNORECASE)
 _RE_NEW = re.compile(
     r"\b(inclu[ií]d\w*|inclus[ãa]o|inclu[ií]r|inclui\b|incluem|criad[oa]s?|cria[çc][ãa]o|criar|"
     r"acrescent\w*|adi[çc][ãa]o|adicion\w*|"
     r"nov[oa]s?\s+(?:campo|grupo|evento|servi[cç]o|c[óo]digo|leiaute|layout|schema|tag|regra|"
-    r"valida\w*|tabela|situa\w*|tipo|vers[ãa]o))",
-    re.IGNORECASE,
-)
+    r"valida\w*|tabela|situa\w*|tipo|vers[ãa]o))", re.IGNORECASE)
 _RE_CHANGE = re.compile(
     r"\b(altera\w*|modific\w*|ajust\w*|atualiz\w*|substitu\w*|passa(?:m|r[áa])?\s+a\b|"
     r"tornad\w*|torna-se|obrigatori\w*|facultativ\w*|redu[çc]\w*|ampli\w*|corre[çc]\w*|corrig\w*)",
-    re.IGNORECASE,
-)
+    re.IGNORECASE)
 _RE_RULE_CODE = re.compile(r"\b[A-Z]{1,3}\d{2,3}[a-z]?-\d{1,3}\b")
 _RE_REJEICAO = re.compile(r"Rejei[çc][ãa]o\s*[:\-]?\s*(?:n[ºo°.]*\s*)?(\d{3})\b", re.IGNORECASE)
 _RE_FIELD_ID = re.compile(r"\b[A-Z]{1,3}\d{2,3}[a-z]?\b(?!-\d)")
@@ -189,16 +141,12 @@ _SECTIONS = (
     ("changed", "Alterações", _RE_CHANGE),
 )
 
-
 _RE_HEADING = re.compile(r"^\d+(?:\.\d+)*\.?\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ][^\n]{2,90}$")
 _RE_HEADING_WORD = re.compile(
-    r"^(Objetivo|Resumo|Introdu[çc][ãa]o|Apresenta[çc][ãa]o|Justificativa|Cronograma|Prazos?)$", re.IGNORECASE
-)
+    r"^(Objetivo|Resumo|Introdu[çc][ãa]o|Apresenta[çc][ãa]o|Justificativa|Cronograma|Prazos?)$", re.IGNORECASE)
 
 
 def _prepare_flat(text):
-    """Junta as linhas do PDF em texto corrido, mas isola os títulos de seção
-    (ex.: "2. Alterações no leiaute") para que não grudem na frase seguinte."""
     lines = []
     for raw in text.splitlines():
         line = re.sub(r"[ \t\u00a0]+", " ", raw).strip()
@@ -227,10 +175,10 @@ def _split_sentences(flat):
 def _is_noise(sentence):
     if len(sentence) < 35 or len(sentence) > 900:
         return True
-    if "...." in sentence or ". . . ." in sentence:  # sumário com linha pontilhada
+    if "...." in sentence or ". . . ." in sentence:
         return True
     letters = sum(ch.isalpha() for ch in sentence)
-    if letters / max(len(sentence), 1) < 0.55:  # linha de tabela / números
+    if letters / max(len(sentence), 1) < 0.55:
         return True
     if re.match(r"^(página|pág\.|nota técnica\s+\d{4}\.\d{3}\s*$)", sentence, re.IGNORECASE):
         return True
@@ -246,11 +194,17 @@ def _score(sentence):
     return score
 
 
+_RE_NEXT_HEADING = re.compile(r"\s\d{1,2}(?:\.\d{1,2})*\.\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ]")
+
+
 def _extract_purpose(flat, fallback):
     for m in re.finditer(r"\b(?:Objetivo|Resumo|Introdu[çc][ãa]o|Apresenta[çc][ãa]o)\b[:.\s]+", flat):
         snippet = flat[m.end(): m.end() + 900]
+        cut = _RE_NEXT_HEADING.search(snippet)  # o objetivo termina onde começa a próxima seção
+        if cut:
+            snippet = snippet[:cut.start()]
         if "...." in snippet[:150] or ". . ." in snippet[:150]:
-            continue  # é o sumário, não o corpo do texto
+            continue
         picked, total = [], 0
         for sentence in _split_sentences(snippet):
             if len(sentence) < 30:
@@ -281,14 +235,12 @@ def _extract_deadlines(flat, sentences):
 
 
 def summarize_text(text, item=None):
-    """Gera o resumo estruturado a partir do texto bruto do documento."""
     item = item or {}
     flat = _prepare_flat(text)
     sentences = _split_sentences(flat)
     purpose = _extract_purpose(flat, item.get("summary"))
     purpose_norm = _norm(purpose)
 
-    # Classifica cada frase na primeira categoria que casar (exclusão > inclusão > alteração)
     buckets = {key: [] for key, _, _ in _SECTIONS}
     seen = set()
     for idx, sentence in enumerate(sentences):
@@ -312,7 +264,6 @@ def summarize_text(text, item=None):
             sections.append({"key": key, "title": title, "items": [_clip(s) for _, s in ranked]})
             chosen_sentences.extend(s for _, s in ranked)
 
-    # Campos/grupos do leiaute citados (nas frases escolhidas; senão, no documento todo)
     def ordered_unique(matches):
         out = []
         for value in matches:
@@ -323,36 +274,18 @@ def summarize_text(text, item=None):
     elements = ordered_unique(_RE_FIELD_ID.findall(" ".join(chosen_sentences)))[:20]
     if not elements:
         elements = ordered_unique(_RE_FIELD_ID.findall(flat))[:12]
-
     rule_codes = ordered_unique(_RE_RULE_CODE.findall(flat))[:12]
     rejections = ordered_unique(_RE_REJEICAO.findall(flat))[:10]
     rules = [f"Regra {c}" for c in rule_codes] + [f"Rejeição {r}" for r in rejections]
 
-    return {
-        "status": "ok",
-        "purpose": purpose,
-        "sections": sections,
-        "elements": elements,
-        "rules": rules,
-        "deadlines": _extract_deadlines(flat, sentences),
-    }
+    return {"status": "ok", "purpose": purpose, "sections": sections, "elements": elements,
+            "rules": rules, "deadlines": _extract_deadlines(flat, sentences)}
 
 
-# ---------------------------------------------------------------------------
-# 4) Orquestração
-# ---------------------------------------------------------------------------
 def _unavailable(reason, item, doc_url=None):
-    return {
-        "status": "unavailable",
-        "reason": reason,
-        "purpose": item.get("summary"),
-        "sections": [],
-        "elements": [],
-        "rules": [],
-        "deadlines": [],
-        "doc_url": doc_url,
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-    }
+    return {"status": "unavailable", "reason": reason, "purpose": item.get("summary"), "sections": [],
+            "elements": [], "rules": [], "deadlines": [], "doc_url": doc_url,
+            "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 
 
 def build_summary(item, page_html, page_url):
@@ -399,7 +332,6 @@ def enrich_items(items, pages):
 
 
 def summary_to_text(cs):
-    """Versão em texto puro (usada no e-mail texto e nos testes)."""
     if not cs:
         return ""
     if cs.get("status") != "ok":
