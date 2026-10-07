@@ -1,0 +1,36 @@
+name: Testar resumo da NT
+
+# Gera o "Resumo das alterações" de uma NT e imprime no log.
+# Não envia e-mail e não altera nenhum arquivo do repositório.
+on:
+  workflow_dispatch:
+    inputs:
+      alvo:
+        description: "URL de um PDF de NT (deixe vazio para usar a NT mais recente do portal da NF-e)"
+        required: false
+        default: ""
+
+jobs:
+  test_summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Gerar resumo
+        env:
+          ALVO: ${{ github.event.inputs.alvo }}
+        run: |
+          if [ -z "$ALVO" ]; then
+            python -m scraper.test_summary
+          else
+            python -m scraper.test_summary "$ALVO"
+          fi
