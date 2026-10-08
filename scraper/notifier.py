@@ -15,6 +15,15 @@ caixa de entrada) e no início da versão em texto puro. Quando o documento diz
 Com test_mode=True (usado por scraper/send_test_email.py) o e-mail sai marcado
 como [TESTE], com um aviso no corpo e sem o selo "NOVO".
 
+Destinatários
+-------------
+O Secret ALERT_TO aceita VÁRIOS e-mails. Podem ser separados por vírgula, ponto e
+vírgula, espaço ou quebra de linha (uma linha por pessoa), e também no formato
+"Nome <email@empresa.com>". Endereços repetidos são enviados uma vez só e endereços
+inválidos são ignorados com aviso no log. Se o servidor recusar ALGUNS destinatários,
+o e-mail segue para os demais e o log informa quais foram recusados.
+Todos os destinatários aparecem no campo "Para" do e-mail.
+
 Conexão SMTP
 ------------
   - tempo máximo de 30 s para conectar/responder (antes dependia do timeout do
@@ -33,6 +42,7 @@ import socket
 import ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.utils import getaddresses
 from html import escape
 
 from . import config
@@ -319,6 +329,55 @@ def _build_subject(new_items, updated_items, test_mode=False):
 
 
 # ---------------------------------------------------------------------------
+# Destinatários
+# ---------------------------------------------------------------------------
+_RE_EMAIL = re.compile(r"^[A-Za-z0-9._%+\-']+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}$")
+
+
+def parse_recipients(raw=None):
+    """Lê os destinatários (ALERT_TO) e devolve (válidos, inválidos).
+
+    Aceita vírgula, ponto e vírgula, espaço ou quebra de linha como separador, e o formato
+    "Nome <email@empresa.com>". Remove repetidos (sem diferenciar maiúsculas/minúsculas),
+    mantendo a ordem em que aparecem. `raw` pode ser texto ou lista; sem argumento usa
+    config.ALERT_TO."""
+    if raw is None:
+        raw = config.ALERT_TO
+    if isinstance(raw, str):
+        raw = [raw]
+    text = ",".join(str(r) for r in (raw or []))
+    text = re.sub(r"[;\r\n\t]+", ",", text)
+    # "a@x.com b@x.com" (separados só por espaço) -> vírgula; "Nome <a@x.com>" fica como está
+    text = re.sub(r"(?<=[A-Za-z0-9>])\s+(?=[A-Za-z0-9._%+\-']+@)", ",", text)
+    # o Python 3.12 rejeita a lista INTEIRA se houver vírgula vazia (",,", ou vírgula nas pontas)
+    text = re.sub(r",(?:\s*,)+", ",", text).strip(" ,")
+
+    valid, invalid, seen = [], [], set()
+    for _, addr in getaddresses([text]):
+        addr = (addr or "").strip().strip(",")
+        if not addr:
+            continue
+        if not _RE_EMAIL.match(addr):
+            invalid.append(addr)
+            continue
+        key = addr.lower()
+        if key not in seen:
+            seen.add(key)
+            valid.append(addr)
+    # sobras que o parser não reconheceu como endereço (ex.: texto solto sem "@")
+    leftovers = [t.strip() for t in text.split(",") if t.strip() and "@" not in t]
+    invalid += [t for t in leftovers if t not in invalid]
+    return valid, invalid
+
+
+def _mask_email(addr):
+    if "@" not in addr:
+        return "***"
+    local, domain = addr.rsplit("@", 1)
+    return f"{local[:2]}***@{domain}"
+
+
+# ---------------------------------------------------------------------------
 # Configuração e diagnóstico de conexão SMTP
 # ---------------------------------------------------------------------------
 def _smtp_settings():
@@ -352,8 +411,7 @@ def _host_kind(host):
 def _mask_user(user):
     if "@" not in user:
         return "preenchido" if user else "VAZIO"
-    local, domain = user.rsplit("@", 1)
-    return f"{local[:2]}***@{domain}"
+    return _mask_email(user)
 
 
 def _config_hints(host, port):
@@ -377,6 +435,16 @@ def _config_hints(host, port):
     return hints
 
 
+def describe_recipients():
+    """Linhas de log com os destinatários que vão receber o e-mail (endereços parcialmente ocultos)."""
+    valid, invalid = parse_recipients()
+    lines = [f"  - ALERT_TO: {len(valid)} destinatário(s) válido(s)" + (": " + ", ".join(_mask_email(a) for a in valid) if valid else "")]
+    if invalid:
+        lines.append(f"  ! ALERT_TO tem {len(invalid)} valor(es) que não parecem e-mail e serão ignorados. "
+                     "Separe os e-mails por vírgula, ponto e vírgula ou uma linha para cada.")
+    return lines
+
+
 def describe_settings():
     """Resumo da configuração de e-mail para o log. Não mostra senha nem valores dos Secrets."""
     host, port, user, password = _smtp_settings()
@@ -385,8 +453,8 @@ def describe_settings():
              f"  - SMTP_PORT: {_port_name(port)}",
              f"  - SMTP_USER: {_mask_user(user)}",
              f"  - SMTP_PASS: {'preenchido' if password else 'VAZIO'}",
-             f"  - ALERT_FROM: {'preenchido' if (config.ALERT_FROM or '').strip() else 'VAZIO'}",
-             f"  - ALERT_TO: {len(config.ALERT_TO)} destinatário(s)"]
+             f"  - ALERT_FROM: {'preenchido' if (config.ALERT_FROM or '').strip() else 'VAZIO'}"]
+    lines += describe_recipients()
     lines += [f"  ! {h}" for h in _config_hints(host, port)]
     return lines
 
@@ -437,19 +505,27 @@ def _delivery_error(*blocks):
 
 
 def send_alert(new_items, updated_items, test_mode=False):
-    """Envia e-mail de alerta. Retorna True se o e-mail foi enviado e False se não havia nada
-    a enviar ou se as credenciais SMTP não estão configuradas (apenas avisa no log, para não
-    quebrar o pipeline em ambientes de teste/desenvolvimento).
+    """Envia e-mail de alerta para TODOS os destinatários de ALERT_TO.
 
-    Levanta EmailDeliveryError (com mensagem em português) se o envio falhar."""
+    Retorna True se o e-mail foi aceito pelo servidor para pelo menos um destinatário, e False se
+    não havia nada a enviar ou se as credenciais SMTP/destinatários não estão configurados
+    (apenas avisa no log, para não quebrar o pipeline em ambientes de teste/desenvolvimento).
+
+    Levanta EmailDeliveryError (com mensagem em português) se o envio falhar. Se o servidor
+    recusar apenas ALGUNS destinatários, o envio continua para os demais e o log informa
+    quais foram recusados."""
     if not new_items and not updated_items:
         print("[notifier] Nenhuma novidade, e-mail não será enviado.")
         return False
 
     host, port, user, password = _smtp_settings()
-    if not (host and user and password and config.ALERT_TO):
+    recipients, invalid = parse_recipients()
+    if invalid:
+        print(f"[notifier] AVISO: {len(invalid)} valor(es) de ALERT_TO não parecem e-mail e foram ignorados "
+              "(separe os e-mails por vírgula, ponto e vírgula ou uma linha para cada).")
+    if not (host and user and password and recipients):
         print(
-            "[notifier] Variáveis de SMTP/ALERT_TO não configuradas - pulando "
+            "[notifier] Variáveis de SMTP/ALERT_TO não configuradas ou sem e-mail válido - pulando "
             "envio de e-mail (configure os Secrets no GitHub para habilitar)."
         )
         return False
@@ -457,11 +533,12 @@ def send_alert(new_items, updated_items, test_mode=False):
     msg = MIMEMultipart("alternative")
     msg["Subject"] = _build_subject(new_items, updated_items, test_mode)
     msg["From"] = config.ALERT_FROM
-    msg["To"] = ", ".join(config.ALERT_TO)
+    msg["To"] = ", ".join(recipients)
     msg.attach(MIMEText(_build_text(new_items, updated_items, test_mode), "plain", "utf-8"))
     msg.attach(MIMEText(_build_html(new_items, updated_items, test_mode), "html", "utf-8"))
 
     context = ssl.create_default_context()
+    refused = {}
     try:
         if port == 465:  # SSL direto
             server = smtplib.SMTP_SSL(host, port, timeout=SMTP_TIMEOUT, context=context)
@@ -471,7 +548,8 @@ def send_alert(new_items, updated_items, test_mode=False):
             if port != 465:
                 server.starttls(context=context)
             server.login(user, password)
-            server.sendmail(config.ALERT_FROM, config.ALERT_TO, msg.as_string())
+            # devolve {} se todos foram aceitos, ou {endereço: (código, motivo)} dos recusados
+            refused = server.sendmail(config.ALERT_FROM, recipients, msg.as_string()) or {}
     except smtplib.SMTPAuthenticationError as exc:
         raise _delivery_error(
             f"Autenticação recusada pelo servidor (código {exc.smtp_code}). A conexão funciona, "
@@ -479,10 +557,14 @@ def send_alert(new_items, updated_items, test_mode=False):
             "  - Gmail: use uma SENHA DE APP de 16 letras (não a senha normal) e SMTP_USER com o e-mail completo.",
             "  - Microsoft 365: o SMTP AUTH pode estar desabilitado para a conta/organização.",
         ) from exc
-    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPSenderRefused) as exc:
+    except smtplib.SMTPRecipientsRefused as exc:
         raise _delivery_error(
-            "O servidor recusou o remetente ou os destinatários. Confira ALERT_FROM (precisa ser o mesmo e-mail "
-            "de SMTP_USER) e ALERT_TO.",
+            f"O servidor recusou TODOS os {len(recipients)} destinatário(s). Confira os e-mails em ALERT_TO.",
+            *[f"  - {_mask_email(a)}: código {code}" for a, (code, _) in exc.recipients.items()],
+        ) from exc
+    except smtplib.SMTPSenderRefused as exc:
+        raise _delivery_error(
+            "O servidor recusou o remetente. Confira ALERT_FROM (precisa ser o mesmo e-mail de SMTP_USER).",
             f"Detalhe do servidor: {type(exc).__name__}",
         ) from exc
     except smtplib.SMTPServerDisconnected as exc:
@@ -500,5 +582,12 @@ def send_alert(new_items, updated_items, test_mode=False):
             *diagnose_connection(host, port),
         ) from exc
 
-    print(f"[notifier] E-mail enviado para {config.ALERT_TO} ({len(new_items) + len(updated_items)} itens).")
+    accepted = [a for a in recipients if a not in refused]
+    print(f"[notifier] E-mail enviado para {len(accepted)} de {len(recipients)} destinatário(s): "
+          + ", ".join(_mask_email(a) for a in accepted)
+          + f" ({len(new_items) + len(updated_items)} itens).")
+    if refused:
+        print(f"[notifier] AVISO: o servidor recusou {len(refused)} destinatário(s): "
+              + ", ".join(f"{_mask_email(a)} (código {code})" for a, (code, _) in refused.items())
+              + ". Confira esses endereços em ALERT_TO.")
     return True
