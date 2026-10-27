@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-27T16:58:46+00:00",
-  "total_items": 403,
+  "generated_at": "2026-10-27T21:33:42+00:00",
+  "total_items": 404,
   "counts_by_document": {
-    "NFe": 331,
+    "NFe": 332,
     "CTe": 41,
     "BP-e": 13,
     "BP-e TA": 3,
     "MDFe": 15
   },
-  "new_last_run": 3,
+  "new_last_run": 4,
   "items": [
     {
       "document": "NFe",
@@ -23,47 +23,22 @@
       "source_key": "nfe_notas_tecnicas",
       "id": "0d4cfa2af831936c",
       "first_seen": "2026-10-27",
-      "previous_version": "2.10",
-      "previous_summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...",
       "change_summary": {
-        "status": "ok",
-        "purpose": "Foi alterada a legislação nacional (Ajuste SINIEF 54/2022), permitindo a emissão da NFC-e para emitente produtor rural, em substituição a Nota Fiscal, modelo",
-        "sections": [
-          {
-            "key": "new",
-            "title": "Inclusões",
-            "items": [
-              "2.4 Criação da Regra de Validação GAP03a-6.",
-              "Inclusão da Regra de Validação GAP03a -6 para e liminar a possibilidade de autorização assíncrona de NF-e e NFC-e."
-            ]
-          },
-          {
-            "key": "changed",
-            "title": "Alterações",
-            "items": [
-              "2.2 Alteração de Schema para evitar caracteres inválidos.",
-              "Para impedir esses caracteres inválidos o SCHEMA estará sendo alterado com as correções.",
-              "2.3 Alteração das Regras de Validação B26-30 e B26-50.",
-              "Alteração da s Regras de Validação B26 -30 e B26 -50 para p ossibilitar a emissão de NFC -e utilizando aplicativo de Nota Fiscal Avulsa para a UF SC.",
-              "Serviço: Evento de Cancelamento (Item 4.3 do MOC) 6.1 Alteração em Regras de Validação (Item 4.3.7-e e 4.3.8 do MOC) # Modelo Regra de Validação Aplic."
-            ]
-          },
-          {
-            "key": "removed",
-            "title": "Exclusões / remoções",
-            "items": [
-              "Projeto Nota Fiscal Eletrônica Nota Técnica 2023.002 Emitente Pessoa Física (CPF) com Inscrição Estadual – NFC-e Eliminação da autorização assíncrona Eliminação dos serviços de inutilização Versão 1.02 – Outubro 2026 Projeto Nota Fiscal Eletrônica NT 2023.002…",
-              "1.02 Eliminação dos serviços de inutilização Até.",
-              "Esta NT também faz referências as alterações necessárias para a eliminação da denegação na NFC-e, prevista pelo Ajuste SINIEF 10/2023.",
-              "A NFC-e também terá a eliminação de envio por lote com mais de 1 NFC-e.",
-              "Por fim, esta NT elimina os serviços de inutilização da NF -e e da NFC-e nos Estado do Acre, Bahia e São Paulo, nos termos dos Ajustes SINIEF nº 38/2026 e nº 40/2026 ."
-            ]
-          }
+        "deadlines": [
+          "Homologação: 01/02/2027",
+          "Produção: 05/04/2027"
         ],
+        "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=DCFRgnlk4g8=",
         "elements": [
           "GAP03a",
           "B26"
         ],
+        "generated_at": "2026-10-27T16:58:44+00:00",
+        "homologation": "01/02/2027",
+        "homologation_note": null,
+        "production": "05/04/2027",
+        "production_note": null,
+        "purpose": "Foi alterada a legislação nacional (Ajuste SINIEF 54/2022), permitindo a emissão da NFC-e para emitente produtor rural, em substituição a Nota Fiscal, modelo",
         "rules": [
           "Regra B26-30",
           "Regra B26-50",
@@ -77,20 +52,45 @@
           "Regra 1C17-38",
           "Rejeição 998"
         ],
-        "homologation": "01/02/2027",
-        "production": "05/04/2027",
-        "homologation_note": null,
-        "production_note": null,
-        "schedule_version": "1.02",
-        "deadlines": [
-          "Homologação: 01/02/2027",
-          "Produção: 05/04/2027"
-        ],
         "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Teste Implantação Produção 1.00 Emissão de NFC-e para Produtor Rural Pessoa Física e Eliminação da Denegação 24/07/2023 Até 04/09/2023 Elimina Lote para a NFC-e 24/07/2023 04/09/2023 1.01 Possibilitar emissão de NFC-e pela nota avulsa para a UF SC Até. 19/01/2026 Até 02/02/2026 1.02 Eliminação da autorização assíncrona Até. 01/02/2027 05/04/2027 1.02 Eliminação dos serviços de inutilização Até. 11/11/2026",
-        "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=DCFRgnlk4g8=",
-        "generated_at": "2026-10-27T16:58:44+00:00"
+        "schedule_version": "1.02",
+        "sections": [
+          {
+            "items": [
+              "2.4 Criação da Regra de Validação GAP03a-6.",
+              "Inclusão da Regra de Validação GAP03a -6 para e liminar a possibilidade de autorização assíncrona de NF-e e NFC-e."
+            ],
+            "key": "new",
+            "title": "Inclusões"
+          },
+          {
+            "items": [
+              "2.2 Alteração de Schema para evitar caracteres inválidos.",
+              "Para impedir esses caracteres inválidos o SCHEMA estará sendo alterado com as correções.",
+              "2.3 Alteração das Regras de Validação B26-30 e B26-50.",
+              "Alteração da s Regras de Validação B26 -30 e B26 -50 para p ossibilitar a emissão de NFC -e utilizando aplicativo de Nota Fiscal Avulsa para a UF SC.",
+              "Serviço: Evento de Cancelamento (Item 4.3 do MOC) 6.1 Alteração em Regras de Validação (Item 4.3.7-e e 4.3.8 do MOC) # Modelo Regra de Validação Aplic."
+            ],
+            "key": "changed",
+            "title": "Alterações"
+          },
+          {
+            "items": [
+              "Projeto Nota Fiscal Eletrônica Nota Técnica 2023.002 Emitente Pessoa Física (CPF) com Inscrição Estadual – NFC-e Eliminação da autorização assíncrona Eliminação dos serviços de inutilização Versão 1.02 – Outubro 2026 Projeto Nota Fiscal Eletrônica NT 2023.002…",
+              "1.02 Eliminação dos serviços de inutilização Até.",
+              "Esta NT também faz referências as alterações necessárias para a eliminação da denegação na NFC-e, prevista pelo Ajuste SINIEF 10/2023.",
+              "A NFC-e também terá a eliminação de envio por lote com mais de 1 NFC-e.",
+              "Por fim, esta NT elimina os serviços de inutilização da NF -e e da NFC-e nos Estado do Acre, Bahia e São Paulo, nos termos dos Ajustes SINIEF nº 38/2026 e nº 40/2026 ."
+            ],
+            "key": "removed",
+            "title": "Exclusões / remoções"
+          }
+        ],
+        "status": "ok"
       },
       "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=DCFRgnlk4g8=",
+      "previous_version": "2.10",
+      "previous_summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...",
       "is_new": true
     },
     {
@@ -107,30 +107,45 @@
       "id": "ee734397bb61b552",
       "first_seen": "2026-10-27",
       "change_summary": {
-        "status": "ok",
-        "purpose": "Publicada Nota Técnica 2023.002 v1.02 ...",
-        "sections": [
-          {
-            "key": "changed",
-            "title": "Alterações",
-            "items": [
-              "Legislação Ajustes SINIEF Atos RFB/CGIBS Atos Técnicos RFB/CGIBS Atos COTEPE Convênios Protocolos."
-            ]
-          }
-        ],
-        "elements": [],
-        "rules": [],
-        "homologation": null,
-        "production": null,
-        "homologation_note": null,
-        "production_note": null,
-        "schedule_version": null,
         "deadlines": [],
         "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
-        "generated_at": "2026-10-27T16:58:40+00:00"
+        "elements": [],
+        "generated_at": "2026-10-27T16:58:40+00:00",
+        "homologation": null,
+        "homologation_note": null,
+        "production": null,
+        "production_note": null,
+        "purpose": "Publicada Nota Técnica 2023.002 v1.02 ...",
+        "rules": [],
+        "schedule_version": null,
+        "sections": [
+          {
+            "items": [
+              "Legislação Ajustes SINIEF Atos RFB/CGIBS Atos Técnicos RFB/CGIBS Atos COTEPE Convênios Protocolos."
+            ],
+            "key": "changed",
+            "title": "Alterações"
+          }
+        ],
+        "status": "ok"
       },
       "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
       "is_new": true
+    },
+    {
+      "category": "Informes",
+      "code": null,
+      "date": "2026-10-02",
+      "document": "NFe",
+      "first_seen": "2026-10-02",
+      "id": "e45b14521944dae9",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "source_key": "nfe_informes",
+      "summary": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "type": "Ato Conjunto",
+      "version": null,
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -139,13 +154,29 @@
       "code": null,
       "version": null,
       "date": "2026-10-02",
-      "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
-      "summary": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+      "summary": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
       "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
       "source_key": "nfe_informes",
-      "id": "e45b14521944dae9",
-      "first_seen": "2026-10-02",
-      "is_new": false
+      "id": "dd80655c60f28495",
+      "first_seen": "2026-10-27",
+      "change_summary": {
+        "status": "unavailable",
+        "reason": "link do documento não localizado na página do portal",
+        "purpose": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+        "sections": [],
+        "elements": [],
+        "rules": [],
+        "homologation": null,
+        "production": null,
+        "homologation_note": null,
+        "production_note": null,
+        "schedule_version": null,
+        "deadlines": [],
+        "doc_url": null,
+        "generated_at": "2026-10-27T21:33:42+00:00"
+      },
+      "is_new": true
     },
     {
       "document": "NFe",
@@ -314,6 +345,47 @@
     },
     {
       "category": "Informes",
+      "change_summary": {
+        "deadlines": [],
+        "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
+        "elements": [],
+        "generated_at": "2026-10-27T16:58:46+00:00",
+        "homologation": null,
+        "homologation_note": null,
+        "production": null,
+        "production_note": null,
+        "purpose": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+        "rules": [],
+        "schedule_version": null,
+        "sections": [
+          {
+            "items": [
+              "Legislação Ajustes SINIEF Atos RFB/CGIBS Atos Técnicos RFB/CGIBS Atos COTEPE Convênios Protocolos."
+            ],
+            "key": "changed",
+            "title": "Alterações"
+          }
+        ],
+        "status": "ok"
+      },
+      "code": "2023.002",
+      "date": "2026-09-04",
+      "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
+      "document": "NFe",
+      "first_seen": "2026-10-27",
+      "id": "525a81289c207262",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "previous_summary": "Publicada Nota Técnica 2023.002 v1.02 ...",
+      "previous_version": "1.02",
+      "source_key": "nfe_informes",
+      "summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+      "title": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desati",
+      "type": "Informe Técnico",
+      "version": "2.10",
+      "is_new": true
+    },
+    {
+      "category": "Informes",
       "code": "2023.002",
       "date": "2026-09-04",
       "document": "NFe",
@@ -341,47 +413,6 @@
       "type": "Informe Técnico",
       "version": "2.10",
       "is_new": false
-    },
-    {
-      "document": "NFe",
-      "category": "Informes",
-      "type": "Informe Técnico",
-      "code": "2023.002",
-      "version": "2.10",
-      "date": "2026-09-04",
-      "title": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desati",
-      "summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
-      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
-      "source_key": "nfe_informes",
-      "id": "525a81289c207262",
-      "first_seen": "2026-10-27",
-      "previous_version": "1.02",
-      "previous_summary": "Publicada Nota Técnica 2023.002 v1.02 ...",
-      "change_summary": {
-        "status": "ok",
-        "purpose": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
-        "sections": [
-          {
-            "key": "changed",
-            "title": "Alterações",
-            "items": [
-              "Legislação Ajustes SINIEF Atos RFB/CGIBS Atos Técnicos RFB/CGIBS Atos COTEPE Convênios Protocolos."
-            ]
-          }
-        ],
-        "elements": [],
-        "rules": [],
-        "homologation": null,
-        "production": null,
-        "homologation_note": null,
-        "production_note": null,
-        "schedule_version": null,
-        "deadlines": [],
-        "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
-        "generated_at": "2026-10-27T16:58:46+00:00"
-      },
-      "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
-      "is_new": true
     },
     {
       "category": "Informes",
