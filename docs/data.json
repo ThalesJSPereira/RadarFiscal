@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T21:33:42+00:00",
+  "generated_at": "2026-10-28T17:34:09+00:00",
   "total_items": 404,
   "counts_by_document": {
     "NFe": 332,
@@ -8,7 +8,7 @@
     "BP-e TA": 3,
     "MDFe": 15
   },
-  "new_last_run": 4,
+  "new_last_run": 0,
   "items": [
     {
       "document": "NFe",
@@ -133,21 +133,6 @@
       "is_new": true
     },
     {
-      "category": "Informes",
-      "code": null,
-      "date": "2026-10-02",
-      "document": "NFe",
-      "first_seen": "2026-10-02",
-      "id": "e45b14521944dae9",
-      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
-      "source_key": "nfe_informes",
-      "summary": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
-      "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
-      "type": "Ato Conjunto",
-      "version": null,
-      "is_new": false
-    },
-    {
       "document": "NFe",
       "category": "Informes",
       "type": "Ato Conjunto",
@@ -161,22 +146,37 @@
       "id": "dd80655c60f28495",
       "first_seen": "2026-10-27",
       "change_summary": {
-        "status": "unavailable",
-        "reason": "link do documento não localizado na página do portal",
-        "purpose": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
-        "sections": [],
-        "elements": [],
-        "rules": [],
-        "homologation": null,
-        "production": null,
-        "homologation_note": null,
-        "production_note": null,
-        "schedule_version": null,
         "deadlines": [],
         "doc_url": null,
-        "generated_at": "2026-10-27T21:33:42+00:00"
+        "elements": [],
+        "generated_at": "2026-10-27T21:33:42+00:00",
+        "homologation": null,
+        "homologation_note": null,
+        "production": null,
+        "production_note": null,
+        "purpose": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+        "reason": "link do documento não localizado na página do portal",
+        "rules": [],
+        "schedule_version": null,
+        "sections": [],
+        "status": "unavailable"
       },
       "is_new": true
+    },
+    {
+      "category": "Informes",
+      "code": null,
+      "date": "2026-10-02",
+      "document": "NFe",
+      "first_seen": "2026-10-02",
+      "id": "e45b14521944dae9",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "source_key": "nfe_informes",
+      "summary": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...",
+      "type": "Ato Conjunto",
+      "version": null,
+      "is_new": false
     },
     {
       "document": "NFe",
