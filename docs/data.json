@@ -1,15 +1,410 @@
 {
-  "generated_at": "2026-10-29T22:10:30+00:00",
-  "total_items": 404,
+  "generated_at": "2026-10-30T17:24:18+00:00",
+  "total_items": 409,
   "counts_by_document": {
-    "NFe": 332,
+    "NFe": 337,
     "CTe": 41,
     "BP-e": 13,
     "BP-e TA": 3,
     "MDFe": 15
   },
-  "new_last_run": 0,
+  "new_last_run": 5,
   "items": [
+    {
+      "document": "NFe",
+      "category": "Notas Técnicas",
+      "type": "Nota Técnica",
+      "code": "2026.008",
+      "version": "1.01",
+      "date": "2026-10-30",
+      "title": "Nota Técnica 2026.008 v1.01",
+      "summary": "Divulga a criação de campos para o valor líquido do produto.",
+      "link": "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=04BIflQt1aY=",
+      "source_key": "nfe_notas_tecnicas",
+      "id": "575709333c85ecb6",
+      "first_seen": "2026-10-30",
+      "previous_version": "1.00",
+      "previous_summary": "Divulga alteração de leiaute e regras de validação",
+      "change_summary": {
+        "status": "ok",
+        "purpose": "Criação de campos para o valor líquido do produto Com o objetivo de ampliar a transparência na formação do preço da operação, foram criados os campos Valor Líquido Unitário e Valor Líquido do Produto . Esses campos permitem identificar o valor da mercadoria ou do serviço antes da incorporação dos tributos vigentes que compõem o preço final , possibilitando distinguir, de forma clara, o valor líquido da operação dos valores tributários agregados ao preço.",
+        "sections": [
+          {
+            "key": "new",
+            "title": "Inclusões",
+            "items": [
+              "Dessa forma, os novos campos permitem evidenciar tanto o valor líquido unitário quanto o valor líquido total do item , proporcionando maior transparência ao contribuinte, ao adquirente e às Administrações Tributárias quanto à composição do preço e à…",
+              "Criação de campo para informar o ICMS previsto O novo campo “Valor do ICMS Previsto no Pagamento Antecipado” (tag: vICMSPrevisto) deverá ser informado quando o documento fiscal emitido for referente a um pagamento realizado antes do fornecimento.",
+              "Serviço (sem tributos) E I11a N 1-1 11v0-10 Valor unitário de comercialização do produto ou serviço, sem a inclusão de tributos.",
+              "110.03 I11c vProdLiq Valor Líquido do Produto ou Serviço (sem. tributos) E I11a N 1-1 13v2 Valor líquido do produto ou serviço, sem a inclusão de tributos.",
+              "Observação 326a W01a vProdLiqTot Valor Total Líquido dos Produtos ou Serviços (sem tributos) E W01 N 0-1 13v2 Soma dos valores líquidos dos produtos ou serviços, sem a inclusão de tributos."
+            ]
+          },
+          {
+            "key": "changed",
+            "title": "Alterações",
+            "items": [
+              "- tpNFCredito=04-Redução de valores;"
+            ]
+          },
+          {
+            "key": "removed",
+            "title": "Exclusões / remoções",
+            "items": [
+              "1.01 - Retirado item “Composição do valor do produto com informações de IBS e CBS”."
+            ]
+          }
+        ],
+        "elements": [
+          "I11a",
+          "I11c",
+          "W01a",
+          "W01"
+        ],
+        "rules": [
+          "Regra I11c-10",
+          "Regra I11c-20",
+          "Regra NB01-10",
+          "Regra NB01-20",
+          "Regra W01a-10",
+          "Regra W01a-20",
+          "Regra B25-80",
+          "Regra VB01-10",
+          "Regra VB01-20",
+          "Regra UB16-10",
+          "Regra NB01-30"
+        ],
+        "homologation": "26/10/2026",
+        "production": "16/11/2026",
+        "homologation_note": "até",
+        "production_note": null,
+        "schedule_version": "1.01",
+        "deadlines": [
+          "Homologação: até 26/10/2026",
+          "Produção: 16/11/2026"
+        ],
+        "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Homologação Implantação Produção 1.00 - Criação dos campos que representam os valores líquidos do produto. - Criação do campo para informar o ICMS previsto no Pagamento Antecipado. - Regras de validação incluídas: I11c-10, I11c-20, NB01-10, NB01-20, W01a-10, W01a-20. - Regras de validação alteradas: B25-80, VB01-10, VB01-20. - Regras de validação removidas: UB16-10. 05/10/2026 Até 26/10/2026 03/11/2026 16",
+        "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=PVjdIcA/H2s=",
+        "generated_at": "2026-10-30T17:24:04+00:00"
+      },
+      "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=PVjdIcA/H2s=",
+      "is_new": true
+    },
+    {
+      "document": "NFe",
+      "category": "Notas Técnicas",
+      "type": "Nota Técnica",
+      "code": "2026.007",
+      "version": "1.11",
+      "date": "2026-10-30",
+      "title": "Nota Técnica 2026.007 v1.11",
+      "summary": "Regras de validação e atualiza regras existentes da NF-e/NFC-e para verificação dos cadastros na Lista Centralizada de Contribuintes da RFB (LCC-RFB) e no Cadastro Centralizado de Contribuintes (CCC).",
+      "link": "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=04BIflQt1aY=",
+      "source_key": "nfe_notas_tecnicas",
+      "id": "c245e5df39eb9b42",
+      "first_seen": "2026-10-30",
+      "previous_version": "1.10",
+      "previous_summary": "Regras de validação e atualiza regras existentes da NF-e/NFC-e para verificação dos cadastros na Lista Centralizada de Contribuintes da RFB (LCC-RFB) e no Cadastro Centralizado de Contribuintes (CCC).",
+      "change_summary": {
+        "status": "ok",
+        "purpose": "Regras de validação e atualiza regras existentes da NF-e/NFC-e para verificação dos cadastros na Lista Centralizada de Contribuintes da RFB (LCC-RFB) e no Cadastro Centralizado de Contribuintes (CCC).",
+        "sections": [
+          {
+            "key": "new",
+            "title": "Inclusões",
+            "items": [
+              "RV B25-90 – Incluída a exceção 2 para não aplicar regra para contribuinte exclusivo do.",
+              "RV B02-10, C12-10 e P12 -40 – Regras alteradas: incluída exceção para que a divergência. entre a UF do emitente/Chave de Acesso e a UF do Web Service não seja rejeitada na SVRS quando se tratar de contribuinte exclusivo do IBS/CBS (NF-e sem a IE do emitente).",
+              "RV C17 -11, C17 -42, C17 -43, C18 -50 – Regras incluídas: autorização exclusiva na SVRS, vedação de NFC-e até 2033, obrigatoriedade de CNPJ e vedação de IEST para o contribuinte exclusivo do IBS/CBS.",
+              "RV N01-10 e UB12-11 – Regras incluídas: tratamento dos grupos de tributos (ICMS proibido e.",
+              "RV 1P10-40 – Regra incluída: direcionamento dos eventos de autoria do emitente contribuinte. exclusivo do IBS/CBS para a SVRS."
+            ]
+          },
+          {
+            "key": "changed",
+            "title": "Alterações",
+            "items": [
+              "A identificação do contribuinte exclusivo do IBS/CBS passa a ser realizada pela ausência da informação da Inscrição Estadual do emitente (tag: emit/IE não informada), complementada pela verificação, no CCC, da inexistência de inscrição estadual de contribu…",
+              "Esta Nota Técnica deverá ser observada por todos os emissores de NF-e abrangidos pelas alterações introduzidas pela Reforma Tributária do Consumo, como contribuintes do ISS e demais pessoas contribuintes do IBS/CBS , que em razão do Regulamento do IBS/CBS e…",
+              "Campo C17 – Ocorrência alterada para 0-1.",
+              "Para a NFC-e (modelo 65), a ausência da IE do emitente passa a ser rejeitada pela regra C17-42.",
+              "C18-50 55 Se não informada a IE do emitente (tag: emit/IE): - Proibido informar a IE do Substituto Tributário (tag: emit/IEST) Observação: Regra de validação exclusiva da SVRS."
+            ]
+          },
+          {
+            "key": "removed",
+            "title": "Exclusões / remoções",
+            "items": [
+              "RV C17-10 – Regra de validação excluída, porque a ausência da IE do emitente deixa de ser. motivo de rejeição na NF-e (modelo 55), passando a caracterizar o emitente como contribuinte exclusivo do IBS/CBS, sujeito à verificação no CCC.",
+              "5E17-70 – Regra de validação excluída, por ter sido substituída pelas regras da LCC-RFB.",
+              "Rejeição: Sigla da UF do Emitente diverge da UF autorizadora C17-10 55/65 IE Emitente com zeros ou nulo Observação: Regra de validação excluída para todas as SEFAZ Autorizadoras.",
+              "Msg Efeito Descrição Erro 5E17-70 55 Mensagens opcionais se informada IE do destinatário e IE não vinculada ao CNPJ/CPF e tpEmis <> 3-NFF (NT 2021.002): - Acessar Cadastro de Pessoa Jurídica ou Pessoa Física: - CNPJ destinatário não cadastrado (NT 2019.001)…",
+              "Msg Efeito Descrição Erro 5AF15-10 55 Se informada IE do Local de Retirada e tpEmis <> 3-NFF: - Acessar CCC (Chave: UF Retirada, IE Retirada. (Desconsiderar CCC.cSitIE=9-Exclusão lógica) - IE do local de retirada não cadastrada Observação: Regra de validação…"
+            ]
+          }
+        ],
+        "elements": [
+          "P12",
+          "C17",
+          "C18"
+        ],
+        "rules": [
+          "Regra 1C17-04",
+          "Regra B25-90",
+          "Regra C17-10",
+          "Regra C17-42",
+          "Regra C17-20",
+          "Regra 5E17-70",
+          "Regra B02-10",
+          "Regra C12-10",
+          "Regra N01-10",
+          "Regra UB12-11",
+          "Regra 1P10-30",
+          "Regra 1P10-32",
+          "Rejeição 209"
+        ],
+        "homologation": "26/10/2026",
+        "production": "16/11/2026",
+        "homologation_note": "até",
+        "production_note": null,
+        "schedule_version": "1.11",
+        "deadlines": [
+          "Homologação: até 26/10/2026",
+          "Produção: 16/11/2026"
+        ],
+        "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Teste Implantação Produção 1.00 - Criação e atualização campos e de Regras de Validação desta NT 01/09/2026 03/11/2026 16/11/2026 1.10 - Alteração em Regras de Validação para facilitar testes em Homologação. - Correção na RV 1C17-04. Até 05/10/2026 Até 26/10/2026 03/11/2026 16/11/2026 1.11 - Alteração das datas de implantação em Homologação e Produção Até 26/10/2026 16/11/2026 Projeto Nota Fiscal Eletrôni",
+        "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=HXzgTeht%205Q=",
+        "generated_at": "2026-10-30T17:24:06+00:00"
+      },
+      "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=HXzgTeht%205Q=",
+      "is_new": true
+    },
+    {
+      "document": "NFe",
+      "category": "Notas Técnicas",
+      "type": "Nota Técnica",
+      "code": "2026.006",
+      "version": "1.01",
+      "date": "2026-10-30",
+      "title": "Nota Técnica 2026.006 v1.01",
+      "summary": "Divulga especificação técnica para vinculação entre NF-e e transação financeira sujeita ao split payment",
+      "link": "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=04BIflQt1aY=",
+      "source_key": "nfe_notas_tecnicas",
+      "id": "90c97cf0a7d89ad9",
+      "first_seen": "2026-10-30",
+      "previous_version": "1.00",
+      "previous_summary": "Divulga especificação técnica para vinculação entre NF-e e transação financeira sujeita ao split payment",
+      "change_summary": {
+        "status": "ok",
+        "purpose": "A vinculação entre DF-e e transação financeira sujeita ao split payment é estritamente necessária para a correta apuração dos débitos do fornecedor e concessão de créditos ao adquirente. No split payment, há duas formas de o contribuinte indicar a vinculação entre o documento fiscal e a transação financeira sujeita ao split payment: i. transmitindo a chave do documento fiscal ao prestador de serviço de pagamento, no início da transação financeira; ii. informando os dados da…",
+        "sections": [
+          {
+            "key": "new",
+            "title": "Inclusões",
+            "items": [
+              "• Orientações adicionais e cronogramas serão divulgados oportunamente por meio dos canais oficiais do CGIBS e da RFB.",
+              "• O preenchimento do grupo criado nesta Nota Técnica para Vinculação da Transação de Pagamento não exclu i a obrigação de preenchimento dos campos dos grupos “YA.",
+              "Além disso, o Evento criado nesta Nota Técnica não substitui o Evento “Conciliação Financeira – ECONF” instituído pela Nota Técnica 2024.002, conforme legislação tributária estadual."
+            ]
+          }
+        ],
+        "elements": [
+          "YC01",
+          "A01",
+          "YC02",
+          "YC03",
+          "YC04",
+          "YC05",
+          "YC06",
+          "YC07",
+          "P17",
+          "P06",
+          "P18",
+          "P16"
+        ],
+        "rules": [
+          "Regra YC03-10",
+          "Regra YC04-20",
+          "Regra YC05-10",
+          "Regra YC06-10",
+          "Regra P21-10",
+          "Regra P26-10",
+          "Regra P27-10"
+        ],
+        "homologation": "26/10/2026",
+        "production": "16/11/2026",
+        "homologation_note": "até",
+        "production_note": null,
+        "schedule_version": "1.01",
+        "deadlines": [
+          "Homologação: até 26/10/2026",
+          "Produção: 16/11/2026"
+        ],
+        "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Homologação Implantação Produção 1.00 Criação do grupo YC. Informações da vinculação da transação de. pagamento do DF-e (Split Payment) e regras de validação relacionadas. Criação do Evento de Informações da Vinculação da Transação de Pagamento do DF-e (110300). 05/10/2026 03/11/2026 1.01 Alteração das datas de implantação em Homologação e Produção Até 26/10/2026 16/11/2026. A implantação do split payment",
+        "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=7xf05PpO4Z0=",
+        "generated_at": "2026-10-30T17:24:09+00:00"
+      },
+      "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=7xf05PpO4Z0=",
+      "is_new": true
+    },
+    {
+      "document": "NFe",
+      "category": "Notas Técnicas",
+      "type": "Nota Técnica",
+      "code": "2026.005",
+      "version": "1.00",
+      "date": "2026-10-30",
+      "title": "Nota Técnica 2026.005 v1.00",
+      "summary": "Atualizações para o Simples Nacional na NF-e e NFC-e.",
+      "link": "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=04BIflQt1aY=",
+      "source_key": "nfe_notas_tecnicas",
+      "id": "cdc8fae3a2fcfda2",
+      "first_seen": "2026-10-30",
+      "change_summary": {
+        "status": "ok",
+        "purpose": "Esta Nota Técnica tem por objetivo disciplinar as adequações adicionais nos leiautes da NF‑e e da NFC‑e (modelos 55 e 65), necessárias à implementação das disposições decorrentes da Reforma Tributária do Consumo, regulamentada pela Lei Complementar nº 214/2025, aplicáveis às operações realizadas por contribuintes optantes pelo Simples Nacional. As alterações apresentadas visam viabilizar a apuração assistida do Simples Nacional, por meio da captura estruturada, em nível de…",
+        "sections": [
+          {
+            "key": "new",
+            "title": "Inclusões",
+            "items": [
+              "Para atender a esse objetivo, esta Nota Técnica estabelece a inclusão de novos campos e regras de validação destinados a identificar: • a situação cadastral e o enquadramento do contribuinte no âmbito do Simples Nacional;",
+              "Adicionalmente, esta Nota Técnica cria o evento fiscal específico denominado “ Evento de Tributação do Simples Nacional ” (tpEvent o = 412140).",
+              "2.1 Criação do campo tpRegimeIBSCBS (tag: C21a) Os contribuintes do Simples Nacional (CRT = 1 ou 2) que tenham optado pelo Regime Regular do IBS/CBS devem informar: • tpRegimeIBSCBS = 1.",
+              "2.2 Criação do campo cAtivSN (tag: I17d) Os contribuintes optantes pelo Simples Nacional (CRT = 1 ou 2), bem como os contribuintes do Regime Normal com solicitação pendente de opção pelo Simples Nacional (CRT = 3 e tpRegimeIBSCBS = 2 , 3 ou 4 ), deve m…"
+            ]
+          }
+        ],
+        "elements": [
+          "C21a",
+          "I17d"
+        ],
+        "rules": [
+          "Regra W59h-10",
+          "Regra W59h-20",
+          "Regra W59i-10",
+          "Regra W59j-10"
+        ],
+        "homologation": "26/10/2026",
+        "production": "16/11/2026",
+        "homologation_note": "até",
+        "production_note": null,
+        "schedule_version": "1.00",
+        "deadlines": [
+          "Homologação: até 26/10/2026",
+          "Produção: 16/11/2026"
+        ],
+        "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Teste Implantação Produção 1.00 Criação de campos relacionados a tributação do Simples Nacional Até 26/10/2026 16/11/2026. 1.00 Criação do Evento Tributação do Simples Nacional Implementação. Futura Implementação Futura Nota Fiscal Eletrônica - NF-e Reforma Tributária – Lei Complementar nº 214/2025 NT 2026.005 Página 4 / 12 1. Introdução. Esta Nota Técnica tem por objetivo disciplinar as adequações adicio",
+        "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=HInG7WD5Sj8=",
+        "generated_at": "2026-10-30T17:24:02+00:00"
+      },
+      "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=HInG7WD5Sj8=",
+      "is_new": true
+    },
+    {
+      "document": "NFe",
+      "category": "Notas Técnicas",
+      "type": "Nota Técnica",
+      "code": "2025.002",
+      "version": "1.53",
+      "date": "2026-10-30",
+      "title": "Nota Técnica 2025.002 v1.53",
+      "summary": "Nota técnica de adequação dos leiautes da NF-e e da NFC-e para inclusão dos campos e das regras de validação referentes à Reforma Tributária do Consumo - RTC",
+      "link": "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=04BIflQt1aY=",
+      "source_key": "nfe_notas_tecnicas",
+      "id": "34205950913a6c9c",
+      "first_seen": "2026-10-30",
+      "previous_version": "1.52",
+      "previous_summary": "Nota técnica de adequação dos leiautes da NF-e e da NFC-e para inclusão dos campos e das regras de validação referentes à Reforma Tributária do Consumo - RTC",
+      "change_summary": {
+        "status": "ok",
+        "purpose": "A Lei Complementar 214/2025 que institui o Imposto sobre Bens e Serviços (IBS), a Contribuição Social sobre Bens e Serviços (CBS) e o Imposto Seletivo (IS), cria o Comitê Gestor do IBS e altera a legislação tributária, definiu na Seção VIII – Disposições transitórias, Art. 62, a obrigatoriedade para a União, os Estados, o Distrito Federal e os Municípios adaptarem os sistemas autorizadores de Documentos Fiscais Eletrônicos (DFe) vigentes para utilização de leiaute…",
+        "sections": [
+          {
+            "key": "new",
+            "title": "Inclusões",
+            "items": [
+              "Isso significa q ue, se esses campos não estiverem preenchidos, as validações específicas para o IBS, CBS e IS não serão executadas. ** A validade jurídica das informações dos novos tributos se dará conforme os prazos estabelecidos na legislação…",
+              "Esta Nota Técnica substitui, no âmbito da NFe/NFCe, a RT NT 2024.002 - IBS/CBS v1.10, que cria novos eventos e modifica o leiaute da NF -e e NFC -e, inserindo os grupos e campos opcionais relacionados à tributação dos novos Impostos, em atendimento às…",
+              "A partir de janeiro de 2026, as novas regras de validação referentes à tributação do IBS e da CBS serão aplicadas.",
+              "PR13 Sequência XML G PR03 0-1 Grupo de informações para envio de mensagens do interesse da SEFAZ (Criado na NT 2018.005) PR14 cMsg E PR13 N 0-1 1-4 Código da Mensagem. (Criado na NT 2018.005) PR15 xMsg E PR13 C 1-1 1-200 Mensagem da SEFAZ para o emissor.…",
+              "• Considera-se site/plataforma própria as vendas que não foram intermediadas (por marketplace), como venda em site próprio, teleatendimento. (Criado na NT 2020.006) 29.6 B25d cIndOp Código indicador do local da operação de. fornecimento E B01 N 0-1 6…"
+            ]
+          },
+          {
+            "key": "changed",
+            "title": "Alterações",
+            "items": [
+              "Observação 29.z1 BB01 gCompraGov Grupo de Compra Governamental G B01 - 0-1 29.z2 BB02 tpEnteGov Tipo de ente governamental E BB01 N 1-1 1 Para administração pública direta e suas autarquias e fundações: 1=União 2=Estado 3=Distrito Federal 4=Município…",
+              "324.25 UB25 vDevTrib Valor do tributo devolvido E UB24 N 1-1 13v2 Valor do tributo devolvido (“cashback” de desconto na própria Nota Fiscal / Fatura) 324.26 UB26 gRed Grupo de informações da redução da alíquota G UB17 - 0-1 - Observação: a obrigatoriedade ou…",
+              "324.94a UB94a qBCBioComb Quantidade de Biocombustível (EAC) a recolher ou a ressarcir E UB94 N 1-1 11v0-4 324.94b UB94b vIBSDiferenca Valor do IBS correspondente a diferença em relação ao pBioObrigatorio E UB94 N 1-1 13v2 Se classTrib = 620004: valor a ser…",
+              "1170 Rejeição: Grupo de Ajuste de Competência não informado [nItem: 999] UB112-30 55 Se informado grupo “gAjusteCompet” (id: UB112): - Valor do IBS (gAjusteCompet/vIBS, id: UB114) ou Valor da CBS (gAjusteCompet/vCBS, id: UB115) deve ser maior que zero.",
+              "Descrição/Observação P17 detEvento G P06 1-1 Detalhes do Evento P18 versao A P17 N 1-1 2v2 Versão do leiaute do evento (P16) P19 descEvento E P17 C 1-1 42 Descrição do evento: \"Atualização da Data de Previsão de Entrega\" P20 cOrgaoAutor E P17 N 1-1 2 Código…"
+            ]
+          },
+          {
+            "key": "removed",
+            "title": "Exclusões / remoções",
+            "items": [
+              "1102 Rejeição: Código indicador do local de operação de fornecimento não permitido neste modelo de DFe B25d-30 55 Se informado o código indicador do local da operação de fornecimento (tag: cIndOp) e cIndOp = “010104” ou “010105”: - Local de Retirada não…",
+              "1110 Rejeição: Local de Retirada não informado Grupo BB.",
+              "Nesse sentido, futuramente, deverá ser eliminada a possibilidade de uso de Lote para o envio dos Eventos.",
+              "Função: Permitir ao fornecedor atualizar a data da previsão de entrega ou disponibilização do bem ao adquirente, de forma a remover o débito do mês em que foi previsto inicialmente."
+            ]
+          }
+        ],
+        "elements": [
+          "PR13",
+          "PR03",
+          "PR14",
+          "PR15",
+          "PR90",
+          "PR01",
+          "B25d",
+          "B01",
+          "BB01",
+          "BB02",
+          "BB03",
+          "UB25",
+          "UB24",
+          "UB26",
+          "UB17",
+          "UB94a",
+          "UB94",
+          "UB94b",
+          "UB95",
+          "UB84"
+        ],
+        "rules": [
+          "Regra B10a-10",
+          "Regra B10a-20",
+          "Regra B10a-30",
+          "Regra B10a-40",
+          "Regra B10a-50",
+          "Regra B25-110",
+          "Regra B25-120",
+          "Regra I05k-10",
+          "Regra UB112-10",
+          "Regra UB112-20",
+          "Regra UB112-30",
+          "Regra UB116-10"
+        ],
+        "homologation": "16/11/2026",
+        "production": "05/10/2026",
+        "homologation_note": null,
+        "production_note": null,
+        "schedule_version": "1.52",
+        "deadlines": [
+          "Homologação: 16/11/2026",
+          "Produção: 05/10/2026"
+        ],
+        "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Teste Implantação Produção 1.01 Inserção de campos de controle e criação de eventos para utilização na apuração do IBS, CBS e IS 01/07/2025 01/10/2025 1.01 Aplicação das Regras de Validação 01/07/2025 01/2026. 1.10** Implantação de novo schema com os campos para apuração do IBS, CBS e IS, com preenchimento opcional, conforme detalhamento do cronograma abaixo. De 07/07/2025 até 28/07/2025* 06/10/2025 1.10*",
+        "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=BMcHSMEoepU=",
+        "generated_at": "2026-10-30T17:24:18+00:00"
+      },
+      "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=BMcHSMEoepU=",
+      "is_new": true
+    },
     {
       "document": "NFe",
       "category": "Notas Técnicas",
