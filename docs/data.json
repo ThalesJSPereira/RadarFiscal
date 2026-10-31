@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T21:46:23+00:00",
+  "generated_at": "2026-10-31T16:28:39+00:00",
   "total_items": 413,
   "counts_by_document": {
     "NFe": 338,
@@ -8,7 +8,7 @@
     "BP-e TA": 3,
     "MDFe": 15
   },
-  "new_last_run": 9,
+  "new_last_run": 0,
   "items": [
     {
       "document": "NFe",
@@ -196,6 +196,37 @@
     },
     {
       "document": "NFe",
+      "category": "Informes",
+      "type": "Publicação",
+      "code": null,
+      "version": null,
+      "date": "2026-10-30",
+      "title": "Publicado Ato Técnico Conjunto RFB/CGIBS nº 10, de 2026 ...",
+      "summary": "Publicado Ato Técnico Conjunto RFB/CGIBS nº 10, de 2026 ...",
+      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
+      "source_key": "nfe_informes",
+      "id": "7dbb2ac3d9b50b70",
+      "first_seen": "2026-10-30",
+      "change_summary": {
+        "deadlines": [],
+        "doc_url": null,
+        "elements": [],
+        "generated_at": "2026-10-30T21:46:17+00:00",
+        "homologation": null,
+        "homologation_note": null,
+        "production": null,
+        "production_note": null,
+        "purpose": "Publicado Ato Técnico Conjunto RFB/CGIBS nº 10, de 2026 ...",
+        "reason": "link do documento não localizado na página do portal",
+        "rules": [],
+        "schedule_version": null,
+        "sections": [],
+        "status": "unavailable"
+      },
+      "is_new": true
+    },
+    {
+      "document": "NFe",
       "category": "Notas Técnicas",
       "type": "Nota Técnica",
       "code": "2026.006",
@@ -260,6 +291,21 @@
       "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=7xf05PpO4Z0=",
       "previous_version": "1.00",
       "previous_summary": "Divulga especificação técnica para vinculação entre NF-e e transação financeira sujeita ao split payment",
+      "is_new": true
+    },
+    {
+      "document": "CTe",
+      "category": "Notas Técnicas",
+      "type": "Nota Técnica",
+      "code": "2026.005",
+      "version": "1.00",
+      "date": "2026-10-30",
+      "title": "Nota Técnica 2026.005_v1.00",
+      "summary": "Atualizações para o Simples Nacional no CT-e.",
+      "link": "https://www.cte.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=Y0nErnoZpsg=",
+      "source_key": "cte_notas_tecnicas",
+      "id": "adebb89ab02e52d5",
+      "first_seen": "2026-10-30",
       "is_new": true
     },
     {
@@ -352,6 +398,65 @@
       "is_new": true
     },
     {
+      "document": "CTe",
+      "category": "Notas Técnicas",
+      "type": "Nota Técnica",
+      "code": "2026.004",
+      "version": "1.01",
+      "date": "2026-10-30",
+      "title": "Nota Técnica 2026.004_v1.01",
+      "summary": "Nota técnica de adequação dos leiautes do BP-e, BPeTA e BP-e TM e das regras de validação referentes à Reforma Tributária do Consumo - RTC.",
+      "link": "https://www.cte.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=Y0nErnoZpsg=",
+      "source_key": "cte_notas_tecnicas",
+      "id": "c55b2a3b4afd8eea",
+      "first_seen": "2026-10-30",
+      "change_summary": {
+        "deadlines": [
+          "Homologação: até 26/10/2026",
+          "Produção: 16/11/2026"
+        ],
+        "doc_url": "https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=ir3st/saoU0=",
+        "elements": [
+          "F36",
+          "F37",
+          "F38"
+        ],
+        "generated_at": "2026-10-30T21:46:23+00:00",
+        "homologation": "26/10/2026",
+        "homologation_note": "até",
+        "production": "16/11/2026",
+        "production_note": null,
+        "purpose": "Nota técnica de adequação dos leiautes do BP-e, BPeTA e BP-e TM e das regras de validação referentes à Reforma Tributária do Consumo - RTC.",
+        "rules": [],
+        "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Homologação Implantação Produção 1.00  Criação dos campos que representam os valores líquidos de impostos  Exceção nas regras de validação de alíquotas para o ambiente de homologação  Ajuste na regra do valor total do DFe  Grupo endereço do comprador opcional no BPeTA 1.01  Ajuste da data de Homologação  A regra do valor total do DFe retorna a soma de IBS e CBS a partir de 2027  Retirada orientação",
+        "schedule_version": "1.00",
+        "sections": [
+          {
+            "items": [
+              "Criação de campos para o valor líquido do produto Com o objetivo de ampliar a transparência na formação do preço da operação, foi criado o campo Valor Líquido do Bilhete.",
+              "Dessa forma, o novo campo permite evidenciar o valor líquido total da prestação do serviço, proporcionando maior transparência ao contribuinte, ao adquirente e às Administrações Tributárias quanto à composição do preço e à participação dos tributos no valor…",
+              "Rejeição: Total Líquido Sem tributos difere do somatório dos bilhetes Criação do Grupo de informações da Multa e Juros no BPe (Aplicável a BPe e BPeTA) O novo grupo de informações deverá ser utilizado para lançar um BPe com multa e juros referente a um BPe…"
+            ],
+            "key": "new",
+            "title": "Inclusões"
+          },
+          {
+            "items": [
+              "Rejeição: BPe referenciado em Multa e juros não pode estar cancelado Se informado grupo de Multa e Juros do BPe: -Acessar BD CHAVES BPE (Chave: UF, CNPJ Emit, Modelo, Série, Nro): - O BPe referenciado (chBPeRef) não pode estar substituído Facult.",
+              "Rejeição: BPe referenciado em Multa e juros não pode estar substituído Se informado grupo de Multa e Juros do BPe: O Emitente do BPe referenciado em multa e juros deve ser igual ao emitente do BPe de Multa e Juros Obrig."
+            ],
+            "key": "changed",
+            "title": "Alterações"
+          }
+        ],
+        "status": "ok"
+      },
+      "doc_url": "https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=ir3st/saoU0=",
+      "previous_version": "1.00",
+      "previous_summary": "Nota técnica de adequação dos leiautes do CT-e, do CT-eOS e da GTV-e.",
+      "is_new": true
+    },
+    {
       "document": "NFe",
       "category": "Notas Técnicas",
       "type": "Nota Técnica",
@@ -406,111 +511,6 @@
       "is_new": true
     },
     {
-      "document": "NFe",
-      "category": "Informes",
-      "type": "Publicação",
-      "code": null,
-      "version": null,
-      "date": "2026-10-30",
-      "title": "Publicado Ato Técnico Conjunto RFB/CGIBS nº 10, de 2026 ...",
-      "summary": "Publicado Ato Técnico Conjunto RFB/CGIBS nº 10, de 2026 ...",
-      "link": "https://www.nfe.fazenda.gov.br/portal/principal.aspx",
-      "source_key": "nfe_informes",
-      "id": "7dbb2ac3d9b50b70",
-      "first_seen": "2026-10-30",
-      "change_summary": {
-        "status": "unavailable",
-        "reason": "link do documento não localizado na página do portal",
-        "purpose": "Publicado Ato Técnico Conjunto RFB/CGIBS nº 10, de 2026 ...",
-        "sections": [],
-        "elements": [],
-        "rules": [],
-        "homologation": null,
-        "production": null,
-        "homologation_note": null,
-        "production_note": null,
-        "schedule_version": null,
-        "deadlines": [],
-        "doc_url": null,
-        "generated_at": "2026-10-30T21:46:17+00:00"
-      },
-      "is_new": true
-    },
-    {
-      "document": "CTe",
-      "category": "Notas Técnicas",
-      "type": "Nota Técnica",
-      "code": "2026.005",
-      "version": "1.00",
-      "date": "2026-10-30",
-      "title": "Nota Técnica 2026.005_v1.00",
-      "summary": "Atualizações para o Simples Nacional no CT-e.",
-      "link": "https://www.cte.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=Y0nErnoZpsg=",
-      "source_key": "cte_notas_tecnicas",
-      "id": "adebb89ab02e52d5",
-      "first_seen": "2026-10-30",
-      "is_new": true
-    },
-    {
-      "document": "CTe",
-      "category": "Notas Técnicas",
-      "type": "Nota Técnica",
-      "code": "2026.004",
-      "version": "1.01",
-      "date": "2026-10-30",
-      "title": "Nota Técnica 2026.004_v1.01",
-      "summary": "Nota técnica de adequação dos leiautes do BP-e, BPeTA e BP-e TM e das regras de validação referentes à Reforma Tributária do Consumo - RTC.",
-      "link": "https://www.cte.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=Y0nErnoZpsg=",
-      "source_key": "cte_notas_tecnicas",
-      "id": "c55b2a3b4afd8eea",
-      "first_seen": "2026-10-30",
-      "previous_version": "1.00",
-      "previous_summary": "Nota técnica de adequação dos leiautes do CT-e, do CT-eOS e da GTV-e.",
-      "change_summary": {
-        "status": "ok",
-        "purpose": "Nota técnica de adequação dos leiautes do BP-e, BPeTA e BP-e TM e das regras de validação referentes à Reforma Tributária do Consumo - RTC.",
-        "sections": [
-          {
-            "key": "new",
-            "title": "Inclusões",
-            "items": [
-              "Criação de campos para o valor líquido do produto Com o objetivo de ampliar a transparência na formação do preço da operação, foi criado o campo Valor Líquido do Bilhete.",
-              "Dessa forma, o novo campo permite evidenciar o valor líquido total da prestação do serviço, proporcionando maior transparência ao contribuinte, ao adquirente e às Administrações Tributárias quanto à composição do preço e à participação dos tributos no valor…",
-              "Rejeição: Total Líquido Sem tributos difere do somatório dos bilhetes Criação do Grupo de informações da Multa e Juros no BPe (Aplicável a BPe e BPeTA) O novo grupo de informações deverá ser utilizado para lançar um BPe com multa e juros referente a um BPe…"
-            ]
-          },
-          {
-            "key": "changed",
-            "title": "Alterações",
-            "items": [
-              "Rejeição: BPe referenciado em Multa e juros não pode estar cancelado Se informado grupo de Multa e Juros do BPe: -Acessar BD CHAVES BPE (Chave: UF, CNPJ Emit, Modelo, Série, Nro): - O BPe referenciado (chBPeRef) não pode estar substituído Facult.",
-              "Rejeição: BPe referenciado em Multa e juros não pode estar substituído Se informado grupo de Multa e Juros do BPe: O Emitente do BPe referenciado em multa e juros deve ser igual ao emitente do BPe de Multa e Juros Obrig."
-            ]
-          }
-        ],
-        "elements": [
-          "F36",
-          "F37",
-          "F38"
-        ],
-        "rules": [],
-        "homologation": "26/10/2026",
-        "production": "16/11/2026",
-        "homologation_note": "até",
-        "production_note": null,
-        "schedule_version": "1.00",
-        "deadlines": [
-          "Homologação: até 26/10/2026",
-          "Produção: 16/11/2026"
-        ],
-        "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Homologação Implantação Produção 1.00  Criação dos campos que representam os valores líquidos de impostos  Exceção nas regras de validação de alíquotas para o ambiente de homologação  Ajuste na regra do valor total do DFe  Grupo endereço do comprador opcional no BPeTA 1.01  Ajuste da data de Homologação  A regra do valor total do DFe retorna a soma de IBS e CBS a partir de 2027  Retirada orientação",
-        "doc_url": "https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=ir3st/saoU0=",
-        "generated_at": "2026-10-30T21:46:23+00:00"
-      },
-      "doc_url": "https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=ir3st/saoU0=",
-      "is_new": true
-    },
-    {
       "document": "CTe",
       "category": "Notas Técnicas",
       "type": "Nota Técnica",
@@ -524,45 +524,45 @@
       "id": "dd8a66c6fb4fb329",
       "first_seen": "2026-10-30",
       "change_summary": {
-        "status": "ok",
-        "purpose": "Nota técnica de adequação dos leiautes do CT-e, do CT-eOS e da GTV-e.",
-        "sections": [
-          {
-            "key": "new",
-            "title": "Inclusões",
-            "items": [
-              "Criação de campos para o valor líquido do produto Com o objetivo de ampliar a transparência na formação do preço da operação, foi criado o campo Valor Líquido do Bilhete.",
-              "Dessa forma, o novo campo permite evidenciar o valor líquido total da prestação do serviço, proporcionando maior transparência ao contribuinte, ao adquirente e às Administrações Tributárias quanto à composição do preço e à participação dos tributos no valor…",
-              "Rejeição: Total Líquido Sem tributos difere do somatório dos bilhetes Criação do Grupo de informações da Multa e Juros no BPe (Aplicável a BPe e BPeTA) O novo grupo de informações deverá ser utilizado para lançar um BPe com multa e juros referente a um BPe…"
-            ]
-          },
-          {
-            "key": "changed",
-            "title": "Alterações",
-            "items": [
-              "Rejeição: BPe referenciado em Multa e juros não pode estar cancelado Se informado grupo de Multa e Juros do BPe: -Acessar BD CHAVES BPE (Chave: UF, CNPJ Emit, Modelo, Série, Nro): - O BPe referenciado (chBPeRef) não pode estar substituído Facult.",
-              "Rejeição: BPe referenciado em Multa e juros não pode estar substituído Se informado grupo de Multa e Juros do BPe: O Emitente do BPe referenciado em multa e juros deve ser igual ao emitente do BPe de Multa e Juros Obrig."
-            ]
-          }
+        "deadlines": [
+          "Homologação: até 26/10/2026",
+          "Produção: 16/11/2026"
         ],
+        "doc_url": "https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=ir3st/saoU0=",
         "elements": [
           "F36",
           "F37",
           "F38"
         ],
-        "rules": [],
+        "generated_at": "2026-10-30T21:46:21+00:00",
         "homologation": "26/10/2026",
-        "production": "16/11/2026",
         "homologation_note": "até",
+        "production": "16/11/2026",
         "production_note": null,
-        "schedule_version": "1.00",
-        "deadlines": [
-          "Homologação: até 26/10/2026",
-          "Produção: 16/11/2026"
-        ],
+        "purpose": "Nota técnica de adequação dos leiautes do CT-e, do CT-eOS e da GTV-e.",
+        "rules": [],
         "schedule_excerpt": "ograma Versão Histórico de atualizações Implantação Homologação Implantação Produção 1.00  Criação dos campos que representam os valores líquidos de impostos  Exceção nas regras de validação de alíquotas para o ambiente de homologação  Ajuste na regra do valor total do DFe  Grupo endereço do comprador opcional no BPeTA 1.01  Ajuste da data de Homologação  A regra do valor total do DFe retorna a soma de IBS e CBS a partir de 2027  Retirada orientação",
-        "doc_url": "https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=ir3st/saoU0=",
-        "generated_at": "2026-10-30T21:46:21+00:00"
+        "schedule_version": "1.00",
+        "sections": [
+          {
+            "items": [
+              "Criação de campos para o valor líquido do produto Com o objetivo de ampliar a transparência na formação do preço da operação, foi criado o campo Valor Líquido do Bilhete.",
+              "Dessa forma, o novo campo permite evidenciar o valor líquido total da prestação do serviço, proporcionando maior transparência ao contribuinte, ao adquirente e às Administrações Tributárias quanto à composição do preço e à participação dos tributos no valor…",
+              "Rejeição: Total Líquido Sem tributos difere do somatório dos bilhetes Criação do Grupo de informações da Multa e Juros no BPe (Aplicável a BPe e BPeTA) O novo grupo de informações deverá ser utilizado para lançar um BPe com multa e juros referente a um BPe…"
+            ],
+            "key": "new",
+            "title": "Inclusões"
+          },
+          {
+            "items": [
+              "Rejeição: BPe referenciado em Multa e juros não pode estar cancelado Se informado grupo de Multa e Juros do BPe: -Acessar BD CHAVES BPE (Chave: UF, CNPJ Emit, Modelo, Série, Nro): - O BPe referenciado (chBPeRef) não pode estar substituído Facult.",
+              "Rejeição: BPe referenciado em Multa e juros não pode estar substituído Se informado grupo de Multa e Juros do BPe: O Emitente do BPe referenciado em multa e juros deve ser igual ao emitente do BPe de Multa e Juros Obrig."
+            ],
+            "key": "changed",
+            "title": "Alterações"
+          }
+        ],
+        "status": "ok"
       },
       "doc_url": "https://www.cte.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=ir3st/saoU0=",
       "is_new": true
@@ -648,7 +648,7 @@
       "doc_url": "https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=DCFRgnlk4g8=",
       "previous_version": "2.10",
       "previous_summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...",
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -687,7 +687,7 @@
         "status": "ok"
       },
       "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Informes",
@@ -718,7 +718,7 @@
       "title": "Publicado no dia 01/10/26 o Ato Conjunto RFB/CGIBS nº 8, de 2026 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
       "type": "Ato Conjunto",
       "version": null,
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Informes",
@@ -939,7 +939,7 @@
       "title": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desati",
       "type": "Informe Técnico",
       "version": "2.10",
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Informes",
