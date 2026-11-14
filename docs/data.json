@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T18:53:45+00:00",
+  "generated_at": "2026-11-14T17:26:21+00:00",
   "total_items": 415,
   "counts_by_document": {
     "NFe": 340,
@@ -8,7 +8,7 @@
     "BP-e TA": 3,
     "MDFe": 15
   },
-  "new_last_run": 2,
+  "new_last_run": 0,
   "items": [
     {
       "document": "NFe",
@@ -24,20 +24,20 @@
       "id": "88536676d4be60da",
       "first_seen": "2026-11-13",
       "change_summary": {
-        "status": "unavailable",
-        "reason": "link do documento não localizado na página do portal",
-        "purpose": "Publicado Ato Conjunto RFB/CGIBS nº 7, de 11 de novembro de 2026 ...",
-        "sections": [],
-        "elements": [],
-        "rules": [],
-        "homologation": null,
-        "production": null,
-        "homologation_note": null,
-        "production_note": null,
-        "schedule_version": null,
         "deadlines": [],
         "doc_url": null,
-        "generated_at": "2026-11-13T18:53:43+00:00"
+        "elements": [],
+        "generated_at": "2026-11-13T18:53:43+00:00",
+        "homologation": null,
+        "homologation_note": null,
+        "production": null,
+        "production_note": null,
+        "purpose": "Publicado Ato Conjunto RFB/CGIBS nº 7, de 11 de novembro de 2026 ...",
+        "reason": "link do documento não localizado na página do portal",
+        "rules": [],
+        "schedule_version": null,
+        "sections": [],
+        "status": "unavailable"
       },
       "is_new": true
     },
@@ -733,32 +733,32 @@
       "source_key": "nfe_informes",
       "id": "fdc863d98965a204",
       "first_seen": "2026-11-13",
-      "previous_version": "2.10",
-      "previous_summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
       "change_summary": {
-        "status": "ok",
-        "purpose": "Publicada Nota Técnica 2023.002 v1.02 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
-        "sections": [
-          {
-            "key": "changed",
-            "title": "Alterações",
-            "items": [
-              "Legislação Ajustes SINIEF Atos RFB/CGIBS Atos Técnicos RFB/CGIBS Atos COTEPE Convênios Protocolos."
-            ]
-          }
-        ],
-        "elements": [],
-        "rules": [],
-        "homologation": null,
-        "production": null,
-        "homologation_note": null,
-        "production_note": null,
-        "schedule_version": null,
         "deadlines": [],
         "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
-        "generated_at": "2026-11-13T18:53:45+00:00"
+        "elements": [],
+        "generated_at": "2026-11-13T18:53:45+00:00",
+        "homologation": null,
+        "homologation_note": null,
+        "production": null,
+        "production_note": null,
+        "purpose": "Publicada Nota Técnica 2023.002 v1.02 ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
+        "rules": [],
+        "schedule_version": null,
+        "sections": [
+          {
+            "items": [
+              "Legislação Ajustes SINIEF Atos RFB/CGIBS Atos Técnicos RFB/CGIBS Atos COTEPE Convênios Protocolos."
+            ],
+            "key": "changed",
+            "title": "Alterações"
+          }
+        ],
+        "status": "ok"
       },
       "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
+      "previous_version": "2.10",
+      "previous_summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
       "is_new": true
     },
     {
