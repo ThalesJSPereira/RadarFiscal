@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T21:23:38+00:00",
+  "generated_at": "2026-11-17T20:11:21+00:00",
   "total_items": 415,
   "counts_by_document": {
     "NFe": 340,
@@ -39,7 +39,7 @@
         "sections": [],
         "status": "unavailable"
       },
-      "is_new": true
+      "is_new": false
     },
     {
       "document": "NFe",
@@ -759,7 +759,7 @@
       "doc_url": "https://www.nfe.fazenda.gov.br/portal/listaSubMenu.aspx?Id=BMPFMBoln3w=",
       "previous_version": "2.10",
       "previous_summary": "Publicado Informe Técnico 2023.002 v.2.10 que divulga atualização na tabela de CFOP ...(Leia mais) Atenção! A versão 2.0 da NF-e será desativada a partir de",
-      "is_new": true
+      "is_new": false
     },
     {
       "category": "Informes",
